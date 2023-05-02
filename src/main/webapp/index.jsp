@@ -12,6 +12,7 @@
 <body>
 
 	<h1> 7조 </h1>
+	<h1> 7조 develop </h1>
 	
 <%-- 	<% //자바코드 --%>
 <!-- // 		boolean flag = true; -->
