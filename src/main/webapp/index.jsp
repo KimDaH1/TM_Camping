@@ -13,6 +13,7 @@
 
 	<h1> 7조 </h1>
 	<h1> 7조 develop </h1>
+	<h1> 7조 develop_CHD 브랜치 생성 </h1>
 	
 <%-- 	<% //자바코드 --%>
 <!-- // 		boolean flag = true; -->
