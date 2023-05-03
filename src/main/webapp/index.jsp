@@ -4,8 +4,8 @@
     <!-- 사용하는 controller java쪽 클래스들 -->
 <%@ page import="camping.dao.PersonDao" %>
 <%@ page import="camping.dto.PersonDto" %>
-<%@ page import="camping.mainController" %>
-<%@ page import="camping.campzone" %>
+<%@ page import="Controller.mainController" %>
+<%@ page import="camping.dto.campzone" %>
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
 	<%
 		String aa = "";
 		mainController mains = new mainController();
-		aa = main.TestingApiTwo();
+		aa = mains.TestingApiTwo();
 	%>
 	<h1> 7조 </h1>
 </body>
