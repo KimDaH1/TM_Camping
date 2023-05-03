@@ -1,4 +1,4 @@
-package sample.oracle;
+package camping.oracle;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

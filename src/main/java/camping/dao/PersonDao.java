@@ -1,4 +1,4 @@
-package sample.dao;
+package camping.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import sample.dto.PersonDto;
-import sample.oracle.DBConnectionManager;
+import camping.dto.PersonDto;
+import camping.oracle.DBConnectionManager;
 
 public class PersonDao {
 

@@ -1,4 +1,4 @@
-package sample.dto;
+package camping.dto;
 
 public class PersonDto {
 	int id;
