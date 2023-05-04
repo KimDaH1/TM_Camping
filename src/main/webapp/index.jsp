@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+    pageEncoding="UTF-8"%>   
     <!-- 사용하는 controller java쪽 클래스들 -->
 <%@ page import="camping.dao.PersonDao" %>
 <%@ page import="camping.dto.PersonDto" %>

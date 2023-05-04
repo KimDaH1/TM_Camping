@@ -12,16 +12,6 @@
 		입실 : <input id="sdate" type="date" name="sdate"> - 퇴실 : <input id="edate" type="date" name="edate">
 		<button id="reservBtn">예약하기</button>
 	</form>
-	<form name="personAddForm" action="reservation_proc.jsp" method="post">
-		<div class="mb-3">
-			<label for="formGroupExampleInput2" class="form-label">Name
-				label</label> <input type="text" class="form-control"
-				id="inputName" placeholder="Another input placeholder"
-				name="name">
-		</div>
-		
-		<button id="insertBtn" type="button" class="btn btn-primary">추가</button>
-	</form>
 	
 	<script>
 		document.getElementById('reservBtn').addEventListener('click', ()=>{
