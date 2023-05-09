@@ -60,14 +60,15 @@ ul{
 					<span class="click"></span><a href="join.jsp"><input type="submit" value="회원가입"></a>
             <input type="submit" value="아이디찾기"><input type="submit" value="비밀번호찾기" style="position: relative; left: 5px;"></span>
 				</div>
-	<div class="snslogin">
+	<div class="snslogin"><br>
+	<h4>간편 로그인</h4>
 		<ul>
 	<li onclick="kakaoLogin();">
        <a href="javascript:void(0)">
           <img src="kakao_login_small.png" width="115" height="45">
       </a>
 </ul>
-</div>
+
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
@@ -81,7 +82,7 @@ function kakaoLogin() {
           url: '/v2/user/me',
           success: function (response) {
         	  console.log(response)
-        	  window.location.href = "main.html";
+        	  window.location.href = "index.jsp";
           },
           fail: function (error) {
             console.log(error)
@@ -112,7 +113,7 @@ function kakaoLogout() {
 </script>
  <%
     String clientId = "VIu1TfHxKPf44pxkVbXl";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8080/ThreeMenCamping/main.html", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://localhost:8080/ThreeMenCamping/index.jsp", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
     String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
@@ -121,8 +122,12 @@ function kakaoLogout() {
          + "&state=" + state;
     session.setAttribute("state", state);
  %>
-  <a href="<%=apiURL%>"><img height="44" width="115" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+  <a class="snslogin" href="<%=apiURL%>"><img height="44" width="115" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<div class="snslogin">
+  <img src="구글로그인.PNG" width="115" height="44">
+</div>
+</div>
 </body>
 </html>
