@@ -11,4 +11,4 @@ CREATE TABLE tm_order(
 SELECT *
 FROM tm_order;
 
-insert into tm_order(o_number, amount, order_item, usernumber) values( 1, 100, '휴먼캠핑장', 1);
+insert into tm_order(o_number, amount, order_item, usernumber) values( 7, 100, '휴먼캠핑장', 1);
