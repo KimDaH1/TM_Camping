@@ -22,7 +22,62 @@
 </head>
 <body>
 	<h1> 7조 Three Men Camping (공공api 테이블) </h1>
+	<table class = "table table-striped" id = "testTable1" border="1" >
+	<thead>
+		<tr>
+			<th>
+				캠핑장명
+			</th>
+			<th>
+				전화번호
+			</th>
+			<th>
+				위도
+			</th>
+			<th>
+				경도
+			</th>
+			<th>
+				주소
+			</th>			
+		</tr>
+	</thead>		
+	<tbody>	
+	
+	<%
+		String aa = "";
+		mainController mains = new mainController();
+		aa = mains.TestingApiTwo();
+		
+		List<campzone> campzonelist = new ArrayList<campzone>();
+		campzonelist = mains.TestCampDB(0);
+		out.print("리스트 확인 : "+campzonelist.size());
+		for (int i = 0; i < campzonelist.size(); i++){
+	%>
+					<tr>
+				<td onClick="clickTest();" style="cursor:pointer;">
+					<% out.print(campzonelist.get(i).getCpname()); %>
+				</td>
+				<td>
+					<%out.print(campzonelist.get(i).getCptel()); %>
+				</td>
+				<td>
+					<%out.print(campzonelist.get(i).getLat()); %>
+				</td>
+				<td>
+					<%out.print(campzonelist.get(i).getLng()); %>
+				</td>
+				<td>
+					<%out.print(campzonelist.get(i).getAddr()); %>
+				</td>
+				
+			</tr>			
+	<%
+		}
+	%>
+	<br><br>
 	<table class = "table table-striped" id = "testTable" border="1" >
+		<h1> 7조 TEST용 EMP 테이블 </h1>
 	<thead>
 		<tr>
 			<th>
@@ -44,16 +99,14 @@
 	</thead>		
 	<tbody>	
 	<%
-		String aa = "";
-		mainController mains = new mainController();
-		aa = mains.TestingApiTwo();
+
+
 		//aa = mains.TestingApione();
-		//aa = mains.TestingApithree();
-		//aa` = mains.TestingApifour();
+		//aa = mains.TestingApiThree(); //전체 컬럼 가져오기 실패
+		//aa = mains.TestingApifour();
 		//aa = mains.TestingApifive();
 		List<emp> emplist = new ArrayList<emp>();
 		emplist = mains.TestMariaDB(0);
-		
 		for (int i = 0; i < emplist.size(); i++){
 	%>
 				<tr>
