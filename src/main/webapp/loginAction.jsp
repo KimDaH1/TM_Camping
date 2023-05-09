@@ -17,32 +17,19 @@
 	<%
 		UserDao userDao = new UserDao();
 		int result = userDao.login(user.getUserID(), user.getUserPassword());
-		if(result == 1){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("location.href= 'main.html'");
-			script.println("</script>");
-		}
-		else if (result ==0){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("비밀번호가 틀립니다.");
-			script.println("history.back()");
-			script.println("</script>");
-		}
-		else if (result == -1){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("존재하지 않는 아이디 입니다.");
-			script.println("history.back()");
-			script.println("</script>");
-		}
-		else if (result == -2){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("데이터베이스 오류가 발생했습니다.");
-			script.println("history.back()");
-			script.println("</script>");
+
+		if(result == 1) {
+			out.println("<script>");
+			out.println("alert('로그인에 성공하였습니다.');");
+			session.setAttribute("userId", user.getUserID());
+			String userId = (String)session.getAttribute("userID");
+			out.println("location.href='index.jsp';");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('잘못된 입력입니다.');");
+			out.println("history.back();");
+			out.println("</script>");
 		}
 	%>
 </body>
