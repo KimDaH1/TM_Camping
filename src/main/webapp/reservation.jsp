@@ -5,13 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+</style>
 </head>
 <body>
 	<h1>예약 페이지</h1>
+	<div id="joinForm">
 		<form name="reservationForm" action="reservation_proc.jsp">
-		입실 : <input id="sdate" type="date" name="sdate"> - 퇴실 : <input id="edate" type="date" name="edate">
-		<button id="reservBtn">예약하기</button>
-	</form>
+			<input id="camp" type="text" readonly="readonly" value="휴먼캠핑장">
+			시작일 : <input id="sdate" type="date" name="sdate">
+			종료일 : <input id="edate" type="date" name="edate">
+			
+			<button id="reservBtn">예약하기</button>
+		</form>
+	</div>
 	
 	<script>
 		document.getElementById('reservBtn').addEventListener('click', ()=>{

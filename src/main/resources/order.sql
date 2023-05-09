@@ -9,6 +9,10 @@ CREATE TABLE tm_order(
 );
 
 SELECT *
-FROM tm_order;
+FROM tm_order
+ORDER BY 1;
 
-insert into tm_order(o_number, amount, order_item, usernumber) values( 7, 100, '휴먼캠핑장', 1);
+--입력 테스트
+INSERT INTO tm_order(o_number, amount, order_item, usernumber) VALUES( 7, 100, '휴먼캠핑장', 1);
+
+DELETE FROM tm_order WHERE order_item IS NULL;

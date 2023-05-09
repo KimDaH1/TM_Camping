@@ -13,16 +13,16 @@
 <%@ page import="java.io.Reader" %>
 <%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page import="java.net.URLEncoder" %>
-
+<%@ page import="camping.dao.OrderDao"%>
 
 <%
  // 결제 승인 API 호출하기 
  
   String orderId = request.getParameter("orderId");
-  String orderName = request.getParameter("orderName");
   String paymentKey = request.getParameter("paymentKey");
-  String amount = request.getParameter("amount");
-  String customerName = request.getParameter("customerName");
+  //String amount = request.getParameter("amount");  
+  int amount = Integer.parseInt(request.getParameter("amount"));  
+  //String customerName = request.getParameter("customerName");
   String secretKey = "test_sk_zXLkKEypNArWmo50nX3lmeaxYG5R:";
   
   Encoder encoder = Base64.getEncoder();
@@ -41,7 +41,6 @@
   obj.put("paymentKey", paymentKey);
   obj.put("orderId", orderId);
   obj.put("amount", amount);
-  obj.put("customerName", customerName);
   
   
   OutputStream outputStream = connection.getOutputStream();
@@ -61,7 +60,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>결제 성공</title>
+    <title>결제 성공 페이지</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 </head>
@@ -70,13 +69,15 @@
 <section>	
     <%
     if (isSuccess) { %>
-        <h1>결제 성공</h1>
-        <p>결과 데이터 : <%= jsonObject.toJSONString() %></p>
-        <p>orderName : <%= jsonObject.get("orderName") %></p>        
-        <p>customerName : <%= jsonObject.get("customerName") %></p>     
-        <p>totalAmount : <%= jsonObject.get("totalAmount") %></p>        
+        <h1>결제 정보</h1>
+        <%-- <p>결과 데이터 : <%= jsonObject.toJSONString() %></p> --%>
+        <p>캠핑장 : <%= jsonObject.get("orderName") %></p>        
+        <%-- <p>customerName : <%= jsonObject.get("customerName") %></p> --%>
+        <p>결제 금액 : <%= jsonObject.get("totalAmount") %></p>        
+        <p>주문 번호 : <%= jsonObject.get("orderId") %></p>        
              
-        <p>method : <%= jsonObject.get("method") %></p>
+        <p>결제 방식 : <%= jsonObject.get("method") %></p>
+        <button id="confirmBtn" type="button" class="btn btn-primary">확인</button>
         <p>
             <% if(jsonObject.get("method").equals("카드")) { out.println(((JSONObject)jsonObject.get("card")).get("number"));} %>
             <% if(jsonObject.get("method").equals("가상계좌")) { out.println(((JSONObject)jsonObject.get("virtualAccount")).get("accountNumber"));} %>
@@ -94,5 +95,15 @@
     %>
 
 </section>
+<script>
+		document.getElementById('confirmBtn').addEventListener('click', ()=>{			
+			<%
+				String orderName = jsonObject.get("orderName").toString();
+				OrderDao orderDao = new OrderDao();
+				orderDao.insertOrderInfo(orderId, amount, orderName, 1);
+			%>
+			location.href='./index.html';
+		});
+	</script>
 </body>
 </html>

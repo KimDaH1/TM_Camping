@@ -30,7 +30,10 @@ public class OrderDao {
 				psmt.setInt(4, userNumber);
 
 				result = psmt.executeUpdate();
-
+				System.out.println(o_number);
+				System.out.println(amount);
+				System.out.println(order_item);
+				System.out.println(userNumber);
 				System.out.println("처리결과:" + result);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

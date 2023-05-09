@@ -96,7 +96,7 @@ body {
 
 					<div class="mb2">
 						<label class="form-label" for="amount">금액 <span
-							class="gray">(amount) <span class="red">필수</span></label> <input
+							class="gray">(amount) </span> <span class="red">필수</span></label> <input
 							id="amount" class="form-control form-control-lg" type="text"
 							value="100">
 						<!-- 금액 내 천단위 콤마 X -->
@@ -183,28 +183,9 @@ body {
 
   /* ================== '결제' Btn Event ================== */
   document.getElementById("requestPayment").addEventListener('click', function () {  
-	
-	//let o_number = document.getElementById("orderId");
-	//let amount = document.getElementById("amount");
-	//let order_item = document.getElementById("orderName");
-	//let userNumber = document.getElementById("userNumber");
-	<%
-		String o_number = "6";
-		int amount = 100;
-		String order_item = "휴먼캠핑장";
-		int userNumber = 1;
-		OrderDao orderDao = new OrderDao();
-		orderDao.insertOrderInfo(o_number, amount, order_item, userNumber);
-	%>
-	let form = document.userInfoForm;
+		
     let paymentType = document.getElementById("paymentType").value;
     let requestJson = initPaymentsData("공통",paymentType);
-    
-    let userNumber = document.getElementById("userNumber").value;
-    let customerName = document.getElementById("customerName").value;
-    console.log(customerName);
-    console.log(userNumber);
-    
     
     tossPayments.requestPayment(paymentType, requestJson)
       .catch(function (error) {
@@ -234,7 +215,7 @@ body {
     paymentData[general].orderId = document.getElementById("orderId").value;
     paymentData[general].orderName = document.getElementById("orderName").value;
     //paymentData[general].userNumber = document.getElementById("userNumber").value;
-    paymentData[general].customerName = document.getElementById("customerName").value;
+    //paymentData[general].customerName = document.getElementById("customerName").value;
     //paymentData[general].customerEmail = document.getElementById("customerEmail").value;
     
     return Object.assign(paymentData[general], paymentData[paymentType]);

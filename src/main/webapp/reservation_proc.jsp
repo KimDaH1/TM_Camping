@@ -2,14 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="camping.dao.ReservationDao"%>
 <%@ page import="java.util.*"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+<link href="https://unpkg.com/v-calendar@2.4.0/lib/v-calendar.min.css"
+	rel="stylesheet">
 </head>
 <body>
+	<div id="app">
+		<v-calendar></v-calendar>
+	</div>
+
+	<script>
+	    new Vue({
+	      el: '#app'
+	    });
+	  </script>
 	<%
 		request.setCharacterEncoding("UTF-8"); //한글 정상 인식을 위해 써준다.
 		String sDate = request.getParameter("sdate");
@@ -40,8 +51,49 @@
 	<%
 		}
 	%>
-	<script>
-		location.href = './index.html';
-	</script>
+	<!-- calendar test -->
+	<noscript>
+		<strong>We're sorry but v-calendar doesn't work
+			properly without JavaScript enabled. Please enable it to continue.</strong>
+	</noscript>
+	<div id="app">
+		<section>
+			<p>This uses the built version of the plugin</p>
+		</section>
+		<section>
+			<div class="selectors">
+				<label for="weeks"> <input id="weeks" type="checkbox"
+					v-model="weeks" /> Show week numbers
+				</label>
+			</div>
+			<v-calendar :show-weeknumbers="weeks" :key="weeks" />
+		</section>
+		<section>
+			<div class="selectors">
+				<label for="single"> <input id="single" type="radio"
+					value="single" v-model="mode" /> Single
+				</label> <label for="multiple"> <input id="multiple" type="radio"
+					value="multiple" v-model="mode" /> Multiple
+				</label> <label for="range"> <input id="range" type="radio"
+					value="range" v-model="mode" /> Range
+				</label>
+			</div>
+			<v-date-picker :mode="mode" v-model="date" />
+		</section>
+	</div>
+	<!-- built files will be auto injected -->
+	<script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          mode: 'single',
+          weeks: false,
+          date: new Date()
+        }
+      }
+    })
+    </script>
+
 </body>
 </html>
