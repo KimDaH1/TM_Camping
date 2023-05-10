@@ -56,9 +56,9 @@
 	int start = (currentPage-1)*numPerPage+1;
 	int end = currentPage*numPerPage;
 	
-	List<emp> emplist;
-	emplist = new ArrayList<emp>();
-	emplist = maincontroller.TestMariaDBLists(start, end, searchValue);
+	List<campzone> campzonelist = new ArrayList<campzone>();
+
+	campzonelist = maincontroller.CampDBLists(start, end, searchValue);
 	//데이터베이스에서 해당 페이지를 가져온다
 	//List<BoardDTO> lists = dao.getLists(start end, searchKey, searchValue);
 	
@@ -70,7 +70,7 @@
 	
 	
 	//페이징 처리
-	String listUrl = "ListTest.jsp"+param;
+	String listUrl = "CampList.jsp"+param;
 	String pageIndexList = myutil.pageIndexList(currentPage, totalPage, listUrl);
 	
 	//글 내용 보기 주소 정리(html에서 onclick의 주소가 너무 길기 때문에 한번에 정리)
@@ -89,7 +89,7 @@
 <script type="text/javascript">
 	function sendIt(){
 		var f = document.searchForm;
-		f.action = "<%=cp %>/ListTest.jsp"; 
+		f.action = "<%=cp %>/CampList.jsp"; 
 		f.submit();
 	}
 	function clickTest(){
@@ -108,7 +108,7 @@
 		          var number =this.cells[0].innerHTML; //사번		          
 		          
 		         str = number.trim(); //사번을 공백없이 변수에 담기
-		         var link = 'http://localhost:8080/ThreeMenCamping/empDetail.jsp?data=' + str;
+		         var link = 'http://localhost:8080/ThreeMenCamping/campDetail.jsp?data=' + str;
 		         location.href=link; //페이지 이동		         
 		       };
 		    }(row);
@@ -132,7 +132,7 @@
 		<form action="" name="searchForm" method="post">
 			<select name="searchKey" class="selectField">
 				<!-- <option value="subject">제목</option> -->
-				<option value="name">사원명</option>
+				<option value="name">캠핑장명</option>
 				<!-- <option value="content">내용</option> -->
 			</select>
 			<input type="text" name="searchValue" value="<%=searchValue %>" class="textField"/>
@@ -149,40 +149,31 @@
 	<table class = "table table-striped" id = "testTable" border="1" >
 	<thead>
 		<tr>
-			<th>
-				사번
-			</th>
-			<th>
-				사원명
-			</th>
-			<th>
-				직책
-			</th>
-			<th>
-				담당자
-			</th>
-			<th>
-				담당자명
-			</th>			
+			<th>캠핑장명</th>
+			<th>전화번호</th>
+			<th>위도</th>
+			<th>경도	</th>
+			<th>주소</th>			
 		</tr>
 	</thead>		
 	<tbody>	
-		<% for (int i = 0; i < emplist.size(); i++){ %>
+		<% for (int i = 0; i < campzonelist.size(); i++)
+		{ %>
 			<tr>
 				<td class="empno" onClick="clickTest();" style="cursor:pointer;">
-					<% out.print(emplist.get(i).getEMPNO()); %>
+					<% out.print(campzonelist.get(i).getCpname()); %>
 				</td>
 				<td class="ename">
-					<%out.print(emplist.get(i).getENAME()); %>
+					<%out.print(campzonelist.get(i).getCptel()); %>
 				</td>
 				<td class="job">
-					<%out.print(emplist.get(i).getJOB()); %>
+					<%out.print(campzonelist.get(i).getLat()); %>
 				</td>
 				<td class="mgr">
-					<%out.print(emplist.get(i).getMGR()); %>
+					<%out.print(campzonelist.get(i).getLng()); %>
 				</td>
 				<td class="mgrName">
-					<%out.print(emplist.get(i).getMgrName()); %>
+					<%out.print(campzonelist.get(i).getAddr()); %>
 				</td>
 				
 			</tr>
