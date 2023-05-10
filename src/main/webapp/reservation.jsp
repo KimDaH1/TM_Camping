@@ -17,11 +17,8 @@
 	<h1>예약 페이지</h1>
 	<div id="joinForm">
 		<form name="reservationForm" action="reservation_proc.jsp">
-			<input id="camp" type="text" readonly="readonly" value="휴먼캠핑장">
-			시작일 : <input id="sdate" type="date" name="sdate">
-			종료일 : <input id="edate" type="date" name="edate">
-			
-			<button id="reservBtn">예약하기</button>
+		입실 : <input id="sdate" type="date" name="sdate"> - 퇴실 : <input id="edate" type="date" name="edate">
+		<button id="reservBtn">예약하기</button>
 		</form>
 	</div>
 	
@@ -39,22 +36,7 @@
 				form.submit();
 			}
 			
-		});
-		
-		document.getElementById('insertBtn').addEventListener('click', ()=>{
-			
-			let form = document.personAddForm;
-			
-			let inputName = document.getElementById('inputName');
-			if(inputName.value == "") {
-				alert('이름은 필수입니다.');
-				inputName.focut();
-			} else {
-				if(confirm('추가하시겠습니까?')) {
-					form.submit();
-				}	
-			}
-		});
+		});		
 	</script>
 </body>
 </html>
