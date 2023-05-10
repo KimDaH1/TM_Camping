@@ -1,30 +1,127 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+<title>예약 페이지</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+	crossorigin="anonymous">
+<script src="https://js.tosspayments.com/v1/payment"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.mb2 {
+	margin-bottom: 25px;
+}
+
+.gray {
+	color: rgb(78, 89, 104);
+	font-size: 13px;
+}
+
+.red {
+	color: rgb(240, 68, 82);
+	font-size: 13px;
+}
+
+.box_section {
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px rgb(0 0 0/ 1%), 0 6px 6px rgb(0 0 0/ 6%);
 }
 </style>
+<script>
+  $( function() {
+    $( ".datepicker" ).datepicker({
+    	dateFormat: 'yy-mm-dd' //달력 날짜 형태
+            ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+            ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+            ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+            ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+            ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+            ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+            ,minDate: 0
+    });    
+  } );
+  </script>
 </head>
-<body>
-	<h1>예약 페이지</h1>
-	<div id="joinForm">
-		<form name="reservationForm" action="reservation_proc.jsp">
-		입실 : <input id="sdate" type="date" name="sdate"> - 퇴실 : <input id="edate" type="date" name="edate">
-		<button id="reservBtn">예약하기</button>
-		</form>
-	</div>
+<body class="bg-light">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3"></div>
+
+			<div class="col-md-6">
+
+				<h2 style="margin-top: 10px; padding: 20px 0px 10px 0px; text-align: center;">
+				<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+				<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+				<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png"> 삼남자
+					캠핑 예약 페이지
+				</h2>
+				<form id="reservForm" name="reservationForm" action="reservation_proc.jsp">
+					<div id="requestPayment_form" class="box_section"
+						style="padding: 40px 30px 50px 30px; margin-top: 30px; margin-bottom: 50px">
 	
+						<div class="mb2">
+							<label class="form-label" for="amount">캠핑장명 <span
+								class="gray">(camp_id) </span></label> <input
+								id="orderId" class="form-control form-control-lg" type="text" value="금성캠핑장" readonly="readonly">
+						</div>
+						<div class="mb2">
+							<label class="form-label" for="amount">시작일 <span
+								class="gray">(s_date) </span></label> <input
+								id="sdate" class="form-control form-control-lg datepicker" type="text" name="sdate" placeholder="여기를 클릭해서 날짜를 선택하세요!">
+						</div>
+						<div class="mb2">
+							<label class="form-label" for="amount">종료일 <span
+								class="gray">(e_date) </span></label> <input
+								id="edate" class="form-control form-control-lg datepicker" type="text" name="edate" placeholder="여기를 클릭해서 날짜를 선택하세요!">
+						</div>											
+	
+						<!-- <div class="mb2">
+							<label class="form-label" for="amount">물품명 <span
+								class="gray">(orderName) </span><span class="red">필수</span></label> <input
+								id="orderName" class="form-control form-control-lg" type="text"
+								value="휴먼캠핑장">
+						</div> -->
+	
+						<div class="mb2">
+							<label class="form-label" for="amount">금액 <span
+								class="gray">(amount) </span></label> <input
+								id="amount" class="form-control form-control-lg" type="text"
+								value="3,000,000,000">
+						</div>
+	
+						<div class="mb2">
+							<label class="form-label" for="amount">구매자명 <span
+								class="gray">(customerName)</span></label> <input id="customerName"
+								class="form-control form-control-lg" type="text" value="김용원">
+						</div>
+	
+						<div class="d-grid gap-2">
+							<button id="reservBtn" type="button"
+								class="btn btn-lg btn-primary">예약하기</button>
+						</div>
+					
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<script>
 		document.getElementById('reservBtn').addEventListener('click', ()=>{
-			
 			let form = document.reservationForm;
 			
 			let sdate = document.getElementById('sdate').value;
