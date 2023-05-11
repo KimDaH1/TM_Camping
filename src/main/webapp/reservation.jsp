@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
@@ -105,7 +106,7 @@ body {
 						</div>
 	
 						<div class="mb2">
-							<label class="form-label" for="amount">구매자명 <span
+							<label class="form-label" for="amount">예약자명 <span
 								class="gray">(customerName)</span></label> <input id="customerName"
 								class="form-control form-control-lg" type="text" value="김용원">
 						</div>
@@ -122,18 +123,56 @@ body {
 	</div>
 	<script>
 		document.getElementById('reservBtn').addEventListener('click', ()=>{
-			let form = document.reservationForm;
+			//let form = document.reservationForm;
 			
 			let sdate = document.getElementById('sdate').value;
 			let edate = document.getElementById('edate').value;
-			console.log(sdate);
-			console.log(edate);
 			
-			if(confirm('예약하시겠습까?')) {
-				form.submit();
+			if(edate >= sdate) {
+				/* if(confirm('예약하시겠습까?')) {
+					form.submit();
+				} */
+				showAlert();
+//				form.submit();
+			} else {
+				showWarning();
 			}
 			
-		});		
+			
+			/* if(confirm('예약하시겠습까?')) {
+				form.submit();
+			} */
+			
+		});
+		function showAlert() {
+			let form = document.reservationForm;
+			let sdate = document.getElementById('sdate').value;
+			let edate = document.getElementById('edate').value;
+			  Swal.fire({
+			    title: '예약하시겠습니까?',
+			    text: '시작일 : ' + sdate + ' ~ ' + '종료일 : ' + edate,
+			    icon: 'question',
+			    showCancelButton: true,
+			    confirmButtonText: '확인',
+			    cancelButtonText: '취소',
+			    
+			    reverseButton: true,
+			    
+			  }).then(result => {
+				  if(result.isConfirmed) {
+					  form.submit();
+				  }
+			  });
+			}
+		function showWarning() {
+			  Swal.fire({
+			    title: '날짜 선택이 잘못되었습니다!',
+			    text: '시작일과 종료일을 다시 확인해주세요.',
+			    icon: 'warning',
+			    confirmButtonText: '확인',
+			    
+			  });
+			}
 	</script>
 </body>
 </html>

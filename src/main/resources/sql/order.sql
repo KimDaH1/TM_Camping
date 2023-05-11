@@ -19,3 +19,5 @@ insert into tm_order
              '금성캠핑장',
              '토스페이',
              1);
+             
+select * from tm_order;

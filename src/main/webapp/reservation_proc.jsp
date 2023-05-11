@@ -7,11 +7,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+<!-- <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
 <link href="https://unpkg.com/v-calendar@2.4.0/lib/v-calendar.min.css"
-	rel="stylesheet">
+	rel="stylesheet"> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
-<body>	
+<body>
+<script>
+	function showAlert() {
+		alert('test');
+	}
+	  Swal.fire({
+	    title: '예약이 완료되었습니다.',
+	    text: '결제 페이지에서 결제 부탁드립니다. ',
+	    icon: 'success',
+	    confirmButtonText: '확인',
+	    
+	  }).then(result => {
+		  if(result.isConfirmed) {
+			  //form.submit();
+			  location.href = './index.html';
+		  };
+	}
+	</script>
 	<%
 		request.setCharacterEncoding("UTF-8"); //한글 정상 인식을 위해 써준다.
 		String sDate = request.getParameter("sdate");
@@ -29,9 +47,9 @@
 		if (result == 1) {
 			//추가성공
 	%>
-
 	<script>
 		alert('예약성공');
+		showAlert();
 	</script>
 	<%
 		} else {
@@ -43,8 +61,7 @@
 		}
 	%>
 	<script>
-		location.href = './index.html';
-	</script>
-
+		//location.href = './index.html';
+	</script>	
 </body>
 </html>
