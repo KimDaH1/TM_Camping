@@ -99,13 +99,12 @@ body {
 							class="gray">(amount) </span> <span class="red">필수</span></label> <input
 							id="amount" class="form-control form-control-lg" type="text"
 							value="100">
-						<!-- 금액 내 천단위 콤마 X -->
 					</div>
 
 					<div class="mb2">
 						<label class="form-label" for="amount">구매자명 <span
 							class="gray">(customerName)</span></label> <input id="customerName"
-							class="form-control form-control-lg" type="text" value="김용원">
+							class="form-control form-control-lg" type="text" value="김용원" name="customerName">
 					</div>
 
 					<div class="d-grid gap-2">
@@ -114,7 +113,6 @@ body {
 					</div>
 
 				</div>
-				<!-- #requestPayment_form -->
 				<div class="col-md-3"></div>
 			</div>
 		</div>

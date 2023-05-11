@@ -5,8 +5,7 @@ CREATE TABLE tm_reservation(
     e_date DATE
 );
 
+--데이터 조회
 SELECT * 
-FROM tm_reservation;
-
-insert into tm_reservation
-values( (select NVL( MAX(r_number),0)+1 from tm_reservation ) , '2023-01-01', '2023-01-03');
+FROM tm_reservation
+ORDER BY r_number;

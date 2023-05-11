@@ -7,16 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
-<link href="https://unpkg.com/v-calendar@2.4.0/lib/v-calendar.min.css"
-	rel="stylesheet"> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
 <script>
 	function showAlert() {
-		alert('test');
-	}
 	  Swal.fire({
 	    title: '예약이 완료되었습니다.',
 	    text: '결제 페이지에서 결제 부탁드립니다. ',
@@ -25,9 +20,9 @@
 	    
 	  }).then(result => {
 		  if(result.isConfirmed) {
-			  //form.submit();
 			  location.href = './index.html';
-		  };
+		  }
+		});
 	}
 	</script>
 	<%
@@ -48,7 +43,6 @@
 			//추가성공
 	%>
 	<script>
-		alert('예약성공');
 		showAlert();
 	</script>
 	<%
@@ -60,8 +54,8 @@
 	<%
 		}
 	%>
-	<script>
+	<!-- <script>
 		//location.href = './index.html';
-	</script>	
+	</script> -->	
 </body>
 </html>

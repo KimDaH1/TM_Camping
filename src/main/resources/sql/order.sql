@@ -7,9 +7,13 @@ CREATE TABLE tm_order(
     order_item VARCHAR2(30), --결제품목
     paytype VARCHAR2(30), --결제타입
     --회원번호(FK)
-    usernumber NUMBER(5) CONSTRAINT USER_ORDER_FK REFERENCES tm_users(usernumber),
+    usernumber NUMBER(5) CONSTRAINT USER_ORDER_FK REFERENCES tm_users(usernumber) ON DELETE SET NULL,
     CONSTRAINT ORDER_NUMBER_PK PRIMARY KEY(orderno, o_number)
 );
+
+--데이터 조회
+select * from tm_order;
+
 --데이터 입력 테스트
 insert into tm_order
     values( (select NVL(MAX(orderno) ,0)+1 from tm_order),
@@ -19,5 +23,3 @@ insert into tm_order
              '금성캠핑장',
              '토스페이',
              1);
-             
-select * from tm_order;
