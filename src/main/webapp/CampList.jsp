@@ -39,7 +39,7 @@
 	
 	
 	// 전체데이터 갯수 구하기
-	int dataCount = maincontroller.getDataTotalCount(searchValue);
+	int dataCount = maincontroller.getDataTotalCountCP(searchValue);
 	
 	// 한페이지에 표시할 데이터의 갯수
 	int numPerPage = 10;
@@ -62,7 +62,7 @@
 	//데이터베이스에서 해당 페이지를 가져온다
 	//List<BoardDTO> lists = dao.getLists(start end, searchKey, searchValue);
 	
-	//검색(기능을 사용할 경우 get방식의 주소에 추가로 적용시켜주게ㅐㅆ다. 사용자 정의)
+	//검색(기능을 사용할 경우 get방식의 주소에 추가로 적용시켜주겠다. 사용자 정의)
 	String param = "";
 	if(!searchValue.equals("")){				
 		param = "&" + URLEncoder.encode("searchValue", "UTF-8") + "=" + URLEncoder.encode(searchValue, "UTF-8");

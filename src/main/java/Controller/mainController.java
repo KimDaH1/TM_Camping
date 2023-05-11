@@ -48,7 +48,7 @@ public class mainController {
 					+ "&MobileOS=ETC"
 					+ "&MobileApp=AppTest"
 					+ "&_type=JSON"
-					+ "&keyword=천안");//import java.ner.url; 추가
+					+ "&keyword=경기도");//import java.ner.url; 추가
 
 			HttpURLConnection conn = (HttpURLConnection) apiUrl.openConnection();
 			conn.setRequestMethod("GET");//import java.net.HttpURLConnection; 추가
@@ -121,7 +121,7 @@ public class mainController {
 		urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+ "=" + URLEncoder.encode("ETC","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+ "=" + URLEncoder.encode("AppTest","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+ "=" + URLEncoder.encode("json","UTF-8"));
-		urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8")+ "=" + URLEncoder.encode("제주","UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8")+ "=" + URLEncoder.encode("경기","UTF-8"));
 		// 3. URL 객체 생성
 		URL url = new URL(urlBuilder.toString());
 
@@ -858,21 +858,20 @@ public class mainController {
 			//String sql = "SELECT * FROM EMP e";
 			String sql = "";
 			strValue = "%" + strValue + "%";
-
+ 
 			sql = "SELECT * FROM TM_CAMPINGZONE_1"
-					+ "WHERE CPNAME LIKE ?"
-					+ " WHERE rnum >= ? and rnum <= ?";
+					+ " WHERE CPNAME LIKE ?"
+					+ " and idx >= ? and idx <= ?"; //and 절이 누락되어 오류가 발생되었음
 
 			psmt = conn.prepareStatement(sql);	
 			psmt.setString(1, strValue);
 			psmt.setInt(2, start);
 			psmt.setInt(3, end);
-
 			rs = psmt.executeQuery();
-
 			while (rs.next()) {
 				campzone scampzone = new campzone();
 	            scampzone.setIdx(rs.getInt("idx"));
+	            System.out.println(rs.getInt("idx"));
 	            scampzone.setCpname(rs.getString("cpname"));
 	            scampzone.setcptel(rs.getString("cptel"));
 	            scampzone.setLat(rs.getDouble("lat"));
@@ -889,8 +888,6 @@ public class mainController {
 		return _campzone;	
 
 	}
-
-	
 	
 
 	//ListTest.jsp의 전체데이터의 갯수 구하기
@@ -926,7 +923,7 @@ public class mainController {
 		return totalCount;
 	}
 
-	//ListTest.jsp의 전체데이터의 갯수 구하기(캠핑)
+	//CampList.jsp의 전체데이터의 갯수 구하기(캠핑)
 	public int getDataTotalCountCP(String strValue) {
 		int totalCount = 0;
 
@@ -1098,7 +1095,7 @@ public class mainController {
 			conn = DBConnectionManager.getConnection();
 
 			String sql = "";
-			sql = "SELECT cpname, cptel, lat, lng, addr FROM tm_campingzone";
+			sql = "SELECT cpname, cptel, lat, lng, addr FROM tm_campingzone_1";
 
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
