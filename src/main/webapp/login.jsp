@@ -15,9 +15,17 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <style>
-
+ @font-face {
+    font-family: 'HS-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.logoimage{
+  color: black;
+}
 *{
-  font-family:Cafe24Ssurround;
+  font-family:'HS-Regular';
   text-align:center;
   margin-top:20px;
 }
@@ -40,19 +48,21 @@ ul{
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    
 }
 
 </style>
 <body id="pull" style="background-image:url(배경화면.png)" >
-  <div class="logoimage"></div>
+  <div class="logoimage">
 		<form method="post" action="loginAction.jsp" >
 				<h3 style="text-align: conter; color: white;" >로그인화면</h3>
 				<div>
 					<input type="text" class="from-control" placeholder="아이디" name="userID" maxlength="20"> 
 				</div>
 				<div>
-					<input type="password" class="from-control" placeholder="비밀번호" name="userPassword" maxlength="20"> 
+					<input type="password" class="from-control" placeholder="비밀번호" name="userPassword" maxlength="20" style="color:black";> 
 				</div>
+      </div>
         <div class="">
 				<input type="submit" value="로그인" style="margin-top : 20px;">
        </div>

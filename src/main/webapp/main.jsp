@@ -50,19 +50,18 @@ header {
   padding: 20px;
   height: 60px;
   background-color: #383a3f;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  position: fixed; /* Add this line */
+  top: 0; /* Add this line */
 }
     footer{
-  position: absolute;
-  top: 97.8%;
+  position: relative;
+  top: 880px;
   color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  width: 96%;
+  width: 97.2%;
   height: 260px;
   background-color: #383a3f;
     }
@@ -120,8 +119,8 @@ header {
       position: absolute;
       top: 100%;
       left: 0;
-      min-width: 100px;
-      z-index: 1;
+      min-width: 120px;
+      z-index: 6;
     }
 
     .has-submenu:hover .submenu {
@@ -152,18 +151,21 @@ header {
       <li><a class="submenu1"href="#">이용안내</a></li>
       <li class="has-submenu"><a class="submenu1" href="#">예약하기</a>
         <ul class="submenu">
-          <li><a class="submenu1" href="#">호텔 예약</a></li>
-          <li><a class="submenu1" href="#">항공권 예약</a></li>
+          <li><a class="submenu1" href="#">캠핑장 예약</a></li>
+          <li><a class="submenu1" href="#">코레일 예약</a></li>
           <li><a class="submenu1" href="#">렌터카 예약</a></li>
-          <li><a class="submenu1" href="#">티켓 예매</a></li>
+          <li><a class="submenu1" href="#">렌탈장비 예약</a></li>
         </ul>
       </li>
-      <li class="has-submenu"><a class="submenu1" href="#">주변여행지</a>
+      <li class="has-submenu"><a class="submenu1" href="#">도별여행지</a>
         <ul class="submenu">
           <li><a class="submenu1" href="#">서울</a></li>
-          <li><a class="submenu1" href="#">부산</a></li>
-          <li><a class="submenu1" href="#">제주</a></li>
-          <li><a class="submenu1" href="#">강릉</a></li>
+          <li><a class="submenu1" href="#">경기도</a></li>
+          <li><a class="submenu1" href="#">강원도</a></li>
+          <li><a class="submenu1" href="#">충청도</a></li>
+          <li><a class="submenu1" href="#">경상도</a></li>
+          <li><a class="submenu1" href="#">전라도</a></li>
+          <li><a class="submenu1" href="#">제주도</a></li>
         </ul>
       </li>
       <li><a class="submenu1" href="#">커뮤니티</a></li>
@@ -187,21 +189,35 @@ header {
 </header>
 <body>
 
-<div class="box diagonal-image1"></div>
-<div class="box diagonal-image2"></div>
-<div class="box diagonal-image3"></div>
-<div class="box diagonal-image4"></div>
-<div class="box diagonal-image5"></div>
+<div class="box diagonal-image1">
+<br><br><br>
+<h1>충청도</h1></div>
+<div class="box diagonal-image2">
+<br><br><br>
+<h1>&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;경기도</h1></div>
+<div class="box diagonal-image3"><br><br><br>
+<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;전라도</h1></div>
+<div class="box diagonal-image4"><br><br><br>
+<h1>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;경상도</h1></div>
+<div class="box diagonal-image5"><br><br><br>
+<h1>&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;강원도</h1></div>
+<div class="box diagonal-image6"><br><br><br>
+<h1>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;제주도</h1></div>
+
+
 
 <style>
+
+    
     .box {
+    	text-align: center;
         display: inline-block;
         position: absolute;
         height: 700px;
         background-size: cover;
         background-repeat: no-repeat;
         transition: transform 0.3s ease;
-        margin-top:50px
+        margin-top:140px
     }
 
     .box:hover {
@@ -209,43 +225,52 @@ header {
     }
 
     .diagonal-image1 {
-        width: 350px;
-        background-image: url('슬라이드캠핑1.jpg');
-        clip-path: polygon(0 0, 100% 0, 44% 100%, 0 100%);
-        z-index: 5;
+        width: 355px;
+        left: 10px;
+        background-image: url('천안.jpg');
+        clip-path: polygon(0 0, 92% 0, 36% 100%, 0 100%);
+       
     }
 
     .diagonal-image2 {
-        width: 450px;
-        left: 160px;
-        background-image: url('슬라이드캠핑2.jpg');
-        clip-path: polygon(43% 0, 100% 0, 53% 100%, 0 100%);
-        z-index: 4;
+        width: 470px;
+        left: 135px;
+        background-image: url('서울.jpg');
+        clip-path: polygon(42% 0, 87% 0, 42% 100%, 0 100%);
+      
     }
 
     .diagonal-image3 {
         width: 450px;
-        left: 398px;
-        background-image: url('슬라이드캠핑3.jpg');
-        clip-path: polygon(47% 0, 100% 0, 55% 100%, 0 100%);
-        z-index: 3;
+        left: 331px;
+        background-image: url('전라도.jpg');
+        clip-path: polygon(47% 0, 90% 0, 45% 100%, 0 100%);
+     
     }
 
     .diagonal-image4 {
         width: 450px;
-        left: 630px;
-        background-image: url('배경화면.png');
-        clip-path: polygon(48% 0, 100% 0, 61% 100%, 2% 100%);
-        z-index: 2;
+        left: 523px;
+        background-image: url('부산.jpg');
+        clip-path: polygon(47% 0, 92% 0, 49% 100%, 2% 100%);
+     
     }
 
     .diagonal-image5 {
-        width: 350px;
-        left: 900px;
-        background-image: url('해여름빌리지.jpg');
-        clip-path: polygon(51% 0, 100% 0, 100% 100%, 0 100%);
-        z-index: 1;
+        width: 450px;
+        left: 740px;
+        background-image: url('홍천.jpg');
+        clip-path: polygon(43% 0, 88% 0, 46% 100%, 0 100%);
+      
     }
+    .diagonal-image6 {
+        width: 350px;
+        left: 910px;
+        background-image: url('제주도.jpg');
+        clip-path: polygon(64% 0, 100% 0, 100% 100%, 10% 100%);
+      
+    }
+
 </style>
 
 </body>
@@ -259,6 +284,7 @@ header {
                 <p>&nbsp; &nbsp; &nbsp;전화번호 : &nbsp;041-561-1122<br><span style="color: rgb(246, 179, 82);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(문의 시간 AM 9:00 ~ PM 8:00 / 점심시간 12:00~13:00)<br>
                 </span>&nbsp; &nbsp; &nbsp;캠핑장 시설 안내 및 이용안내 문의만 부탁드립니다.</p>
           </div>
+          <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=천안시+동남구+휴먼+교육센터" style="width: 400px; height: 250px;"></iframe>
 					<div>
 						<span style="padding: 20px;">이용약관</span><span style="padding: 20px;">개인정보처리방침</span><span style="padding: 20px;">새로운 메뉴</span>
           </div>
