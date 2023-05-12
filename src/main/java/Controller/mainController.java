@@ -244,90 +244,23 @@ public class mainController {
 
 	}
 
-	public List<campzone> TestingApiThree() throws IOException{
+	
+
+	public String TestingApiThree() throws IOException{
 		String strResult = "";
 		String cpname = "";
 		String cptel = "";
 		double lat;
 		double lng;
 		String addr = "";
-				
-		String cpLineIntro = ""; // 한줄소개
-		String cpIntro = ""; // 소개
-		int cpAllar; // 전체면적
-		String cpInsrncAt = ""; // 영업배상책임보험 가입여부
-		String cpTrsagntNo = ""; // 관광사업자번호
-		String cpBizrno = ""; // 사업자번호
-		String cpFacltDivNm = ""; // 사업주체, 구분
-		String cpMangeDivNm = ""; // 운영주체, 관리주체
-		String cpMgcDiv = ""; // 운영기관, 관리기관
-		String cpManageSttus = ""; // 운영상태, 관리상태
-		String cpHvofBgnde = ""; // 휴장기간, 휴무기간 시작일
-		String cpHvofEnddle = ""; // 휴장기간, 휴무기간 종료일
-		String cpFeatureNm = ""; // 특징
-		String cpInduty = ""; // 업종☆
-		String cpLctCl = ""; // 입지구분☆
-		String cpDoNm = ""; // 도
-		String cpSigunguNm = ""; //시군구
-		int cpZipcode; // 우편번호
-		String cpAddr2 = ""; // 주소상세
-		String cpDirection = ""; //오시는길 컨텐츠
-		String cpHomepage = ""; //홈페이지
-		String cpResveUrl = ""; //예약 페이지
-		String cpResveCl = ""; //예약 구분
-		int cpManageNmpr; // 상주관리인원
-		int cpGnrlSiteCo; // 주요시설 일반야영장
-		int cpAutoSiteCo; // 주요시설 자동차야영장
-		int cpGlampSiteCo; //주요시설 글램핑
-		int cpCaravSiteCo; //주요시설 카라반
-		int cpIndvdlCaravSiteCo; //주요시설 개인 카라반
-		int cpSitedStnc; //사이트간 거리
-		int cpSiteMg1Width; //사이트 크기1 가로
-		int cpSiteMg2Width; //사이트 크기2 가로
-		int cpSiteMg3Width; //사이트 크기3 가로
-		int cpSiteMg1Vrticl; //사이트 크기 1 세로
-		int cpSiteMg2Vrticl; //사이트 크기2 세로
-		int cpSiteMg3Vrticl; //사이트 크기 3 세로
-		int cpSiteMg1Co; //사이트 크기 1 수량
-		int cpSiteMg2Co; //사이트 크기 2 수량
-		int cpSiteMg3Co; // 사이트 크기 3 수량
-		int cpSiteBottomCl1; //잔디
-		int cpSiteBottomCl2; //파쇄석
-		int cpSiteBottomCl3; // 테크
-		int cpSiteBottomCl4; // 자갈
-		int cpSiteBottomCl5; // 맨흙
-		String cpTooltip = ""; //툴팁
-		String cpGlampInnerFclty = ""; // 글램핑 내부시설
-		String cpCaravInnerFclty = ""; // 카라반 내부시설
-		String cpPrmisnDe = ""; // 인허가일자
-		String cpOperPdCl = ""; // 운영기간
-		String cpOperDeCl = ""; // 운영일
-		String cpTrlerAcmpnyAt = ""; //개인 트레일러 동반 여부(Y:사용, N:미사용)
-		String cpCaravAcmpnyAt = ""; //개인 카라반 동반 여부(Y:사용, N:미사용)
-		int cpToiletCo; //화장실 개수
-		int cpSwrmCo; //샤워실 개수
-		int cpWtrplCo; //개수대 개수
-		String cpBrazierCl = ""; //화로대
-		String cpSbrsCl = ""; //부대시설
-		String cpSbrsEtc = ""; //부대시설 기타
-		String cpPosblFcltyCl = ""; //주변이용가능시설
-		String cpPosblFcltyEtc = ""; //주변이용가능시설 기타
-		String cpClturEventAt = ""; //자체문화행사 여부(Y:사용, N:미사용)
-		String cpClturEvent = ""; //자체문화행사명
-		String cpExprnProgrmAt = "";//체험프로그램 여부(Y:사용, N:미사용)
-		String cpExprnProgrm = ""; // 체험프로그램명
-		int cpExtshrCo; //소화기개수
-		int cpFrprvtWrppCo; //방화수 개수
-		int cpFrprvtSandCo; //방화사 개수
-		int cpFireSensorCo; // 화재감지기 개수
-		String cpThemaEnvrnCl = ""; // 테마환경
-		String cpEqpmnLendCl = ""; // 캠핑장비대여
-		String cpAnimalCmgCl = ""; //애완동물출입
-		String cpTourEraCl = ""; // 여행시기
-		String cpFirstImageUrl = ""; // 대표이미지
-		String cpCreatedtime = ""; //등록일
-		String cpModifiedtime = ""; //수정일
-
+		
+		String cpLineIntro = "";
+		String cpLctCl = "";
+		String cpPosblFcltyCl = "";
+		String cpHomepage = "";
+		String cpAnimalCmgCl = "";;
+		String cpInduty = "";
+		
 		int iresult = 0;
 
 		/*URL apiUrl = new URL("https://apis.data.go.kr/B551011/GoCamping/searchList"
@@ -345,8 +278,7 @@ public class mainController {
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8")+ "=" + URLEncoder.encode("10","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+ "=" + URLEncoder.encode("ETC","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+ "=" + URLEncoder.encode("AppTest","UTF-8"));
-		urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+ "=" + URLEncoder.encode("json","UTF-8"));
-		urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8")+ "=" + URLEncoder.encode("천안","UTF-8"));
+		//urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+ "=" + URLEncoder.encode("json","UTF-8"));
 		// 3. URL 객체 생성
 		URL url = new URL(urlBuilder.toString());
 
@@ -382,15 +314,13 @@ public class mainController {
 		conn.disconnect();
 
 		// 11. 전달받은 데이터 확인
-		System.out.println("전달받은 데이터 확인 : " + sb.toString());
+		System.out.println(sb.toString());
 
 		strResult = sb.toString();
 
 		JSONParser jsonParser1 = new JSONParser();//import org.json.simple.parser.JSONParser; 추가
 		JSONObject jsonObject1;//import org.json.simple.JSONObject; 추가
-		List<campzone> json_arr = new ArrayList<campzone>();
 		try {
-			System.out.println("3");
 			jsonObject1 = (JSONObject) jsonParser1.parse(strResult);
 			System.out.println("jsonObject1 = " + jsonObject1);
 
@@ -398,95 +328,285 @@ public class mainController {
 			campzoneJsonModel roots = new Gson().fromJson(jsonObject1.toString(), campzoneJsonModel.class);
 
 			for(int i = 0; i<roots.response.body.items.item.size(); i++) {
-				campzone json_datas = new campzone();
 				System.out.println(roots.response.body.items.item.get(i).addr1.toString());
 
-				cpname = roots.response.body.items.item.get(i).facltNm.toString(); // 야영장명☆
-				cpLineIntro = roots.response.body.items.item.get(i).lineIntro.toString(); // 한줄소개
-				cpAllar = roots.response.body.items.item.get(i).allar; // 전체면적
-				cpInsrncAt = roots.response.body.items.item.get(i).insrncAt.toString(); // 영업배상책임보험 가입여부
-				cpTrsagntNo = roots.response.body.items.item.get(i).trsagntNo.toString(); // 관광사업자번호
-				cpBizrno = roots.response.body.items.item.get(i).bizrno.toString(); // 사업자번호
-				cpFacltDivNm = roots.response.body.items.item.get(i).facltDivNm.toString(); // 사업주체, 구분
-				cpMangeDivNm = roots.response.body.items.item.get(i).mangeDivNm.toString(); // 운영주체, 관리주체
-				cpMgcDiv = roots.response.body.items.item.get(i).mgcDiv.toString(); // 운영기관, 관리기관
-				cpManageSttus = roots.response.body.items.item.get(i).manageSttus.toString(); // 운영상태, 관리상태
-				cpHvofBgnde = roots.response.body.items.item.get(i).hvofBgnde.toString(); // 휴장기간, 휴무기간 시작일
-				cpHvofEnddle = roots.response.body.items.item.get(i).hvofEnddle.toString(); // 휴장기간, 휴무기간 종료일
-				cpFeatureNm = roots.response.body.items.item.get(i).featureNm.toString(); // 특징
-				cpInduty = roots.response.body.items.item.get(i).induty.toString(); // 업종
-				cpLctCl = roots.response.body.items.item.get(i).lctCl.toString(); // 입지구분
-				cpDoNm = roots.response.body.items.item.get(i).doNm.toString(); // 도
-				cpSigunguNm = roots.response.body.items.item.get(i).sigunguNm.toString(); //시군구
-				cpZipcode = roots.response.body.items.item.get(i).zipcode; // 우편번호
-				addr = roots.response.body.items.item.get(i).addr1.toString(); // 주소
-				cpAddr2 = roots.response.body.items.item.get(i).addr2.toString(); // 주소상세
-				lat = roots.response.body.items.item.get(i).mapX; //경도
-				lng = roots.response.body.items.item.get(i).mapY; //위도
-				cpDirection = roots.response.body.items.item.get(i).direction.toString(); //오시는길 컨텐츠
-				cptel = roots.response.body.items.item.get(i).tel.toString(); //전화
-				cpHomepage = roots.response.body.items.item.get(i).homepage.toString(); //홈페이지
-				cpResveUrl = roots.response.body.items.item.get(i).resveUrl.toString(); //예약 페이지
-				cpResveCl = roots.response.body.items.item.get(i).resveCl.toString(); //예약 구분
-				cpManageNmpr = roots.response.body.items.item.get(i).manageNmpr; // 상주관리인원
-				cpGnrlSiteCo = roots.response.body.items.item.get(i).gnrlSiteCo; // 주요시설 일반야영장
-				cpAutoSiteCo = roots.response.body.items.item.get(i).autoSiteCo; // 주요시설 자동차야영장
-				cpGlampSiteCo = roots.response.body.items.item.get(i).glampSiteCo; //주요시설 글램핑
-				cpCaravSiteCo = roots.response.body.items.item.get(i).caravSiteCo; //주요시설 카라반
-				cpIndvdlCaravSiteCo = roots.response.body.items.item.get(i).indvdlCaravSiteCo; //주요시설 개인 카라반
-				cpSitedStnc = roots.response.body.items.item.get(i).sitedStnc; //사이트간 거리
-				cpSiteMg1Width = roots.response.body.items.item.get(i).siteMg1Width; //사이트 크기1 가로
-				cpSiteMg2Width = roots.response.body.items.item.get(i).siteMg2Width; //사이트 크기2 가로
-				cpSiteMg3Width = roots.response.body.items.item.get(i).siteMg3Width; //사이트 크기3 가로
-				cpSiteMg1Vrticl = roots.response.body.items.item.get(i).siteMg1Vrticl; //사이트 크기 1 세로
-				cpSiteMg2Vrticl = roots.response.body.items.item.get(i).siteMg2Vrticl; //사이트 크기2 세로
-				cpSiteMg3Vrticl = roots.response.body.items.item.get(i).siteMg3Vrticl; //사이트 크기 3 세로
-				cpSiteMg1Co = roots.response.body.items.item.get(i).siteMg1Co; //사이트 크기 1 수량
-				cpSiteMg2Co = roots.response.body.items.item.get(i).siteMg2Co; //사이트 크기 2 수량
-				cpSiteMg3Co = roots.response.body.items.item.get(i).siteMg3Co; // 사이트 크기 3 수량
-				cpSiteBottomCl1 = roots.response.body.items.item.get(i).siteBottomCl1; //잔디
-				cpSiteBottomCl2 = roots.response.body.items.item.get(i).siteBottomCl2; //파쇄석
-				cpSiteBottomCl3 = roots.response.body.items.item.get(i).siteBottomCl3; // 테크
-				cpSiteBottomCl4 = roots.response.body.items.item.get(i).siteBottomCl4; // 자갈
-				cpSiteBottomCl5 = roots.response.body.items.item.get(i).siteBottomCl5; // 맨흙
-				cpTooltip = roots.response.body.items.item.get(i).tooltip.toString(); //툴팁
-				cpGlampInnerFclty = roots.response.body.items.item.get(i).glampInnerFclty.toString(); // 글램핑 내부시설
-				cpCaravInnerFclty = roots.response.body.items.item.get(i).caravInnerFclty.toString(); // 카라반 내부시설
-				cpPrmisnDe = roots.response.body.items.item.get(i).prmisnDe.toString(); // 인허가일자
-				cpOperPdCl = roots.response.body.items.item.get(i).operPdCl.toString(); // 운영기간
-				cpOperDeCl = roots.response.body.items.item.get(i).operDeCl.toString(); // 운영일
-				cpTrlerAcmpnyAt = roots.response.body.items.item.get(i).trlerAcmpnyAt.toString(); //개인 트레일러 동반 여부(Y:사용, N:미사용)
-				cpCaravAcmpnyAt = roots.response.body.items.item.get(i).caravAcmpnyAt.toString(); //개인 카라반 동반 여부(Y:사용, N:미사용)
-				cpToiletCo = roots.response.body.items.item.get(i).toiletCo; //화장실 개수
-				cpSwrmCo = roots.response.body.items.item.get(i).swrmCo; //샤워실 개수
-				cpWtrplCo = roots.response.body.items.item.get(i).wtrplCo; //개수대 개수
-				cpBrazierCl = roots.response.body.items.item.get(i).brazierCl.toString(); //화로대
-				cpSbrsCl = roots.response.body.items.item.get(i).sbrsCl.toString(); //부대시설
-				cpSbrsEtc = roots.response.body.items.item.get(i).sbrsEtc.toString(); //부대시설 기타
-				cpPosblFcltyCl = roots.response.body.items.item.get(i).posblFcltyCl.toString(); //주변이용가능시설
-				cpPosblFcltyEtc = roots.response.body.items.item.get(i).posblFcltyEtc.toString(); //주변이용가능시설 기타
-				cpClturEventAt = roots.response.body.items.item.get(i).clturEventAt.toString(); //자체문화행사 여부(Y:사용, N:미사용)
-				cpClturEvent = roots.response.body.items.item.get(i).clturEvent.toString(); //자체문화행사명
-				cpExprnProgrmAt = roots.response.body.items.item.get(i).exprnProgrmAt.toString();//체험프로그램 여부(Y:사용, N:미사용)
-				cpExprnProgrm = roots.response.body.items.item.get(i).exprnProgrm.toString(); // 체험프로그램명
-				cpExtshrCo = roots.response.body.items.item.get(i).extshrCo; //소화기개수
-				cpFrprvtWrppCo = roots.response.body.items.item.get(i).frprvtWrppCo; //방화수 개수
-				cpFrprvtSandCo = roots.response.body.items.item.get(i).frprvtSandCo; //방화사 개수
-				cpFireSensorCo = roots.response.body.items.item.get(i).fireSensorCo; // 화재감지기 개수
-				cpThemaEnvrnCl = roots.response.body.items.item.get(i).themaEnvrnCl.toString(); // 테마환경
-				cpEqpmnLendCl = roots.response.body.items.item.get(i).eqpmnLendCl.toString(); // 캠핑장비대여
-				cpAnimalCmgCl = roots.response.body.items.item.get(i).animalCmgCl.toString(); //애완동물출입
-				cpTourEraCl = roots.response.body.items.item.get(i).tourEraCl.toString(); // 여행시기
-				cpFirstImageUrl = roots.response.body.items.item.get(i).firstImageUrl.toString(); // 대표이미지
-				cpCreatedtime = roots.response.body.items.item.get(i).createdtime.toString(); //등록일
-				cpModifiedtime = roots.response.body.items.item.get(i).modifiedtime.toString(); //수정일
+				cpname = roots.response.body.items.item.get(i).facltNm.toString();
+				cptel = roots.response.body.items.item.get(i).tel.toString();
+				lat = roots.response.body.items.item.get(i).mapX;
+				lng = roots.response.body.items.item.get(i).mapY;
+				addr = roots.response.body.items.item.get(i).addr1.toString();
 				
-				json_datas.setAddr(cpAddr2);
-				json_datas.setCpAddr2(cpAddr2);
-				json_datas.setCpAllar(cpAllar);
-				
-				json_arr.add(json_datas);
-				
+				cpLineIntro = roots.response.body.items.item.get(i).lineIntro.toString();
+				cpLctCl = roots.response.body.items.item.get(i).lctCl.toString();
+				cpPosblFcltyCl = roots.response.body.items.item.get(i).posblFcltyCl.toString();
+				cpHomepage = roots.response.body.items.item.get(i).homepage.toString();
+				cpAnimalCmgCl = roots.response.body.items.item.get(i).animalCmgCl.toString();
+				cpInduty = roots.response.body.items.item.get(i).induty.toString();
+				//insert methods 만들어 놓고 호출
+
+				//한줄씩 넣기 때문에 결과값 피드백은 1을 받게 되어 있음 //executeUpdate() 참고
+				iresult = InsertCampDt(cpname, cptel, lat, lng, addr, cpLineIntro, cpLctCl, cpPosblFcltyCl, cpHomepage, cpAnimalCmgCl, cpInduty);
+				if(iresult != 1) {
+					break;
+				}
+
+			}
+
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
+		System.out.println();
+
+		return strResult;
+	} 	
+	
+	
+	
+	
+//	public List<campzone> TestingApiThree() throws IOException{
+//		String strResult = "";
+//		String cpname = "";
+//		String cptel = "";
+//		double lat;
+//		double lng;
+//		String addr = "";
+//				
+//		String cpLineIntro = ""; // 한줄소개
+//		String cpIntro = ""; // 소개
+//		int cpAllar; // 전체면적
+//		String cpInsrncAt = ""; // 영업배상책임보험 가입여부
+//		String cpTrsagntNo = ""; // 관광사업자번호
+//		String cpBizrno = ""; // 사업자번호
+//		String cpFacltDivNm = ""; // 사업주체, 구분
+//		String cpMangeDivNm = ""; // 운영주체, 관리주체
+//		String cpMgcDiv = ""; // 운영기관, 관리기관
+//		String cpManageSttus = ""; // 운영상태, 관리상태
+//		String cpHvofBgnde = ""; // 휴장기간, 휴무기간 시작일
+//		String cpHvofEnddle = ""; // 휴장기간, 휴무기간 종료일
+//		String cpFeatureNm = ""; // 특징
+//		String cpInduty = ""; // 업종☆
+//		String cpLctCl = ""; // 입지구분☆
+//		String cpDoNm = ""; // 도
+//		String cpSigunguNm = ""; //시군구
+//		int cpZipcode; // 우편번호
+//		String cpAddr2 = ""; // 주소상세
+//		String cpDirection = ""; //오시는길 컨텐츠
+//		String cpHomepage = ""; //홈페이지
+//		String cpResveUrl = ""; //예약 페이지
+//		String cpResveCl = ""; //예약 구분
+//		int cpManageNmpr; // 상주관리인원
+//		int cpGnrlSiteCo; // 주요시설 일반야영장
+//		int cpAutoSiteCo; // 주요시설 자동차야영장
+//		int cpGlampSiteCo; //주요시설 글램핑
+//		int cpCaravSiteCo; //주요시설 카라반
+//		int cpIndvdlCaravSiteCo; //주요시설 개인 카라반
+//		int cpSitedStnc; //사이트간 거리
+//		int cpSiteMg1Width; //사이트 크기1 가로
+//		int cpSiteMg2Width; //사이트 크기2 가로
+//		int cpSiteMg3Width; //사이트 크기3 가로
+//		int cpSiteMg1Vrticl; //사이트 크기 1 세로
+//		int cpSiteMg2Vrticl; //사이트 크기2 세로
+//		int cpSiteMg3Vrticl; //사이트 크기 3 세로
+//		int cpSiteMg1Co; //사이트 크기 1 수량
+//		int cpSiteMg2Co; //사이트 크기 2 수량
+//		int cpSiteMg3Co; // 사이트 크기 3 수량
+//		int cpSiteBottomCl1; //잔디
+//		int cpSiteBottomCl2; //파쇄석
+//		int cpSiteBottomCl3; // 테크
+//		int cpSiteBottomCl4; // 자갈
+//		int cpSiteBottomCl5; // 맨흙
+//		String cpTooltip = ""; //툴팁
+//		String cpGlampInnerFclty = ""; // 글램핑 내부시설
+//		String cpCaravInnerFclty = ""; // 카라반 내부시설
+//		String cpPrmisnDe = ""; // 인허가일자
+//		String cpOperPdCl = ""; // 운영기간
+//		String cpOperDeCl = ""; // 운영일
+//		String cpTrlerAcmpnyAt = ""; //개인 트레일러 동반 여부(Y:사용, N:미사용)
+//		String cpCaravAcmpnyAt = ""; //개인 카라반 동반 여부(Y:사용, N:미사용)
+//		int cpToiletCo; //화장실 개수
+//		int cpSwrmCo; //샤워실 개수
+//		int cpWtrplCo; //개수대 개수
+//		String cpBrazierCl = ""; //화로대
+//		String cpSbrsCl = ""; //부대시설
+//		String cpSbrsEtc = ""; //부대시설 기타
+//		String cpPosblFcltyCl = ""; //주변이용가능시설
+//		String cpPosblFcltyEtc = ""; //주변이용가능시설 기타
+//		String cpClturEventAt = ""; //자체문화행사 여부(Y:사용, N:미사용)
+//		String cpClturEvent = ""; //자체문화행사명
+//		String cpExprnProgrmAt = "";//체험프로그램 여부(Y:사용, N:미사용)
+//		String cpExprnProgrm = ""; // 체험프로그램명
+//		int cpExtshrCo; //소화기개수
+//		int cpFrprvtWrppCo; //방화수 개수
+//		int cpFrprvtSandCo; //방화사 개수
+//		int cpFireSensorCo; // 화재감지기 개수
+//		String cpThemaEnvrnCl = ""; // 테마환경
+//		String cpEqpmnLendCl = ""; // 캠핑장비대여
+//		String cpAnimalCmgCl = ""; //애완동물출입
+//		String cpTourEraCl = ""; // 여행시기
+//		String cpFirstImageUrl = ""; // 대표이미지
+//		String cpCreatedtime = ""; //등록일
+//		String cpModifiedtime = ""; //수정일
+//
+//		int iresult = 0;
+//
+//		/*URL apiUrl = new URL("https://apis.data.go.kr/B551011/GoCamping/searchList"
+//				+ "?serviceKey=nHYvwaA5iMdJN%2BZfRIwpkLrcYSbqND87jXVtes2Z6I7kb5%2F8Ycv1UCLzedNfTfWQ%2FVoOtadIC9WpwTLtTnukPA%3D%3D"
+//				+ "&numOfRows=10"
+//				+ "&pageNo=1"
+//				+ "&MobileOS=ETC"
+//				+ "&MobileApp=AppTest"
+//				+ "&_type=JSON"
+//				+ "&keyword=천안");*/
+//		StringBuilder urlBuilder = new StringBuilder("https://apis.data.go.kr/B551011/GoCamping/searchList");
+//		// 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.
+//		urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + "nHYvwaA5iMdJN%2BZfRIwpkLrcYSbqND87jXVtes2Z6I7kb5%2F8Ycv1UCLzedNfTfWQ%2FVoOtadIC9WpwTLtTnukPA%3D%3D"); /*Service Key*/
+//		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8")+ "=" + URLEncoder.encode("1","UTF-8"));
+//		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8")+ "=" + URLEncoder.encode("10","UTF-8"));
+//		urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+ "=" + URLEncoder.encode("ETC","UTF-8"));
+//		urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+ "=" + URLEncoder.encode("AppTest","UTF-8"));
+//		urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+ "=" + URLEncoder.encode("json","UTF-8"));
+//		urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8")+ "=" + URLEncoder.encode("천안","UTF-8"));
+//		// 3. URL 객체 생성
+//		URL url = new URL(urlBuilder.toString());
+//
+//		// 4. 요청하고자 하는 URL과 통신하기 위한 Connection 객체 생성
+//		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//
+//		// 5. 통신을 위한 메소드 SET
+//		conn.setRequestMethod("GET");
+//
+//		// 6. 통신을 위한 Content-type SET
+//		conn.setRequestProperty("Content-type", "application/json");
+//
+//		// 7. 통신 응답 코드 확인
+//		System.out.println("Response code : " + conn.getResponseCode());
+//
+//		// 8. 전달받은 데이터를 BufferedReader 객체로 저장
+//		BufferedReader rd;
+//		if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+//			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//		} else {
+//			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+//		}
+//
+//		// 9. 저장된 데이터를 라인별로 읽어 StringBuilder 객체로 저장
+//		StringBuilder sb = new StringBuilder();
+//		String line;
+//		while ((line = rd.readLine()) != null) {
+//			sb.append(line);
+//		}
+//
+//		// 10. 객체 해제
+//		rd.close();
+//		conn.disconnect();
+//
+//		// 11. 전달받은 데이터 확인
+//		System.out.println("전달받은 데이터 확인 : " + sb.toString());
+//
+//		strResult = sb.toString();
+//
+//		JSONParser jsonParser1 = new JSONParser();//import org.json.simple.parser.JSONParser; 추가
+//		JSONObject jsonObject1;//import org.json.simple.JSONObject; 추가
+//		List<campzone> json_arr = new ArrayList<campzone>();
+//		try {
+//			System.out.println("3");
+//			jsonObject1 = (JSONObject) jsonParser1.parse(strResult);
+//			System.out.println("jsonObject1 = " + jsonObject1);
+//
+//			// Gson의 역할 json통신된 json을 만들어놓은 dto모델에 담는다.
+//			campzoneJsonModel roots = new Gson().fromJson(jsonObject1.toString(), campzoneJsonModel.class);
+//
+//			for(int i = 0; i<roots.response.body.items.item.size(); i++) {
+//				campzone json_datas = new campzone();
+//				System.out.println(roots.response.body.items.item.get(i).addr1.toString());
+//
+//				cpname = roots.response.body.items.item.get(i).facltNm.toString(); // 야영장명☆
+//				cpLineIntro = roots.response.body.items.item.get(i).lineIntro.toString(); // 한줄소개
+//				cpAllar = roots.response.body.items.item.get(i).allar; // 전체면적
+//				cpInsrncAt = roots.response.body.items.item.get(i).insrncAt.toString(); // 영업배상책임보험 가입여부
+//				cpTrsagntNo = roots.response.body.items.item.get(i).trsagntNo.toString(); // 관광사업자번호
+//				cpBizrno = roots.response.body.items.item.get(i).bizrno.toString(); // 사업자번호
+//				cpFacltDivNm = roots.response.body.items.item.get(i).facltDivNm.toString(); // 사업주체, 구분
+//				cpMangeDivNm = roots.response.body.items.item.get(i).mangeDivNm.toString(); // 운영주체, 관리주체
+//				cpMgcDiv = roots.response.body.items.item.get(i).mgcDiv.toString(); // 운영기관, 관리기관
+//				cpManageSttus = roots.response.body.items.item.get(i).manageSttus.toString(); // 운영상태, 관리상태
+//				cpHvofBgnde = roots.response.body.items.item.get(i).hvofBgnde.toString(); // 휴장기간, 휴무기간 시작일
+//				cpHvofEnddle = roots.response.body.items.item.get(i).hvofEnddle.toString(); // 휴장기간, 휴무기간 종료일
+//				cpFeatureNm = roots.response.body.items.item.get(i).featureNm.toString(); // 특징
+//				cpInduty = roots.response.body.items.item.get(i).induty.toString(); // 업종
+//				cpLctCl = roots.response.body.items.item.get(i).lctCl.toString(); // 입지구분
+//				cpDoNm = roots.response.body.items.item.get(i).doNm.toString(); // 도
+//				cpSigunguNm = roots.response.body.items.item.get(i).sigunguNm.toString(); //시군구
+//				cpZipcode = roots.response.body.items.item.get(i).zipcode; // 우편번호
+//				addr = roots.response.body.items.item.get(i).addr1.toString(); // 주소
+//				cpAddr2 = roots.response.body.items.item.get(i).addr2.toString(); // 주소상세
+//				lat = roots.response.body.items.item.get(i).mapX; //경도
+//				lng = roots.response.body.items.item.get(i).mapY; //위도
+//				cpDirection = roots.response.body.items.item.get(i).direction.toString(); //오시는길 컨텐츠
+//				cptel = roots.response.body.items.item.get(i).tel.toString(); //전화
+//				cpHomepage = roots.response.body.items.item.get(i).homepage.toString(); //홈페이지
+//				cpResveUrl = roots.response.body.items.item.get(i).resveUrl.toString(); //예약 페이지
+//				cpResveCl = roots.response.body.items.item.get(i).resveCl.toString(); //예약 구분
+//				cpManageNmpr = roots.response.body.items.item.get(i).manageNmpr; // 상주관리인원
+//				cpGnrlSiteCo = roots.response.body.items.item.get(i).gnrlSiteCo; // 주요시설 일반야영장
+//				cpAutoSiteCo = roots.response.body.items.item.get(i).autoSiteCo; // 주요시설 자동차야영장
+//				cpGlampSiteCo = roots.response.body.items.item.get(i).glampSiteCo; //주요시설 글램핑
+//				cpCaravSiteCo = roots.response.body.items.item.get(i).caravSiteCo; //주요시설 카라반
+//				cpIndvdlCaravSiteCo = roots.response.body.items.item.get(i).indvdlCaravSiteCo; //주요시설 개인 카라반
+//				cpSitedStnc = roots.response.body.items.item.get(i).sitedStnc; //사이트간 거리
+//				cpSiteMg1Width = roots.response.body.items.item.get(i).siteMg1Width; //사이트 크기1 가로
+//				cpSiteMg2Width = roots.response.body.items.item.get(i).siteMg2Width; //사이트 크기2 가로
+//				cpSiteMg3Width = roots.response.body.items.item.get(i).siteMg3Width; //사이트 크기3 가로
+//				cpSiteMg1Vrticl = roots.response.body.items.item.get(i).siteMg1Vrticl; //사이트 크기 1 세로
+//				cpSiteMg2Vrticl = roots.response.body.items.item.get(i).siteMg2Vrticl; //사이트 크기2 세로
+//				cpSiteMg3Vrticl = roots.response.body.items.item.get(i).siteMg3Vrticl; //사이트 크기 3 세로
+//				cpSiteMg1Co = roots.response.body.items.item.get(i).siteMg1Co; //사이트 크기 1 수량
+//				cpSiteMg2Co = roots.response.body.items.item.get(i).siteMg2Co; //사이트 크기 2 수량
+//				cpSiteMg3Co = roots.response.body.items.item.get(i).siteMg3Co; // 사이트 크기 3 수량
+//				cpSiteBottomCl1 = roots.response.body.items.item.get(i).siteBottomCl1; //잔디
+//				cpSiteBottomCl2 = roots.response.body.items.item.get(i).siteBottomCl2; //파쇄석
+//				cpSiteBottomCl3 = roots.response.body.items.item.get(i).siteBottomCl3; // 테크
+//				cpSiteBottomCl4 = roots.response.body.items.item.get(i).siteBottomCl4; // 자갈
+//				cpSiteBottomCl5 = roots.response.body.items.item.get(i).siteBottomCl5; // 맨흙
+//				cpTooltip = roots.response.body.items.item.get(i).tooltip.toString(); //툴팁
+//				cpGlampInnerFclty = roots.response.body.items.item.get(i).glampInnerFclty.toString(); // 글램핑 내부시설
+//				cpCaravInnerFclty = roots.response.body.items.item.get(i).caravInnerFclty.toString(); // 카라반 내부시설
+//				cpPrmisnDe = roots.response.body.items.item.get(i).prmisnDe.toString(); // 인허가일자
+//				cpOperPdCl = roots.response.body.items.item.get(i).operPdCl.toString(); // 운영기간
+//				cpOperDeCl = roots.response.body.items.item.get(i).operDeCl.toString(); // 운영일
+//				cpTrlerAcmpnyAt = roots.response.body.items.item.get(i).trlerAcmpnyAt.toString(); //개인 트레일러 동반 여부(Y:사용, N:미사용)
+//				cpCaravAcmpnyAt = roots.response.body.items.item.get(i).caravAcmpnyAt.toString(); //개인 카라반 동반 여부(Y:사용, N:미사용)
+//				cpToiletCo = roots.response.body.items.item.get(i).toiletCo; //화장실 개수
+//				cpSwrmCo = roots.response.body.items.item.get(i).swrmCo; //샤워실 개수
+//				cpWtrplCo = roots.response.body.items.item.get(i).wtrplCo; //개수대 개수
+//				cpBrazierCl = roots.response.body.items.item.get(i).brazierCl.toString(); //화로대
+//				cpSbrsCl = roots.response.body.items.item.get(i).sbrsCl.toString(); //부대시설
+//				cpSbrsEtc = roots.response.body.items.item.get(i).sbrsEtc.toString(); //부대시설 기타
+//				cpPosblFcltyCl = roots.response.body.items.item.get(i).posblFcltyCl.toString(); //주변이용가능시설
+//				cpPosblFcltyEtc = roots.response.body.items.item.get(i).posblFcltyEtc.toString(); //주변이용가능시설 기타
+//				cpClturEventAt = roots.response.body.items.item.get(i).clturEventAt.toString(); //자체문화행사 여부(Y:사용, N:미사용)
+//				cpClturEvent = roots.response.body.items.item.get(i).clturEvent.toString(); //자체문화행사명
+//				cpExprnProgrmAt = roots.response.body.items.item.get(i).exprnProgrmAt.toString();//체험프로그램 여부(Y:사용, N:미사용)
+//				cpExprnProgrm = roots.response.body.items.item.get(i).exprnProgrm.toString(); // 체험프로그램명
+//				cpExtshrCo = roots.response.body.items.item.get(i).extshrCo; //소화기개수
+//				cpFrprvtWrppCo = roots.response.body.items.item.get(i).frprvtWrppCo; //방화수 개수
+//				cpFrprvtSandCo = roots.response.body.items.item.get(i).frprvtSandCo; //방화사 개수
+//				cpFireSensorCo = roots.response.body.items.item.get(i).fireSensorCo; // 화재감지기 개수
+//				cpThemaEnvrnCl = roots.response.body.items.item.get(i).themaEnvrnCl.toString(); // 테마환경
+//				cpEqpmnLendCl = roots.response.body.items.item.get(i).eqpmnLendCl.toString(); // 캠핑장비대여
+//				cpAnimalCmgCl = roots.response.body.items.item.get(i).animalCmgCl.toString(); //애완동물출입
+//				cpTourEraCl = roots.response.body.items.item.get(i).tourEraCl.toString(); // 여행시기
+//				cpFirstImageUrl = roots.response.body.items.item.get(i).firstImageUrl.toString(); // 대표이미지
+//				cpCreatedtime = roots.response.body.items.item.get(i).createdtime.toString(); //등록일
+//				cpModifiedtime = roots.response.body.items.item.get(i).modifiedtime.toString(); //수정일
+//				
+//				json_datas.setAddr(cpAddr2);
+//				json_datas.setCpAddr2(cpAddr2);
+//				json_datas.setCpAllar(cpAllar);
+//				
+//				json_arr.add(json_datas);
+//				
 				
 
 
@@ -511,14 +631,14 @@ public class mainController {
 
 			}
 
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}
-
-		System.out.println();
-
-		return json_arr;
-	} 
+//		} catch(Exception ex) {
+//			ex.printStackTrace();
+//		}
+//
+//		System.out.println();
+//
+//		return json_arr;
+//	} 
 
 //	private int InsertCampDtAll(String cpname, String cptel, double lat, double lng, String addr, String cptel,
 //			String cpLineIntro,	int cpAllar,	String cpInsrncAt, String cpFacltDivNm,	String cpMangeDivNm,	String cpMgcDiv,	String cpManageSttus,

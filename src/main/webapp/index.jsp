@@ -40,8 +40,8 @@
 		String aa = "";
 		mainController mains = new mainController();
 		
-		aa = mains.TestingApiTwo();
-		//aa = mains.TestingApiThree();
+		//aa = mains.TestingApiTwo();
+		aa = mains.TestingApiThree();
 		
 		List<campzone> campzonelist = new ArrayList<campzone>();
 		campzonelist = mains.TestCampDB(0);
