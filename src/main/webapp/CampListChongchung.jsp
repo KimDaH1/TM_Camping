@@ -39,7 +39,7 @@
 	
 	
 	// 전체데이터 갯수 구하기
-	int dataCount = maincontroller.getDataTotalCountCP(searchValue);
+	int dataCount = maincontroller.getDataTotalCountChongchung(searchValue);
 	
 	// 한페이지에 표시할 데이터의 갯수
 	int numPerPage = 10;
@@ -58,7 +58,7 @@
 	
 	List<campzone> campzonelist = new ArrayList<campzone>();
 
-	campzonelist = maincontroller.CampDBLists(start, end, searchValue);
+	campzonelist = maincontroller.CampDBListChongchung(start, end, searchValue);
 	//데이터베이스에서 해당 페이지를 가져온다
 	//List<BoardDTO> lists = dao.getLists(start end, searchKey, searchValue);
 	
@@ -70,7 +70,7 @@
 	
 	
 	//페이징 처리
-	String listUrl = "CampList.jsp"+param;
+	String listUrl = "CampListChongchung.jsp"+param;
 	String pageIndexList = myutil.pageIndexList(currentPage, totalPage, listUrl);
 	
 	//글 내용 보기 주소 정리(html에서 onclick의 주소가 너무 길기 때문에 한번에 정리)
@@ -89,7 +89,7 @@
 <script type="text/javascript">
 	function sendIt(){
 		var f = document.searchForm;
-		f.action = "<%=cp %>/CampList.jsp"; 
+		f.action = "<%=cp %>/CampListChongchung.jsp"; 
 		f.submit();
 	}
 	function clickTest(){
@@ -108,7 +108,7 @@
 		          var number =this.cells[0].innerHTML; //사번		          
 		          
 		         str = number.trim(); //사번을 공백없이 변수에 담기
-		         var link = 'http://localhost:8080/ThreeMenCamping/campDetail.jsp?data=' + str;
+		         var link = 'http://localhost:8080/ThreeMenCamping/ChongchungDetail.jsp?data=' + str;
 		         location.href=link; //페이지 이동		         
 		       };
 		    }(row);
@@ -121,7 +121,7 @@
 
 </head>
 <body>
-	<h1> Three Men Camping (TM_CAMPINGZONE_1 캠핑장 테이블 test) </h1>
+	<h1> Three Men Camping (충청도 캠핑장 테이블 test) </h1>
 
 <div id="bbsList">
 	<div id="bbsList_title">
@@ -150,21 +150,22 @@
 	<thead>
 		<tr>
 			<th>캠핑장명</th>
-			<th>전화번호</th>
+			<th>형태</th>
 			<th>위도</th>
 			<th>경도	</th>
 			<th>주소</th>			
 		</tr>
 	</thead>		
 	<tbody>	
-		<% for (int i = 0; i < campzonelist.size(); i++)
+		<% out.println(campzonelist.size());
+		for (int i = 0; i < campzonelist.size(); i++)
 		{ %>
 			<tr>
 				<td class="empno" onClick="clickTest();" style="cursor:pointer;">
 					<% out.print(campzonelist.get(i).getCpname()); %>
 				</td>
 				<td class="ename">
-					<%out.print(campzonelist.get(i).getCptel()); %>
+					<%out.print(campzonelist.get(i).getCpInduty()); %>
 				</td>
 				<td class="job">
 					<%out.print(campzonelist.get(i).getLat()); %>

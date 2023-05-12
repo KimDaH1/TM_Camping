@@ -19,7 +19,7 @@ public class myUtil{
 	// listUrl : 링크를 설정할 URL(ListTest.jsp)
 	public String pageIndexList(int currentPage, int totalPage, String listUrl) {
 		
-		int numPerBlock = 5;  //리스트 밑에 나오는 페이지번호 출력 갯수
+		int numPerBlock = 10;  //리스트 밑에 나오는 페이지번호 출력 갯수
 		int currentPageSetup; //표시할 첫 페이지의 -1해준 값
 		int page;  			  // 하이퍼링크가 될 page index 숫자
 		

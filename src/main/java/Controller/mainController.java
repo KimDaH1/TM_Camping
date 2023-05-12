@@ -121,7 +121,7 @@ public class mainController {
 		urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+ "=" + URLEncoder.encode("ETC","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+ "=" + URLEncoder.encode("AppTest","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+ "=" + URLEncoder.encode("json","UTF-8"));
-		urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8")+ "=" + URLEncoder.encode("경기","UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8")+ "=" + URLEncoder.encode("제주","UTF-8"));
 		// 3. URL 객체 생성
 		URL url = new URL(urlBuilder.toString());
 
@@ -278,7 +278,9 @@ public class mainController {
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8")+ "=" + URLEncoder.encode("10","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+ "=" + URLEncoder.encode("ETC","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+ "=" + URLEncoder.encode("AppTest","UTF-8"));
-		//urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+ "=" + URLEncoder.encode("json","UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+ "=" + URLEncoder.encode("json","UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8")+ "=" + URLEncoder.encode("서울시","UTF-8"));
+
 		// 3. URL 객체 생성
 		URL url = new URL(urlBuilder.toString());
 
@@ -629,7 +631,7 @@ public class mainController {
 //					break;
 //				}
 
-			}
+//			}
 
 //		} catch(Exception ex) {
 //			ex.printStackTrace();
@@ -811,6 +813,240 @@ public class mainController {
 		return  _campzone;	
 	}
 	
+	// 경기 게시판 테이블 생성 준비 
+	public List<campzone> TestCampDBGyeonggi(int idx) {
+		List<campzone> _campzone = new ArrayList<campzone>();
+		String result = "a";
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;
+		// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			sql = "SELECT rownum idx, cpname, cpinduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL WHERE addr LIKE '%경기%'";
+			if(idx != 0) {
+				sql += " and rownum =" + idx;
+			}			
+			psmt = conn.prepareStatement(sql);						
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+	            campzone scampzone = new campzone();
+	            scampzone.setIdx(rs.getInt("rownum"));
+	            scampzone.setCpname(rs.getString("cpname"));
+	            scampzone.setCpInduty(rs.getString("cpinduty"));
+	            scampzone.setLat(rs.getDouble("lat"));
+	            scampzone.setLng(rs.getDouble("lng"));
+	            scampzone.setAddr(rs.getString("addr"));
+	            _campzone.add(scampzone);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+		// System.out.println(result);
+		return  _campzone;	
+	}
+	
+	// 전라 게시판 테이블 생성 준비 
+	public List<campzone> TestCampDBJeolla(int idx) {
+		List<campzone> _campzone = new ArrayList<campzone>();
+		String result = "a";
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;
+		// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL WHERE addr LIKE '%전라%'";
+			if(idx != 0) {
+				sql += " and rownum =" + idx;
+			}			
+			psmt = conn.prepareStatement(sql);						
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+	            campzone scampzone = new campzone();
+	            scampzone.setIdx(rs.getInt("idx"));
+	            scampzone.setCpname(rs.getString("cpname"));
+	            scampzone.setCpInduty(rs.getString("cpInduty"));
+	            scampzone.setLat(rs.getDouble("lat"));
+	            scampzone.setLng(rs.getDouble("lng"));
+	            scampzone.setAddr(rs.getString("addr"));
+	            _campzone.add(scampzone);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+		// System.out.println(result);
+		return  _campzone;	
+	}
+	
+	// 경상 게시판 테이블 생성 준비 
+	public List<campzone> TestCampDBGyeongsang(int idx) {
+		List<campzone> _campzone = new ArrayList<campzone>();
+		String result = "a";
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;
+		// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL WHERE addr LIKE '%경상%'";
+			if(idx != 0) {
+				sql += " where rownum =" + idx;
+			}			
+			psmt = conn.prepareStatement(sql);						
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+	            campzone scampzone = new campzone();
+	            scampzone.setIdx(rs.getInt("idx"));
+	            scampzone.setCpname(rs.getString("cpname"));
+	            scampzone.setCpInduty(rs.getString("cpInduty"));
+	            scampzone.setLat(rs.getDouble("lat"));
+	            scampzone.setLng(rs.getDouble("lng"));
+	            scampzone.setAddr(rs.getString("addr"));
+	            _campzone.add(scampzone);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+		// System.out.println(result);
+		return  _campzone;	
+	}
+	
+	// 강원 게시판 테이블 생성 준비 
+	public List<campzone> TestCampDBGangwon(int idx) {
+		List<campzone> _campzone = new ArrayList<campzone>();
+		String result = "a";
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;
+		// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL WHERE addr LIKE '%강원%'";
+			if(idx != 0) {
+				sql += " and rownum =" + idx;
+			}			
+			psmt = conn.prepareStatement(sql);						
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+	            campzone scampzone = new campzone();
+	            scampzone.setIdx(rs.getInt("idx"));
+	            scampzone.setCpname(rs.getString("cpname"));
+	            scampzone.setCpInduty(rs.getString("cpInduty"));
+	            scampzone.setLat(rs.getDouble("lat"));
+	            scampzone.setLng(rs.getDouble("lng"));
+	            scampzone.setAddr(rs.getString("addr"));
+	            _campzone.add(scampzone);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+		// System.out.println(result);
+		return  _campzone;	
+	}
+	
+	// 제주 게시판 테이블 생성 준비 
+	public List<campzone> TestCampDBJeju(int idx) {
+		List<campzone> _campzone = new ArrayList<campzone>();
+		String result = "a";
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;
+		// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL WHERE addr LIKE '%제주%'";
+			if(idx != 0) {
+				sql += " where idx =" + idx;
+			}			
+			psmt = conn.prepareStatement(sql);						
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+	            campzone scampzone = new campzone();
+	            scampzone.setIdx(rs.getInt("rownum"));
+	            scampzone.setCpname(rs.getString("cpname"));
+	            scampzone.setCpInduty(rs.getString("cpinduty"));
+	            scampzone.setLat(rs.getDouble("lat"));
+	            scampzone.setLng(rs.getDouble("lng"));
+	            scampzone.setAddr(rs.getString("addr"));
+	            _campzone.add(scampzone);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+		// System.out.println(result);
+		return  _campzone;	
+	}
+	
+	// 충청도 캠핑장 테이블 생성 준비 
+	public List<campzone> TestChongchungDB(int rownum) {
+		List<campzone> _campzone = new ArrayList<campzone>();
+		String result = "a";
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;
+		// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			sql = "SELECT rownum, cpname, cpinduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL WHERE addr LIKE '%충청%'";
+			if(rownum != 0) {
+				sql += " where rownum =" + rownum;
+			}			
+			psmt = conn.prepareStatement(sql);						
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+	            campzone scampzone = new campzone();
+	            scampzone.setIdx(rs.getInt("rownum"));
+	            scampzone.setCpname(rs.getString("cpname"));
+	            scampzone.setCpInduty(rs.getString("cpinduty"));
+	            scampzone.setLat(rs.getDouble("lat"));
+	            scampzone.setLng(rs.getDouble("lng"));
+	            scampzone.setAddr(rs.getString("addr"));
+	            _campzone.add(scampzone);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+		// System.out.println(result);
+		return  _campzone;	
+	}
+	
 	// 테이블 생성 준비
 	public List<emp> TestMariaDB(int empno) {
 		List<emp> _emp = new ArrayList<emp>();
@@ -963,7 +1199,8 @@ public class mainController {
 		return _emp;	
 
 	}
-	
+
+	// CampDBLists 게시판
 	public List<campzone> CampDBLists(int start, int end, String strValue) {
 		List<campzone> _campzone = new ArrayList<campzone>();
 		String result = "a";
@@ -1007,6 +1244,286 @@ public class mainController {
 		}		
 		return _campzone;	
 
+	}	
+	
+// 경기 게시판
+	public List<campzone> CampDBListsGyeonggi(int start, int end, String strValue) {
+		List<campzone> _campzone = new ArrayList<campzone>();
+		String result = "a";
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;
+
+		// 게시판용 리스트
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			strValue = "%" + strValue + "%";
+ 
+			sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
+					+ " WHERE (addr like '%경기%' or addr like '%서울%') and CPNAME LIKE ?"
+					+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+
+			psmt = conn.prepareStatement(sql);	
+			psmt.setString(1, strValue);
+			psmt.setInt(2, start);
+			psmt.setInt(3, end);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				campzone scampzone = new campzone();
+	            scampzone.setIdx(rs.getInt("rownum"));
+	            System.out.println(rs.getInt("rownum"));
+	            scampzone.setCpname(rs.getString("cpname"));
+	            scampzone.setCpInduty(rs.getString("cpInduty"));
+	            scampzone.setLat(rs.getDouble("lat"));
+	            scampzone.setLng(rs.getDouble("lng"));
+	            scampzone.setAddr(rs.getString("addr"));
+	            _campzone.add(scampzone);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+		return _campzone;	
+
+	}
+
+	// 전라 게시판
+		public List<campzone> CampDBListsJeolla(int start, int end, String strValue) {
+			List<campzone> _campzone = new ArrayList<campzone>();
+			String result = "a";
+			Connection conn = null; //import java.sql.Connection;
+			PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+			ResultSet rs = null; //import java.sql.ResultSet;
+
+			// 게시판용 리스트
+			try {			
+				conn = DBConnectionManager.getConnection();			
+				//쿼리문
+				//String sql = "SELECT * FROM EMP e";
+				String sql = "";
+				strValue = "%" + strValue + "%";
+	 
+				sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
+						+ " WHERE addr like '%전라%' and CPNAME LIKE ?"
+						+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+
+				psmt = conn.prepareStatement(sql);	
+				psmt.setString(1, strValue);
+				psmt.setInt(2, start);
+				psmt.setInt(3, end);
+				rs = psmt.executeQuery();
+				while (rs.next()) {
+					campzone scampzone = new campzone();
+		            scampzone.setIdx(rs.getInt("rownum"));
+		            System.out.println(rs.getInt("rownum"));
+		            scampzone.setCpname(rs.getString("cpname"));
+		            scampzone.setCpInduty(rs.getString("cpInduty"));
+		            scampzone.setLat(rs.getDouble("lat"));
+		            scampzone.setLng(rs.getDouble("lng"));
+		            scampzone.setAddr(rs.getString("addr"));
+		            _campzone.add(scampzone);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBConnectionManager.close(rs, psmt, conn);
+			}		
+			return _campzone;	
+
+		}
+
+		// 경상 게시판
+		public List<campzone> CampDBListsGyeongsang(int start, int end, String strValue) {
+			List<campzone> _campzone = new ArrayList<campzone>();
+			String result = "a";
+			Connection conn = null; //import java.sql.Connection;
+			PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+			ResultSet rs = null; //import java.sql.ResultSet;
+
+			// 게시판용 리스트
+			try {			
+				conn = DBConnectionManager.getConnection();			
+				//쿼리문
+				//String sql = "SELECT * FROM EMP e";
+				String sql = "";
+				strValue = "%" + strValue + "%";
+	 
+				sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
+						+ " WHERE addr like '%경상%' and CPNAME LIKE ?"
+						+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+
+				psmt = conn.prepareStatement(sql);	
+				psmt.setString(1, strValue);
+				psmt.setInt(2, start);
+				psmt.setInt(3, end);
+				rs = psmt.executeQuery();
+				while (rs.next()) {
+					campzone scampzone = new campzone();
+		            scampzone.setIdx(rs.getInt("rownum"));
+		            System.out.println(rs.getInt("rownum"));
+		            scampzone.setCpname(rs.getString("cpname"));
+		            scampzone.setCpInduty(rs.getString("cpInduty"));
+		            scampzone.setLat(rs.getDouble("lat"));
+		            scampzone.setLng(rs.getDouble("lng"));
+		            scampzone.setAddr(rs.getString("addr"));
+		            _campzone.add(scampzone);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBConnectionManager.close(rs, psmt, conn);
+			}		
+			return _campzone;	
+
+		}
+		
+		// 강원 게시판
+		public List<campzone> CampDBListsGangwon(int start, int end, String strValue) {
+			List<campzone> _campzone = new ArrayList<campzone>();
+			String result = "a";
+			Connection conn = null; //import java.sql.Connection;
+			PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+			ResultSet rs = null; //import java.sql.ResultSet;
+
+			// 게시판용 리스트
+			try {			
+				conn = DBConnectionManager.getConnection();			
+				//쿼리문
+				//String sql = "SELECT * FROM EMP e";
+				String sql = "";
+				strValue = "%" + strValue + "%";
+	 
+				sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
+						+ " WHERE addr like '%강원%' and CPNAME LIKE ?"
+						+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+
+				psmt = conn.prepareStatement(sql);	
+				psmt.setString(1, strValue);
+				psmt.setInt(2, start);
+				psmt.setInt(3, end);
+				rs = psmt.executeQuery();
+				while (rs.next()) {
+					campzone scampzone = new campzone();
+		            scampzone.setIdx(rs.getInt("rownum"));
+		            System.out.println(rs.getInt("rownum"));
+		            scampzone.setCpname(rs.getString("cpname"));
+		            scampzone.setCpInduty(rs.getString("cpInduty"));
+		            scampzone.setLat(rs.getDouble("lat"));
+		            scampzone.setLng(rs.getDouble("lng"));
+		            scampzone.setAddr(rs.getString("addr"));
+		            _campzone.add(scampzone);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBConnectionManager.close(rs, psmt, conn);
+			}		
+			return _campzone;	
+
+		}
+		
+		// 제주 게시판
+		public List<campzone> CampDBListsJeju(int start, int end, String strValue) {
+			List<campzone> _campzone = new ArrayList<campzone>();
+			String result = "a";
+			Connection conn = null; //import java.sql.Connection;
+			PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+			ResultSet rs = null; //import java.sql.ResultSet;
+
+			// 게시판용 리스트
+			try {			
+				conn = DBConnectionManager.getConnection();			
+				//쿼리문
+				//String sql = "SELECT * FROM EMP e";
+				String sql = "";
+				strValue = "%" + strValue + "%";
+	 
+				sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
+						+ " WHERE addr like '%제주%' and CPNAME LIKE ?"
+						+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+
+				psmt = conn.prepareStatement(sql);	
+				psmt.setString(1, strValue);
+				psmt.setInt(2, start);
+				psmt.setInt(3, end);
+				rs = psmt.executeQuery();
+				while (rs.next()) {
+					campzone scampzone = new campzone();
+		            scampzone.setIdx(rs.getInt("rownum"));
+		            System.out.println(rs.getInt("rownum"));
+		            scampzone.setCpname(rs.getString("cpname"));
+		            scampzone.setCpInduty(rs.getString("cpInduty"));
+		            scampzone.setLat(rs.getDouble("lat"));
+		            scampzone.setLng(rs.getDouble("lng"));
+		            scampzone.setAddr(rs.getString("addr"));
+		            _campzone.add(scampzone);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBConnectionManager.close(rs, psmt, conn);
+			}		
+			return _campzone;	
+
+		}
+	
+// 충청도 게시판
+	public List<campzone> CampDBListChongchung(int start, int end, String strValue) {
+
+		List<campzone> _campzone = new ArrayList<campzone>();
+
+		String result = "a";
+
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;
+
+		// 충청 게시판용 리스트
+		try {			
+
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			strValue = "%" + strValue + "%";
+
+			sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
+					+ " WHERE addr like '%충청%' and CPNAME LIKE ?"
+					+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+
+			psmt = conn.prepareStatement(sql);	
+			psmt.setString(1, strValue);
+			psmt.setInt(2, start);
+			psmt.setInt(3, end);
+
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				campzone scampzone = new campzone();
+	            scampzone.setIdx(rs.getInt("rownum"));
+	            System.out.println(rs.getInt("rownum"));
+	            scampzone.setCpname(rs.getString("cpname"));
+	            scampzone.setCpInduty(rs.getString("cpInduty"));
+	            scampzone.setLat(rs.getDouble("lat"));
+	            scampzone.setLng(rs.getDouble("lng"));
+	            scampzone.setAddr(rs.getString("addr"));
+	            _campzone.add(scampzone);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+		return _campzone;	
 	}
 	
 
@@ -1076,6 +1593,204 @@ public class mainController {
 		return totalCount;
 	}
 	
+	//경기도의 전체데이터의 갯수 구하기(캠핑)
+	public int getDataTotalCountGyeonggi(String strValue) {
+		int totalCount = 0;
+
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			strValue = "%" + strValue + "%";
+
+			sql = "SELECT COUNT(rownum) AS CNT FROM TM_CAMPINGZONE_EXAL"
+					+ " WHERE (addr like '%경기%' or addr like '%서울%')  and cpname like ?";						
+			psmt = conn.prepareStatement(sql);	
+			psmt.setString(1, strValue);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return totalCount;
+	}
+	
+	//전라도의 전체데이터의 갯수 구하기(캠핑)
+	public int getDataTotalCountJeolla(String strValue) {
+		int totalCount = 0;
+
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			strValue = "%" + strValue + "%";
+
+			sql = "SELECT COUNT(rownum) AS CNT FROM TM_CAMPINGZONE_EXAL"
+					+ " WHERE addr like '%전라%' and cpname like ?";						
+			psmt = conn.prepareStatement(sql);	
+			psmt.setString(1, strValue);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return totalCount;
+	}
+	
+	//경상도의 전체데이터의 갯수 구하기(캠핑)
+	public int getDataTotalCountGyeongsang(String strValue) {
+		int totalCount = 0;
+
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			strValue = "%" + strValue + "%";
+
+			sql = "SELECT COUNT(rownum) AS CNT FROM TM_CAMPINGZONE_EXAL"
+					+ " WHERE addr like '%경상%' and  cpname like ?";						
+			psmt = conn.prepareStatement(sql);	
+			psmt.setString(1, strValue);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return totalCount;
+	}
+	
+	//강원도의 전체데이터의 갯수 구하기(캠핑)
+	public int getDataTotalCountGangwon(String strValue) {
+		int totalCount = 0;
+
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			strValue = "%" + strValue + "%";
+
+			sql = "SELECT COUNT(rownum) AS CNT FROM TM_CAMPINGZONE_EXAL"
+					+ " WHERE addr like '%강원%' and cpname like ?";						
+			psmt = conn.prepareStatement(sql);	
+			psmt.setString(1, strValue);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return totalCount;
+	}
+	
+	//제주도의 전체데이터의 갯수 구하기(캠핑)
+	public int getDataTotalCountJeju(String strValue) {
+		int totalCount = 0;
+
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			strValue = "%" + strValue + "%";
+
+			sql = "SELECT COUNT(rownum) AS CNT FROM TM_CAMPINGZONE_EXAL"
+					+ " WHERE addr like '%제주%' and like ?";						
+			psmt = conn.prepareStatement(sql);	
+			psmt.setString(1, strValue);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return totalCount;
+	}
+	
+	//CampListChongchung.jsp의 전체데이터의 갯수 구하기(캠핑)
+	public int getDataTotalCountChongchung(String strValue) {
+		int totalCount = 0;
+
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+			strValue = "%" + strValue + "%";
+
+			sql = "SELECT COUNT(rownum) AS CNT FROM TM_CAMPINGZONE_EXAL"
+					+ " WHERE addr like '%충청%' and cpname like ?";						
+			psmt = conn.prepareStatement(sql);	
+			psmt.setString(1, strValue);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return totalCount;
+	}
+	
 
 
 	//2. 1011(서지희) 1022(최희두) 7839(KING)만 이름으로 뿌려 스트링 반환 메소드 만들어서 풀기
@@ -1093,7 +1808,7 @@ public class mainController {
 		return strResult;
 	}
 
-
+//emp리스트 세부정보
 	public emp TestMariaDBDetail(String empno) {
 		emp semp = new emp();
 		String result = "a";
@@ -1157,7 +1872,50 @@ public class mainController {
 
 	}
 	
+	//캠핑 세부정보
 	public campzone CampDBDetail(String cpname) {
+		campzone scamp = new campzone();
+		String result = "a";
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;
+		
+		try {
+			conn = DBConnectionManager.getConnection();
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "";
+
+			sql = "SELECT cpname, cpLineIntro, cpLctCl, addr, cpPosblFcltyCl, cptel, cpAnimalCmgCl, cpInduty FROM tm_campingzone_1 where cpname ='"+cpname+"'";
+
+			psmt = conn.prepareStatement(sql);			
+
+			rs = psmt.executeQuery();
+
+
+			while (rs.next()) {				
+				scamp.setCpname(rs.getString("cpname"));
+				scamp.setCpIntro(rs.getString("cpLineIntro"));
+				scamp.setCpLctCl(rs.getString("cpLctCl"));
+				scamp.setAddr(rs.getString("addr"));
+				scamp.setCpPosblFcltyCl(rs.getString("cpPosblFcltyCl"));
+				scamp.setcptel(rs.getString("cptel"));
+				scamp.setCpAnimalCmgCl(rs.getString("cpAnimalCmgCl"));
+				scamp.setCpInduty(rs.getString("cpInduty"));
+								
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+		// System.out.println(result);
+		return scamp;	
+
+	}
+	//충청db세부정보
+	public campzone ChongchungDBDetail(String cpname) throws IOException{
 		campzone scamp = new campzone();
 		String result = "a";
 		Connection conn = null; //import java.sql.Connection;
