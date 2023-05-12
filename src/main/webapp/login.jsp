@@ -15,6 +15,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <style>
+
 *{
   font-family:Cafe24Ssurround;
   text-align:center;
@@ -77,23 +78,39 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
 function kakaoLogin() {
     Kakao.Auth.login({
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          success: function (response) {
-        	  console.log(response)
-        	  window.location.href = "index.jsp";
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
+        success: function (response) {
+            Kakao.API.request({
+                url: '/v2/user/me',
+                success: function (response) {
+                    console.log(response);
+                    let kakaoNickname = response.properties.nickname;
+                    
+                    // 서버로 카카오 닉네임 전송
+                    let xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            if (xhr.status === 200) {
+                                // 세션에 카카오 닉네임이 저장된 후 main.jsp로 리디렉션
+                                window.location.href = "main.jsp";
+                            } else {
+                                console.error("카카오 로그인 처리 중 오류 발생");
+                            }
+                        }
+                    };
+                    xhr.open("POST", "kakaoLogin.jsp", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send("kakaoNickname=" + encodeURIComponent(kakaoNickname));
+                },
+                fail: function (error) {
+                    console.log(error);
+                },
+            });
+        },
+        fail: function (error) {
+            console.log(error);
+        },
+    });
+}
 //카카오로그아웃  
 function kakaoLogout() {
     if (Kakao.Auth.getAccessToken()) {
@@ -113,7 +130,7 @@ function kakaoLogout() {
 </script>
  <%
     String clientId = "VIu1TfHxKPf44pxkVbXl";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8080/ThreeMenCamping/index.jsp", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://localhost:8080/ThreeMenCamping/main.jsp", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
     String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"

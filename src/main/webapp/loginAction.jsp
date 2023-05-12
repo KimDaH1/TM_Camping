@@ -23,7 +23,7 @@
 			out.println("alert('로그인에 성공하였습니다.');");
 			session.setAttribute("userId", user.getUserID());
 			String userId = (String)session.getAttribute("userID");
-			out.println("location.href='index.jsp';");
+			out.println("location.href='main.jsp';");
 			out.println("</script>");
 		} else {
 			out.println("<script>");

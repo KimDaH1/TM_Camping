@@ -33,33 +33,7 @@
 			out.println("history.back();");
 			out.println("</script>");
 		}
-/* 		if(result == 1){
-			out.println("<script>");
-			out.println("alert('회원가입이 완료되었습니다.');");
-			out.println("location.href='login.jsp';");
-			out.println("</script>");
-		}
-		else if (result ==0){
-			out.println("<script>");
-			out.println("alert('회원가입에 실패하였습니다.');");
-			out.println("history.back();");
-			out.println("</script>");
-		} */
-		/* else if (result == -1){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("존재하지 않는 아이디 입니다.");
-			script.println("history.back()");
-			script.println("</script>");
-		}
-		else if (result == -2){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("데이터베이스 오류가 발생했습니다.");
-			script.println("history.back()");
-			script.println("</script>"); 
-		}*/
-	%>
+
 	%>
 </body>
 </html>

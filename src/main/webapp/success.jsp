@@ -99,8 +99,9 @@
 		document.getElementById('confirmBtn').addEventListener('click', ()=>{			
 			<%
 				String orderName = jsonObject.get("orderName").toString();
+				String method = jsonObject.get("method").toString();
 				OrderDao orderDao = new OrderDao();
-				orderDao.insertOrderInfo(orderId, amount, orderName, 1);
+				orderDao.insertOrderInfo(orderId, amount, orderName, method,1);
 			%>
 			location.href='./index.html';
 		});

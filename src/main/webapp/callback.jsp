@@ -4,6 +4,8 @@
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="java.io.InputStreamReader" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="org.json.JSONObject" %>
+
 <html>
   <head>
     <title>네이버로그인</title>
@@ -41,8 +43,11 @@
       }
       br.close();
       if (responseCode == 200) {
-        out.println(res.toString());
-      }
+    	  JSONObject json = new JSONObject(res.toString());
+    	  String naverId = json.getString("id");
+    	  session.setAttribute("naverId", naverId);
+    	  out.println(res.toString());
+    	}
     } catch (Exception e) {
       // Exception 로깅
     }
