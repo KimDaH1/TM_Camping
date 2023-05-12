@@ -31,7 +31,7 @@
 		String eDate = request.getParameter("edate");
 	
 		ReservationDao reservationDao = new ReservationDao();
-		int result = reservationDao.insertReservationInfo(sDate, eDate);
+		int result = reservationDao.insertReservationInfo(sDate, eDate, 1, 1);
 	
 		// id, 이름, 주소, 번호, 취미 설정
 		/* PersonDto personDto = new PersonDto();

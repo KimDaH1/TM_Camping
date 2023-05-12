@@ -11,13 +11,11 @@
 	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 	crossorigin="anonymous">
 <script src="https://js.tosspayments.com/v1/payment"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
@@ -69,13 +67,10 @@ body {
 
 				<h2
 					style="margin-top: 10px; padding: 20px 0px 10px 0px; text-align: center;">
-					<img width="45px"
-						src="https://static.toss.im/3d-emojis/u1F60E-apng.png"> <img
-						width="45px"
-						src="https://static.toss.im/3d-emojis/u1F60E-apng.png"> <img
-						width="45px"
-						src="https://static.toss.im/3d-emojis/u1F60E-apng.png"> 삼남자
-					캠핑 예약 페이지
+					<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+					<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png"> 
+					<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png"><br>
+					삼남자 캠핑 예약 페이지
 				</h2>
 				<form id="reservForm" name="reservationForm"
 					action="reservation_proc.jsp">

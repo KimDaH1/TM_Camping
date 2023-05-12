@@ -1,0 +1,135 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.net.URLDecoder"%>
+<%@ page import="camping.Utils.myUtil" %>
+<%@ page import="camping.dao.ReservationDao" %>
+<%@ page import="camping.dto.ReservationDto" %>
+<%@ page import="camping.Utils.MyDateUtil" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+
+<%
+request.setCharacterEncoding("UTF-8");
+String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘
+
+ReservationDao reservationDao = new ReservationDao();
+
+
+int userNumber = 1;
+/*
+// 전체데이터 갯수 구하기
+int dataCount = reservationDao.getReservationCount(userNumber);
+
+// 한페이지에 표시할 데이터의 갯수
+int numPerPage = 10;
+
+// 전체 페이지수 구하기
+int totalPage = myutil.getPageCount(numPerPage, dataCount);
+
+// 전체 페이지수가 표시할 페이지수보다 큰 경우(삭제로 인해)
+if (currentPage > totalPage) {
+	currentPage = totalPage;
+}
+
+// 데이터베이스에서 가져올 rownum의 시작과 끝
+int start = (currentPage - 1) * numPerPage + 1;
+int end = currentPage * numPerPage;
+*/
+List<ReservationDto> reservationList;
+reservationList = new ArrayList<ReservationDto>();
+reservationList = reservationDao.getReservationList(userNumber);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+	<h1>예약 리스트 페이지</h1>
+
+	<div id="bbsList">
+		
+		<table class="table table-striped" id="testTable" border="1">
+			<thead>
+				<tr>
+					<th>예약번호</th>
+					<th>캠핑장명</th>
+					<th>시작일</th>
+					<th>종료일</th>
+					<th>금액</th>
+					<th>결제하기</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+				for (int i = 0; i < reservationList.size(); i++) {
+				%>
+				<tr>
+					<td id="r_id<%=i%>" style="cursor: pointer;">
+						<%
+						out.print(reservationList.get(i).getR_id());
+						%>
+					</td>
+					<td class="empno">
+						<%
+						out.print(reservationList.get(i).getC_id());
+						%>
+					</td>
+					<td class="ename">
+						<%
+						//out.print(reservationList.get(i).geteDate());
+						out.print( MyDateUtil.convertStringToUtilDate(reservationList.get(i).getsDate()) );
+						%>
+					</td>
+					<td class="job">
+						<%
+						out.print( MyDateUtil.convertStringToUtilDate(reservationList.get(i).geteDate()) );
+						//out.print(reservationList.get(i).geteDate());
+						%>
+					</td>
+					<td class="mgr">
+						<%
+						out.print(reservationList.get(i).getUserNumber());
+						%>
+					</td>
+					<td class="mgrName">
+						<button id="<%=i %>" class="btn btn-primary orderBtn">결제</button>
+					</td>
+
+				</tr>				
+				<%
+				}
+				%>
+			</tbody>
+		</table>
+		
+	</div>
+	<script>
+	 $(document).ready(function () {
+		 
+         $('.orderBtn').click(function(){
+        	 
+             let tempId = $(this).attr('id');
+             let r_id = document.getElementById('r_id'+tempId).innerText;
+             //alert('예약번호:'+r_id);
+             //alert(tempId+'번째 데이터');
+             location.href='./order.jsp?id='+r_id;
+         });
+     });
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+</body>
+</html>

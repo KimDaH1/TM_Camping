@@ -44,6 +44,10 @@ body {
 </head>
 
 <body class="bg-light">
+	<% 
+		request.setCharacterEncoding("UTF-8"); //한글 정상 인식을 위해 써준다.
+		int id = Integer.parseInt(request.getParameter("id"));
+	 %>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3"></div>
@@ -63,27 +67,27 @@ body {
 					<label class="form-label" for="paymentType">결제수단 <span
 						class="red">필수</span></label> <select id="paymentType"
 						class="form-select form-control-lg mb2">
-						<option value="카드" selected>카드</option>
+						<option value="토스페이" selected="selected">토스페이</option>
+						<option value="카드">카드</option>
 						<option value="계좌이체">계좌이체</option>
 						<option value="가상계좌">가상계좌</option>
 						<option value="휴대폰">휴대폰</option>
 						<option value="문화상품권">문화상품권</option>
 						<option value="도서문화상품권">도서문화상품권</option>
 						<option value="게임문화상품권">게임문화상품권</option>
-						<option value="토스페이">토스페이</option>
 					</select>
 
 					<div class="mb2">
 						<label class="form-label" for="amount">주문번호 <span
 							class="gray">(orderId) </span> <span class="red">필수</span></label> <input
-							id="orderId" class="form-control form-control-lg" type="text">
+							id="orderId" class="form-control form-control-lg" type="text" readonly="readonly">
 					</div>
 					<form name="userInfoForm" action="success.jsp">
 						<div class="mb2">
-							<label class="form-label" for="amount">회원번호 <span
+							<label class="form-label" for="amount">예약번호 <span
 								class="gray">(userNumber) </span> <span class="red">필수</span></label> <input
 								id="userNumber" class="form-control form-control-lg" type="text"
-								name="userNumber">
+								name="userNumber" value="<%=id%>" readonly="readonly">
 						</div>
 					</form>
 
@@ -91,20 +95,20 @@ body {
 						<label class="form-label" for="amount">물품명 <span
 							class="gray">(orderName) </span><span class="red">필수</span></label> <input
 							id="orderName" class="form-control form-control-lg" type="text"
-							value="휴먼캠핑장">
+							value="휴먼캠핑장" readonly="readonly">
 					</div>
 
 					<div class="mb2">
 						<label class="form-label" for="amount">금액 <span
 							class="gray">(amount) </span> <span class="red">필수</span></label> <input
 							id="amount" class="form-control form-control-lg" type="text"
-							value="100">
+							value="100" readonly="readonly">
 					</div>
 
 					<div class="mb2">
 						<label class="form-label" for="amount">구매자명 <span
 							class="gray">(customerName)</span></label> <input id="customerName"
-							class="form-control form-control-lg" type="text" value="김용원" name="customerName">
+							class="form-control form-control-lg" type="text" value="김용원" name="customerName" readonly="readonly">
 					</div>
 
 					<div class="d-grid gap-2">
@@ -136,7 +140,7 @@ body {
     "customerName": "",
     "customerEmail": "",
     "customerMobilePhone": null,
-    "successUrl": "http://localhost:8080/ThreeMenCamping/" + "success.jsp",
+    "successUrl": "http://localhost:8080/ThreeMenCamping/" + "success.jsp?id="+<%=id%>,
     "failUrl": "http://localhost:8080/ThreeMenCamping/" + "fail.jsp",
     "windowTarget": "iframe",
     "taxFreeAmount": null,
@@ -199,7 +203,8 @@ body {
 
   /* ================== 페이지 로딩시 실행 ================== */
   document.addEventListener("DOMContentLoaded", function () {
-    makeOrderId("ThreeMenCamping"); 
+    makeOrderId("ThreeMenCamping");
+    document.getElementById('userNumber').value = id;
   });
 
   /* ================= 주문번호(OrderID) 자동생성 =================== */

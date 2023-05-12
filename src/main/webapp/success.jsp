@@ -204,7 +204,8 @@ body {
 				String orderName = jsonObject.get("orderName").toString();
 				String method = jsonObject.get("method").toString();
 				OrderDao orderDao = new OrderDao();
-				orderDao.insertOrderInfo(orderId, amount, orderName, method,1);
+				int r_id = Integer.parseInt(request.getParameter("id"));
+				orderDao.insertOrderInfo(orderId, amount, method, 1, r_id);
 			%>
 			location.href='./index.html';
 		});
