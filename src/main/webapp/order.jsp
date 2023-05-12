@@ -50,11 +50,11 @@ body {
 
 			<div class="col-md-6">
 
-				<h2
-					style="margin-top: 10px; padding: 20px 0px 10px 0px; text-align: center;">
-					<img width="45px"
-						src="https://static.toss.im/3d-emojis/u1F60E-apng.png"> 삼남자
-					캠핑 결제 페이지
+				<h2 style="margin-top: 10px; padding: 20px 0px 10px 0px; text-align: center;">
+					<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+					<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+					<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+					삼남자 캠핑 결제 페이지
 				</h2>
 
 				<div id="requestPayment_form" class="box_section"
@@ -118,6 +118,7 @@ body {
 				<div class="col-md-3"></div>
 			</div>
 		</div>
+	</div>
 </body>
 <script>
   /* =================================  API KEY 세팅 ================================== */

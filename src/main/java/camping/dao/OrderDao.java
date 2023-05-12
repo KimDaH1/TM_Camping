@@ -10,7 +10,7 @@ import camping.oracle.DBConnectionManager;
 public class OrderDao {
 
 	// insert
-		public int insertOrderInfo(String o_number, int amount, String order_item, int userNumber) {
+		public int insertOrderInfo(String o_number, int amount, String order_item, String paytype, int userNumber) {
 
 			Connection conn = null;
 			PreparedStatement psmt = null;
@@ -20,14 +20,17 @@ public class OrderDao {
 				conn = DBConnectionManager.getConnection();
 
 				// 쿼리문!
-				String sql = "insert into tm_order(o_number, amount, order_item, usernumber)"
-						+ " values( ?, ?, ?, ?)";
+//				String sql = "insert into tm_order(o_number, amount, order_item, usernumber)"
+//						+ " values( ?, ?, ?, ?)";
+				String sql = "insert into tm_order "
+						+ " values( (select NVL(MAX(orderno),0)+1 from tm_order), ?, ?, to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?)";
 
 				psmt = conn.prepareStatement(sql);
 				psmt.setString(1, o_number);
 				psmt.setInt(2, amount);
 				psmt.setString(3, order_item);
-				psmt.setInt(4, userNumber);
+				psmt.setString(4, paytype);
+				psmt.setInt(5, userNumber);
 
 				result = psmt.executeUpdate();
 				System.out.println(o_number);
