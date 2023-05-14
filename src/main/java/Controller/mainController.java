@@ -1477,12 +1477,11 @@ public class mainController {
 		}
 	
 // 충청도 게시판
-	public List<campzone> CampDBListChongchung(int start, int end, String strValue) {
+	public List<campzone> CampDBListChongchung(int start, int end, String strValue, String lction) {
 
 		List<campzone> _campzone = new ArrayList<campzone>();
-
-		String result = "a";
-
+		System.out.println(start);
+		System.out.println(end);
 		Connection conn = null; //import java.sql.Connection;
 		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
 		ResultSet rs = null; //import java.sql.ResultSet;
@@ -1494,22 +1493,43 @@ public class mainController {
 			//쿼리문
 			//String sql = "SELECT * FROM EMP e";
 			String sql = "";
+			if(lction.equals("1")) {
+				lction = "%서울%";
+			} else if(lction.equals("2")) {
+				lction = "%경기%";
+			} else if(lction.equals("3")) {
+				lction = "%강원%";
+			} else if(lction.equals("4")) {
+				lction = "%충청%";
+			} else if(lction.equals("5")) {
+				lction = "%전라%";
+			} else if(lction.equals("6")) {
+				lction = "%경상%";
+			} else if(lction.equals("7")) {
+				lction = "%제주%";
+			}
+			System.out.println("lction" + lction);
+			
 			strValue = "%" + strValue + "%";
 
-			sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
-					+ " WHERE addr like '%충청%' and CPNAME LIKE ?"
-					+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+			sql = "select rnum, cpname, cpinduty, lat, lng, addr from "
+					+ " (SELECT rownum as rnum, cpname, cpInduty, lat, lng, addr "
+					+ " FROM TM_CAMPINGZONE_EXAL"
+					+ " WHERE addr like ? "
+					+ " and CPNAME LIKE ? ) subTB"
+					+ " where rnum >= ? and rnum <= ?"; 
 
 			psmt = conn.prepareStatement(sql);	
-			psmt.setString(1, strValue);
+			psmt.setString(1, lction);
+			psmt.setString(2, strValue);
 			psmt.setInt(2, start);
 			psmt.setInt(3, end);
 
 			rs = psmt.executeQuery();
 			while (rs.next()) {
 				campzone scampzone = new campzone();
-	            scampzone.setIdx(rs.getInt("rownum"));
-	            System.out.println(rs.getInt("rownum"));
+	            scampzone.setIdx(rs.getInt("rnum"));
+	            System.out.println(rs.getInt("rnum"));
 	            scampzone.setCpname(rs.getString("cpname"));
 	            scampzone.setCpInduty(rs.getString("cpInduty"));
 	            scampzone.setLat(rs.getDouble("lat"));

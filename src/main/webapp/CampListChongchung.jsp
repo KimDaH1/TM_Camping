@@ -13,6 +13,7 @@
 	String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘
 	
 	myUtil myutil = new myUtil();
+	
 	mainController maincontroller = new mainController();	
 	//넘어온 페이지 번호를 get방식으로 넘기는것 같음
 	String pageNum = request.getParameter("pageNum");
@@ -27,7 +28,8 @@
 	
 	//검색키와 값	
 	String searchValue = request.getParameter("searchValue");
-	
+	String locationValue = request.getParameter("locations");
+
 	//검색어가 있을 경우
 	if(searchValue != null){
 		if(request.getMethod().equalsIgnoreCase("GET")){
@@ -37,6 +39,13 @@
 		searchValue = "";
 	}
 	
+	if(locationValue != null){
+		if(request.getMethod().equalsIgnoreCase("GET")){
+			locationValue = URLDecoder.decode(searchValue,"UTF-8");
+		}
+	} else {//검색어가 없을 경우		
+		locationValue = "";
+	}
 	
 	// 전체데이터 갯수 구하기
 	int dataCount = maincontroller.getDataTotalCountChongchung(searchValue);
@@ -47,6 +56,10 @@
 	// 전체 페이지수 구하기
 	int totalPage = myutil.getPageCount(numPerPage, dataCount);
 	
+	if(totalPage == 0){
+		System.out.println("데이터가 없습니다.");
+		return;
+	}
 	// 전체 페이지수가 표시할 페이지수보다 큰 경우(삭제로 인해)
 	if(currentPage > totalPage){
 		currentPage = totalPage;
@@ -57,8 +70,8 @@
 	int end = currentPage*numPerPage;
 	
 	List<campzone> campzonelist = new ArrayList<campzone>();
-
-	campzonelist = maincontroller.CampDBListChongchung(start, end, searchValue);
+	System.out.println("locationValue : " + locationValue);
+	campzonelist = maincontroller.CampDBListChongchung(start, end, searchValue, locationValue);
 	//데이터베이스에서 해당 페이지를 가져온다
 	//List<BoardDTO> lists = dao.getLists(start end, searchKey, searchValue);
 	
@@ -137,6 +150,15 @@
 			</select>
 			<input type="text" name="searchValue" value="<%=searchValue %>" class="textField"/>
 			<input type="button" value="검  색" class="btn2" onclick="sendIt()"/>
+			<select name="locations" class="selectField">
+				<option value="1">서울</option>
+				<option value="2">경기</option>
+				<option value="3">강원</option>
+				<option value="4">충청</option>
+				<option value="5">전라</option>
+				<option value="6">경상</option>
+				<option value="7">제주</option>
+			</select>
 		</form>
 		</div>
 		<%-- <div id="rightHeader">
