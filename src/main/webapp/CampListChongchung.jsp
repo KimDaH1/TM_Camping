@@ -179,12 +179,13 @@
 		</tr>
 	</thead>		
 	<tbody>	
-		<% out.println(campzonelist.size());
+		<% out.println("리스트 사이즈 : " + campzonelist.size());
 		for (int i = 0; i < campzonelist.size(); i++)
 		{ %>
 			<tr>
 				<td class="empno" onClick="clickTest();" style="cursor:pointer;">
-					<% out.print(campzonelist.get(i).getCpname()); %>
+					<%System.out.println("campzonelist.get(i).getCpname() : " + campzonelist.get(i).getCpname()); 
+					out.print(campzonelist.get(i).getCpname()); %>
 				</td>
 				<td class="ename">
 					<%out.print(campzonelist.get(i).getCpInduty()); %>

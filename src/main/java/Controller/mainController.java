@@ -1023,7 +1023,7 @@ public class mainController {
 			String sql = "";
 			sql = "SELECT rownum, cpname, cpinduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL WHERE addr LIKE '%충청%'";
 			if(rownum != 0) {
-				sql += " where rownum =" + rownum;
+				sql += " and rownum =" + rownum;
 			}			
 			psmt = conn.prepareStatement(sql);						
 			rs = psmt.executeQuery();
@@ -1480,8 +1480,9 @@ public class mainController {
 	public List<campzone> CampDBListChongchung(int start, int end, String strValue, String lction) {
 
 		List<campzone> _campzone = new ArrayList<campzone>();
-		System.out.println(start);
-		System.out.println(end);
+		System.out.println("start : "+start);
+		System.out.println("end : "+end);
+		System.out.println("lction" + lction);
 		Connection conn = null; //import java.sql.Connection;
 		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
 		ResultSet rs = null; //import java.sql.ResultSet;
@@ -1508,7 +1509,7 @@ public class mainController {
 			} else if(lction.equals("7")) {
 				lction = "%제주%";
 			}
-			System.out.println("lction" + lction);
+			System.out.println("lction : " + lction);
 			
 			strValue = "%" + strValue + "%";
 
@@ -1522,8 +1523,8 @@ public class mainController {
 			psmt = conn.prepareStatement(sql);	
 			psmt.setString(1, lction);
 			psmt.setString(2, strValue);
-			psmt.setInt(2, start);
-			psmt.setInt(3, end);
+			psmt.setInt(3, start);
+			psmt.setInt(4, end);
 
 			rs = psmt.executeQuery();
 			while (rs.next()) {
