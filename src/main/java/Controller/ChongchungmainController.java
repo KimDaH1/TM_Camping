@@ -1,6 +1,6 @@
 package Controller;
 
-import java.io.BufferedReader; 
+import java.io.BufferedReader;  
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -160,7 +160,10 @@ public class ChongchungmainController {
 			conn = DBConnectionManager.getConnection();
 
 			//쿼리문
-			String sql = "INSERT INTO TM_CAMPINGZONE_Chongchung (IDX, CPNAME, CPTEL, LAT, LNG, ADDR, cpLineIntro, cpLctCl, cpPosblFcltyCl, cpHomepage, cpAnimalCmgCl, cpInduty) VALUES ((SELECT NVL(MAX(idx)+1,1) FROM TM_CAMPINGZONE_Chongchung), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO TM_CAMPINGZONE_Chongchung "
+					+ " (IDX, CPNAME, CPTEL, LAT, LNG, ADDR, cpLineIntro, cpLctCl, cpPosblFcltyCl, cpHomepage,"
+					+ " cpAnimalCmgCl, cpInduty) VALUES ((SELECT NVL(MAX(idx)+1,1) "
+					+ " FROM TM_CAMPINGZONE_Chongchung), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, cpname);
 			psmt.setString(2, cptel);
@@ -231,6 +234,4 @@ public class ChongchungmainController {
 
 	}
 	
-	//가장 최근 idx 가져오기
-
 }
