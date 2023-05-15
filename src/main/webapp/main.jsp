@@ -137,75 +137,116 @@ header {
 
     .submenu a:hover {
       background-color: #ffc107;
+}
+		 div,
+        ul,
+        li {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0
+        }
 
+        a {
+            text-decoration: none;
+        }
+
+        .quickmenu {
+        	z-index: 6;
+            position: absolute;
+            width: 90px;
+            top: 90%;
+            margin-top: -50px;
+            right: 10px;
+            background: #fff;
+        }
+
+        .quickmenu ul {
+            position: relative;
+            float: left;
+            width: 100%;
+            display: inline-block;
+            *display: inline;
+            border: 1px solid #ddd;
+        }
+
+        .quickmenu ul li {
+            float: left;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+            display: inline-block;
+            *display: inline;
+        }
+
+        .quickmenu ul li a {
+            position: relative;
+            float: left;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #999;
+            font-size: 9.5pt;
+        }
+
+        .quickmenu ul li a:hover {
+            color: #000;
+        }
+
+        .quickmenu ul li:last-child {
+            border-bottom: 0;
+        }
+
+        .content {
+            position: relative;
+            min-height: 1000px;
+        }
   </style>
   
 </head>
 
 
- <header>
-  <h1 style="position: absolute; left: 100px;">TM_Camping</h1>
-  <nav>
-    <a href="main1.html"><img src="캠핑메인.png" alt="" style="width: 150px; position: relative; left: 300px; bottom: 5px;"></a>
-    <ul>
-      <li><a class="submenu1"href="#">이용안내</a></li>
-      <li class="has-submenu"><a class="submenu1" href="#">예약하기</a>
-        <ul class="submenu">
-          <li><a class="submenu1" href="#">캠핑장 예약</a></li>
-          <li><a class="submenu1" href="#">코레일 예약</a></li>
-          <li><a class="submenu1" href="#">렌터카 예약</a></li>
-          <li><a class="submenu1" href="#">렌탈장비 예약</a></li>
-        </ul>
-      </li>
-      <li class="has-submenu"><a class="submenu1" href="#">도별여행지</a>
-        <ul class="submenu">
-          <li><a class="submenu1" href="#">서울</a></li>
-          <li><a class="submenu1" href="#">경기도</a></li>
-          <li><a class="submenu1" href="#">강원도</a></li>
-          <li><a class="submenu1" href="#">충청도</a></li>
-          <li><a class="submenu1" href="#">경상도</a></li>
-          <li><a class="submenu1" href="#">전라도</a></li>
-          <li><a class="submenu1" href="#">제주도</a></li>
-        </ul>
-      </li>
-      <li><a class="submenu1" href="#">커뮤니티</a></li>
-    </ul>
-  <div class="sidebar">
-   <span class="login-area">
-   <%  if (session.getAttribute("userId") != null) { %>
-  <% String userId = (String)session.getAttribute("userId"); %>
-  <span class="login-area">어서오세요 : <%= userId %> 님&nbsp; &nbsp; &nbsp;</span>
-<% } else { %>
-  <a class="submenu1 login-area" href="login.jsp">로그인</a>
-  <a class="submenu1 login-area" href="join.jsp">회원가입</a>
-<% } %>   <button id="logout">로그아웃</button>
-  <a class="submenu1 " href="https://www.weather.go.kr/w/weather/forecast/short-term.do">기상청날씨</a>
-	<script>
-		document.getElementById('logout').addEventListener('click', ()=>{location.href='logout.jsp'});
-	</script>
-</span>
-</div>
-  </nav>
-</header>
+ 
 <body>
+    <div class="quickmenu">
+        <ul>
+          <li><a href="#">예약확인</a></li>
+          <li><a href="#">결제확인</a></li>
+          <li><a href="#">My Page</a></li>
+        </ul>
+      </div>
+<%@ include file = "header.jsp" %>
 
-<div class="box diagonal-image1">
-<br><br><br>
-<h1>충청도</h1></div>
-<div class="box diagonal-image2">
-<br><br><br>
-<h1>&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;경기도</h1></div>
-<div class="box diagonal-image3"><br><br><br>
-<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;전라도</h1></div>
-<div class="box diagonal-image4"><br><br><br>
+<div class="box diagonal-image1" onclick="location.href='CampListChongchung.jsp';"><br><br><br>
+<h1 >충청도</h1></div>
+<div class="box diagonal-image2"  onclick="location.href='CampListGyeonggi.jsp';"><br><br><br>
+<h1 >&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;경기도</h1></div>
+<div class="box diagonal-image3" onclick="location.href='CampListJeolla.jsp';"><br><br><br>
+<h1 >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;전라도</h1></div>
+<div class="box diagonal-image4" onclick="location.href='CampListGyeongsang.jsp';"><br><br><br>
 <h1>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;경상도</h1></div>
-<div class="box diagonal-image5"><br><br><br>
+<div class="box diagonal-image5" onclick="location.href='CampListGangwon.jsp';"><br><br><br>
 <h1>&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;강원도</h1></div>
-<div class="box diagonal-image6"><br><br><br>
+<div class="box diagonal-image6" onclick="location.href='CampListJeju.jsp';"><br><br><br>
 <h1>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;제주도</h1></div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+      integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+        
+$(document).ready(function(){
+  var currentPosition = parseInt($(".quickmenu").css("top"));
+  $(window).scroll(function() {
+    var position = $(window).scrollTop(); 
+    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+  });
+});
+    </script>
 <style>
 
     
@@ -272,21 +313,8 @@ header {
     }
 
 </style>
+<%@ include file = "footer.jsp" %>
 
 </body>
-        <footer>
-          <div>
-				<img src="sns.PNG" alt="" style="border-radius: 15px; position: relative; ">
-                <p>&nbsp; &nbsp; &nbsp;업체명 : TM_Camping</p>
-                <p>&nbsp; &nbsp; &nbsp;대표자 : 7조 &nbsp;</p>
-                <p>&nbsp; &nbsp; &nbsp;사업자등록번호 : 111-11-11111 &nbsp;</p>
-                <p>&nbsp; &nbsp; &nbsp;주소 : 충청남도 천안시 동남구 대흥동 134 휴먼교육센터 8층 &nbsp;</p>
-                <p>&nbsp; &nbsp; &nbsp;전화번호 : &nbsp;041-561-1122<br><span style="color: rgb(246, 179, 82);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(문의 시간 AM 9:00 ~ PM 8:00 / 점심시간 12:00~13:00)<br>
-                </span>&nbsp; &nbsp; &nbsp;캠핑장 시설 안내 및 이용안내 문의만 부탁드립니다.</p>
-          </div>
-          <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=천안시+동남구+휴먼+교육센터" style="width: 400px; height: 250px;"></iframe>
-					<div>
-						<span style="padding: 20px;">이용약관</span><span style="padding: 20px;">개인정보처리방침</span><span style="padding: 20px;">새로운 메뉴</span>
-          </div>
-        </footer>
-        </html>
+
+</html>
