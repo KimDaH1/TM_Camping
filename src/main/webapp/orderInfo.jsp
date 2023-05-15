@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@page import="java.net.URLEncoder"%>
-<%@page import="java.net.URLDecoder"%>
-<%@ page import="camping.Utils.myUtil" %>
-<%@ page import="camping.dao.ReservationDao" %>
-<%@ page import="camping.dto.ReservationDto" %>
+    pageEncoding="UTF-8"%>
+<%@ page import="camping.dao.OrderDao" %>
+<%@ page import="camping.dto.OrderDto" %>
 <%@ page import="camping.Utils.MyDateUtil" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-
 <%
 request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘
 
-ReservationDao reservationDao = new ReservationDao();
+OrderDao reservationDao = new OrderDao();
 
 
 int userNumber = 1;
@@ -36,9 +32,10 @@ if (currentPage > totalPage) {
 int start = (currentPage - 1) * numPerPage + 1;
 int end = currentPage * numPerPage;
 */
-List<ReservationDto> reservationList;
-reservationList = new ArrayList<ReservationDto>();
-reservationList = reservationDao.getReservationList(userNumber);
+
+List<OrderDto> orderList;
+orderList = new ArrayList<OrderDto>();
+orderList = reservationDao.getOrderList(userNumber);
 %>
 <!DOCTYPE html>
 <html>
@@ -59,61 +56,61 @@ reservationList = reservationDao.getReservationList(userNumber);
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
-	<h1 style="text-align: center;">예약 리스트 페이지</h1>
+<h1 style="text-align: center;">결제 리스트 페이지</h1>
 
 	<div id="bbsList">
 		
 		<table class="table table-striped" id="testTable" border="1">
 			<thead>
 				<tr>
-					<th>예약번호</th>
+					<th>결제번호</th>
+					<th>주문번호</th>
 					<th>캠핑장명</th>
-					<th>시작일</th>
-					<th>종료일</th>
+					<th>결제시간</th>
 					<th>금액</th>
-					<th>결제하기</th>
-					<th>예약취소</th>
+					<!-- <th>결제하기</th> -->
+					<th>결제취소</th>
 				</tr>
 			</thead>
 			<tbody>
 				<%
-				for (int i = 0; i < reservationList.size(); i++) {
+				for (int i = 0; i < orderList.size(); i++) {
 				%>
 				<tr>
-					<td id="r_id<%=i%>" style="cursor: pointer;">
+					<td id="o_id<%=i%>" style="cursor: pointer;">
 						<%
-						out.print(reservationList.get(i).getR_id());
+						out.print(orderList.get(i).getO_id());
+						%>
+					</td>
+					<td class="o_number">
+						<%
+						out.print(orderList.get(i).getO_number());
 						%>
 					</td>
 					<td class="empno">
-						<%
-						out.print(reservationList.get(i).getC_id());
-						%>
+						화성캠핑장
+						<%-- <%
+						out.print(orderList.get(i).getC_id());
+						%> --%>
 					</td>
-					<td class="ename">
+					<td class="order_date">
 						<%
-						//out.print(reservationList.get(i).geteDate());
-						out.print( MyDateUtil.convertStringToUtilDate(reservationList.get(i).getsDate()) );
-						%>
-					</td>
-					<td class="job">
-						<%
-						out.print( MyDateUtil.convertStringToUtilDate(reservationList.get(i).geteDate()) );
-						//out.print(reservationList.get(i).geteDate());
+						out.print(orderList.get(i).getOrder_date());
+						//out.print( MyDateUtil.convertStringToUtilDate(orderList.get(i).getOrder_date()) );
 						%>
 					</td>
 					<td class="mgr">
 						<%
-						out.print(reservationList.get(i).getUserNumber());
+						out.print(orderList.get(i).getAmount());
 						%>
 					</td>
-					<td class="order">
-						<%-- <button id="<%=i %>" class="btn btn-primary orderBtn">결제</button> --%>
-						<button id="<%=reservationList.get(i).getR_id() %>" class="btn btn-primary orderBtn">결제</button>
-					</td>
+					<%-- <td class="order">
+						<button id="<%=i %>" class="btn btn-primary orderBtn">결제</button>
+						<button id="<%=orderList.get(i).getO_id() %>" class="btn btn-primary orderBtn">결제</button>
+					</td> --%>
 					<td class="cancel">
 						<%-- <button id="cancel<%=i %>" class="btn btn-danger cancelBtn">취소</button> --%>
-						<button id="<%=reservationList.get(i).getR_id() %>" class="btn btn-danger cancelBtn">취소</button>
+						<button id="<%=orderList.get(i).getO_id() %>" class="btn btn-danger cancelBtn">취소</button>
 					</td>
 
 				</tr>				
@@ -147,8 +144,8 @@ reservationList = reservationDao.getReservationList(userNumber);
 			//alert(tempId);
 		    //let r_number = document.getElementById('r_id'+tempId).innerText;
 			  Swal.fire({
-			    title: '예약을 취소하시겠습니까?',
-			    text: '확인버튼 : 예약 취소하기',
+			    title: '결제를 취소하시겠습니까?',
+			    text: '확인버튼 : 결제 취소하기',
 			    icon: 'warning',
 			    showCancelButton: true,
 			    confirmButtonText: '확인',
@@ -162,6 +159,6 @@ reservationList = reservationDao.getReservationList(userNumber);
 				  }
 			  });
 			}
-	</script>	
+	</script>
 </body>
 </html>

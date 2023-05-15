@@ -7,6 +7,7 @@ public class ReservationDto {
 	String eDate;
 	int userNumber;
 	int c_id;
+	String r_state;
 	
 	public int getR_id() {
 		return r_id;
@@ -38,6 +39,13 @@ public class ReservationDto {
 	public void setC_id(int c_id) {
 		this.c_id = c_id;
 	}
+	public String getR_state() {
+		return r_state;
+	}
+	public void setR_state(String r_state) {
+		this.r_state = r_state;
+	}
+	
 	@Override
 	public String toString() {
 		return "ReservationDto [r_id=" + r_id + ", sDate=" + sDate + ", eDate=" + eDate + "]";

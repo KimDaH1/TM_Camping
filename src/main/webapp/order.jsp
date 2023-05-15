@@ -86,8 +86,8 @@ body {
 						<div class="mb2">
 							<label class="form-label" for="amount">예약번호 <span
 								class="gray">(userNumber) </span> <span class="red">필수</span></label> <input
-								id="userNumber" class="form-control form-control-lg" type="text"
-								name="userNumber" value="<%=id%>" readonly="readonly">
+								id="r_number" class="form-control form-control-lg" type="text"
+								name="r_number" value="<%=id%>" readonly="readonly">
 						</div>
 					</form>
 
@@ -204,7 +204,7 @@ body {
   /* ================== 페이지 로딩시 실행 ================== */
   document.addEventListener("DOMContentLoaded", function () {
     makeOrderId("ThreeMenCamping");
-    document.getElementById('userNumber').value = id;
+    document.getElementById('r_number').value = id;
   });
 
   /* ================= 주문번호(OrderID) 자동생성 =================== */

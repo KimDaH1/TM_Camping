@@ -134,12 +134,16 @@ body {
 			let sdate = document.getElementById('sdate').value;
 			let edate = document.getElementById('edate').value;
 			
-			if(edate >= sdate) {
-				/* if(confirm('예약하시겠습까?')) {
-					form.submit();
-				} */
-				showAlert();
-//				form.submit();
+			if(sdate != "" && edate != "") {
+				if(edate >= sdate) {
+					/* if(confirm('예약하시겠습까?')) {
+						form.submit();
+					} */
+					showAlert();
+	//				form.submit();
+				} else {
+					showWarning();
+				}
 			} else {
 				showWarning();
 			}

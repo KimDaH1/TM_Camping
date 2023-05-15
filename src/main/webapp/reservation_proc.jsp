@@ -24,6 +24,19 @@
 		  }
 		});
 	}
+	function showWarning() {
+	  Swal.fire({
+	    title: '해당날짜에 이미 예약이 되어있습니다.',
+	    text: '다른 날짜를 선택해주세요.',
+	    icon: 'warning',
+	    confirmButtonText: '확인',
+	    
+	  }).then(result => {
+		  if(result.isConfirmed) {
+			  location.href = './reservation.jsp';
+		  }
+		});
+	}
 	</script>
 	<%
 		request.setCharacterEncoding("UTF-8"); //한글 정상 인식을 위해 써준다.
@@ -31,7 +44,8 @@
 		String eDate = request.getParameter("edate");
 	
 		ReservationDao reservationDao = new ReservationDao();
-		int result = reservationDao.insertReservationInfo(sDate, eDate, 1, 1);
+		//int result = reservationDao.insertReservationInfo(sDate, eDate, 1, 1, "예약됨");
+		int result = reservationDao.insertReservation(sDate, eDate, 1, 1, "예약됨");
 	
 		// id, 이름, 주소, 번호, 취미 설정
 		/* PersonDto personDto = new PersonDto();
@@ -39,7 +53,7 @@
 		personDto.setName(name);
 		int result2 = personDao.updatePersonInfo(personDto); //객체단위로 넘기기 */
 	
-		if (result == 1) {
+		if (result == 0) {
 			//추가성공
 	%>
 	<script>
@@ -49,7 +63,8 @@
 		} else {
 	%>
 	<script>
-			alert('예약실패..');
+			//alert('예약실패..');
+		showWarning();
 	</script>
 	<%
 		}

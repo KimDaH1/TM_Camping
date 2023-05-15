@@ -17,7 +17,7 @@
 
 <%
  // 결제 승인 API 호출하기 
- 
+  String userId = (String)session.getAttribute("userId");
   String orderId = request.getParameter("orderId");
   String paymentKey = request.getParameter("paymentKey");
   //String amount = request.getParameter("amount");  
@@ -146,7 +146,7 @@ body {
 						<div class="mb2">
 							<label class="form-label" for="amount">예약자명 <span
 								class="gray">(customerName)</span></label> <input id="customerName"
-								class="form-control form-control-lg" type="text" value="김용원" readonly="readonly">
+								class="form-control form-control-lg" type="text" value="<%=userId %>" readonly="readonly">
 						</div>
 						<div class="mb2">
 							<label class="form-label" for="amount">주문 번호 <span
@@ -201,11 +201,13 @@ body {
 <script>
 		document.getElementById('confirmBtn').addEventListener('click', ()=>{			
 			<%
+				OrderDao orderDao = new OrderDao();
 				String orderName = jsonObject.get("orderName").toString();
 				String method = jsonObject.get("method").toString();
-				OrderDao orderDao = new OrderDao();
-				int r_id = Integer.parseInt(request.getParameter("id"));
-				orderDao.insertOrderInfo(orderId, amount, method, 1, r_id);
+				int r_number = Integer.parseInt(request.getParameter("id"));
+				String o_state = "결제됨";
+				
+				orderDao.insertOrderInfo(orderId, amount, method, 1, r_number, o_state);
 			%>
 			location.href='./index.html';
 		});
