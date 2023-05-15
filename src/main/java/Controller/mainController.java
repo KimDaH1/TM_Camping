@@ -984,14 +984,14 @@ public class mainController {
 			String sql = "";
 			sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL WHERE addr LIKE '%제주%'";
 			if(idx != 0) {
-				sql += " where idx =" + idx;
+				sql += " where rownum =" + idx;
 			}			
 			psmt = conn.prepareStatement(sql);						
 			rs = psmt.executeQuery();
 			
 			while (rs.next()) {
 	            campzone scampzone = new campzone();
-	            scampzone.setIdx(rs.getInt("rownum"));
+	            scampzone.setIdx(rs.getInt("idx"));
 	            scampzone.setCpname(rs.getString("cpname"));
 	            scampzone.setCpInduty(rs.getString("cpinduty"));
 	            scampzone.setLat(rs.getDouble("lat"));
@@ -1262,9 +1262,12 @@ public class mainController {
 			String sql = "";
 			strValue = "%" + strValue + "%";
  
-			sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
-					+ " WHERE (addr like '%경기%' or addr like '%서울%') and CPNAME LIKE ?"
-					+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+			sql =  "select rnum, cpname, cpinduty, lat, lng, addr from "
+					+ " (SELECT rownum as rnum, cpname, cpInduty, lat, lng, addr "
+					+ "	 FROM TM_CAMPINGZONE_EXAL "
+					+ "	 WHERE (addr like '%경기%' or addr like '%서울%') "
+					+ "	 and CPNAME LIKE ? ) subTB "
+					+ "	 where rnum >= ? and rnum <= ?"; //and 절이 누락되어 오류가 발생되었음
 
 			psmt = conn.prepareStatement(sql);	
 			psmt.setString(1, strValue);
@@ -1273,8 +1276,8 @@ public class mainController {
 			rs = psmt.executeQuery();
 			while (rs.next()) {
 				campzone scampzone = new campzone();
-	            scampzone.setIdx(rs.getInt("rownum"));
-	            System.out.println(rs.getInt("rownum"));
+	            scampzone.setIdx(rs.getInt("rnum"));
+	            System.out.println(rs.getInt("rnum"));
 	            scampzone.setCpname(rs.getString("cpname"));
 	            scampzone.setCpInduty(rs.getString("cpInduty"));
 	            scampzone.setLat(rs.getDouble("lat"));
@@ -1308,9 +1311,12 @@ public class mainController {
 				String sql = "";
 				strValue = "%" + strValue + "%";
 	 
-				sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
-						+ " WHERE addr like '%전라%' and CPNAME LIKE ?"
-						+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+				sql = "select rnum, cpname, cpinduty, lat, lng, addr from "
+						+ " (SELECT rownum as rnum, cpname, cpInduty, lat, lng, addr "
+						+ "	 FROM TM_CAMPINGZONE_EXAL "
+						+ "	 WHERE addr like '%전라%' "
+						+ "	 and CPNAME LIKE ? ) subTB "
+						+ "	 where rnum >= ? and rnum <= ?"; //and 절이 누락되어 오류가 발생되었음
 
 				psmt = conn.prepareStatement(sql);	
 				psmt.setString(1, strValue);
@@ -1319,8 +1325,8 @@ public class mainController {
 				rs = psmt.executeQuery();
 				while (rs.next()) {
 					campzone scampzone = new campzone();
-		            scampzone.setIdx(rs.getInt("rownum"));
-		            System.out.println(rs.getInt("rownum"));
+		            scampzone.setIdx(rs.getInt("rnum"));
+		            System.out.println(rs.getInt("rnum"));
 		            scampzone.setCpname(rs.getString("cpname"));
 		            scampzone.setCpInduty(rs.getString("cpInduty"));
 		            scampzone.setLat(rs.getDouble("lat"));
@@ -1354,9 +1360,12 @@ public class mainController {
 				String sql = "";
 				strValue = "%" + strValue + "%";
 	 
-				sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
-						+ " WHERE addr like '%경상%' and CPNAME LIKE ?"
-						+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+				sql = "select rnum, cpname, cpinduty, lat, lng, addr from "
+						+ " (SELECT rownum as rnum, cpname, cpInduty, lat, lng, addr "
+						+ "	 FROM TM_CAMPINGZONE_EXAL "
+						+ "	 WHERE addr like '%경상%' "
+						+ "	 and CPNAME LIKE ? ) subTB "
+						+ "	 where rnum >= ? and rnum <= ?"; //and 절이 누락되어 오류가 발생되었음
 
 				psmt = conn.prepareStatement(sql);	
 				psmt.setString(1, strValue);
@@ -1365,8 +1374,8 @@ public class mainController {
 				rs = psmt.executeQuery();
 				while (rs.next()) {
 					campzone scampzone = new campzone();
-		            scampzone.setIdx(rs.getInt("rownum"));
-		            System.out.println(rs.getInt("rownum"));
+		            scampzone.setIdx(rs.getInt("rnum"));
+		            System.out.println(rs.getInt("rnum"));
 		            scampzone.setCpname(rs.getString("cpname"));
 		            scampzone.setCpInduty(rs.getString("cpInduty"));
 		            scampzone.setLat(rs.getDouble("lat"));
@@ -1400,9 +1409,12 @@ public class mainController {
 				String sql = "";
 				strValue = "%" + strValue + "%";
 	 
-				sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
-						+ " WHERE addr like '%강원%' and CPNAME LIKE ?"
-						+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+				sql = "select rnum, cpname, cpinduty, lat, lng, addr from "
+						+ " (SELECT rownum as rnum, cpname, cpInduty, lat, lng, addr "
+						+ "	 FROM TM_CAMPINGZONE_EXAL "
+						+ "	 WHERE addr like '%강원%' "
+						+ "	 and CPNAME LIKE ? ) subTB "
+						+ "	 where rnum >= ? and rnum <= ?";
 
 				psmt = conn.prepareStatement(sql);	
 				psmt.setString(1, strValue);
@@ -1411,8 +1423,8 @@ public class mainController {
 				rs = psmt.executeQuery();
 				while (rs.next()) {
 					campzone scampzone = new campzone();
-		            scampzone.setIdx(rs.getInt("rownum"));
-		            System.out.println(rs.getInt("rownum"));
+		            scampzone.setIdx(rs.getInt("rnum"));
+		            System.out.println(rs.getInt("rnum"));
 		            scampzone.setCpname(rs.getString("cpname"));
 		            scampzone.setCpInduty(rs.getString("cpInduty"));
 		            scampzone.setLat(rs.getDouble("lat"));
@@ -1446,9 +1458,12 @@ public class mainController {
 				String sql = "";
 				strValue = "%" + strValue + "%";
 	 
-				sql = "SELECT rownum, cpname, cpInduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL"
-						+ " WHERE addr like '%제주%' and CPNAME LIKE ?"
-						+ " and rownum >= ? and rownum <= ?"; //and 절이 누락되어 오류가 발생되었음
+				sql = "select rnum, cpname, cpinduty, lat, lng, addr from "
+						+ " (SELECT rownum as rnum, cpname, cpInduty, lat, lng, addr "
+						+ "	 FROM TM_CAMPINGZONE_EXAL "
+						+ "	 WHERE addr like '%제주%' "
+						+ "	 and CPNAME LIKE ? ) subTB "
+						+ "	 where rnum >= ? and rnum <= ?"; //and 절이 누락되어 오류가 발생되었음
 
 				psmt = conn.prepareStatement(sql);	
 				psmt.setString(1, strValue);
@@ -1457,8 +1472,8 @@ public class mainController {
 				rs = psmt.executeQuery();
 				while (rs.next()) {
 					campzone scampzone = new campzone();
-		            scampzone.setIdx(rs.getInt("rownum"));
-		            System.out.println(rs.getInt("rownum"));
+		            scampzone.setIdx(rs.getInt("rnum"));
+		            System.out.println(rs.getInt("rnum"));
 		            scampzone.setCpname(rs.getString("cpname"));
 		            scampzone.setCpInduty(rs.getString("cpInduty"));
 		            scampzone.setLat(rs.getDouble("lat"));
@@ -1728,7 +1743,7 @@ public class mainController {
 			strValue = "%" + strValue + "%";
 
 			sql = "SELECT COUNT(rownum) AS CNT FROM TM_CAMPINGZONE_EXAL"
-					+ " WHERE addr like '%강원%' and cpname like ?";						
+					+ " WHERE addr like '%강원%' and  cpname like ?";						
 			psmt = conn.prepareStatement(sql);	
 			psmt.setString(1, strValue);
 
@@ -1761,7 +1776,7 @@ public class mainController {
 			strValue = "%" + strValue + "%";
 
 			sql = "SELECT COUNT(rownum) AS CNT FROM TM_CAMPINGZONE_EXAL"
-					+ " WHERE addr like '%제주%' and like ?";						
+					+ " WHERE addr like '%제주%' and cpname like ?";						
 			psmt = conn.prepareStatement(sql);	
 			psmt.setString(1, strValue);
 

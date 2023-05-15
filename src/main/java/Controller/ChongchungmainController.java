@@ -1,6 +1,6 @@
 package Controller;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -18,17 +18,23 @@ import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
 
+import camping.dto.PersonDto;
 import camping.dto.campzone;
 import camping.dto.campzoneJsonModel;
 import camping.oracle.DBConnectionManager;
 
+//javascript에서 값 넘겨 받기 테스트
+import javax.servlet.http.HttpServletRequest;
+
+
 public class ChongchungmainController {
 
-	private String cpname;
+	public String TestingApiChongchung(HttpServletRequest request) throws IOException{
+		
+	    String str = request.getParameter("data");
 
-	public String TestingApiChongchung() throws IOException{
 		String strResult = "";
-		this.cpname = cpname;
+		String cpname = "";
 		String cptel = "";
 		double lat;
 		double lng;
@@ -59,7 +65,7 @@ public class ChongchungmainController {
 		urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+ "=" + URLEncoder.encode("ETC","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+ "=" + URLEncoder.encode("AppTest","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+ "=" + URLEncoder.encode("json","UTF-8"));
-		urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8")+ "=" + URLEncoder.encode(cpname,"UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8")+ "=" + URLEncoder.encode(str,"UTF-8"));
 		// 3. URL 객체 생성
 		URL url = new URL(urlBuilder.toString());
 
@@ -123,6 +129,7 @@ public class ChongchungmainController {
 				cpHomepage = roots.response.body.items.item.get(i).homepage.toString();
 				cpAnimalCmgCl = roots.response.body.items.item.get(i).animalCmgCl.toString();
 				cpInduty = roots.response.body.items.item.get(i).induty.toString();
+
 				//insert methods 만들어 놓고 호출
 
 				//한줄씩 넣기 때문에 결과값 피드백은 1을 받게 되어 있음 //executeUpdate() 참고
@@ -141,7 +148,7 @@ public class ChongchungmainController {
 
 		return strResult;
 	} 
-	
+
 	private int InsertCampDt(String cpname, String cptel, double lat, double lng, String addr, String cpLineIntro, String cpLctCl, String cpPosblFcltyCl, String cpHomepage, String cpAnimalCmgCl, String cpInduty) {
 		Connection conn = null; //import java.sql.Connection;
 		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
@@ -153,7 +160,7 @@ public class ChongchungmainController {
 			conn = DBConnectionManager.getConnection();
 
 			//쿼리문
-			String sql = "INSERT INTO TM_CAMPINGZONE_Chongchung (IDX, CPNAME, CPTEL, LAT, LNG, ADDR, cpLineIntro, cpLctCl, cpPosblFcltyCl, cpHomepage, cpAnimalCmgCl, cpInduty) VALUES ((SELECT NVL(MAX(idx)+1,1) FROM tm_campingzone_1), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO TM_CAMPINGZONE_Chongchung (IDX, CPNAME, CPTEL, LAT, LNG, ADDR, cpLineIntro, cpLctCl, cpPosblFcltyCl, cpHomepage, cpAnimalCmgCl, cpInduty) VALUES ((SELECT NVL(MAX(idx)+1,1) FROM TM_CAMPINGZONE_Chongchung), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, cpname);
 			psmt.setString(2, cptel);
@@ -165,7 +172,7 @@ public class ChongchungmainController {
 			psmt.setString(8, cpPosblFcltyCl);
 			psmt.setString(9, cpHomepage);
 			psmt.setString(10, cpAnimalCmgCl);
-			psmt.setString(11, cpInduty);
+			psmt.setString(11, cpInduty);			
 
 			result = psmt.executeUpdate();//추가시킨 low값 만큼 int return
 
@@ -179,9 +186,8 @@ public class ChongchungmainController {
 
 	}
 	
-	
-	//디테일
-	public campzone ChongchungDBDetail(String cpname) {
+	//충청db세부정보
+	public campzone ChongchungDBDetail(String cpname) throws IOException{
 		campzone scamp = new campzone();
 		String result = "a";
 		Connection conn = null; //import java.sql.Connection;
@@ -194,14 +200,16 @@ public class ChongchungmainController {
 			//String sql = "SELECT * FROM EMP e";
 			String sql = "";
 
-			sql = "SELECT cpname, cpLineIntro, cpLctCl, addr, cpPosblFcltyCl, cptel, cpAnimalCmgCl, cpInduty FROM tm_campingzone_1 where cpname ='"+cpname+"'";
+			sql = "SELECT idx, cpname, cpLineIntro, cpLctCl, addr, cpPosblFcltyCl, cptel, cpAnimalCmgCl, cpInduty FROM TM_CAMPINGZONE_Chongchung where cpname ='"+cpname+"' order by idx";
 
 			psmt = conn.prepareStatement(sql);			
 
 			rs = psmt.executeQuery();
 
 
-			while (rs.next()) {				
+			while (rs.next()) {		
+				scamp.setIdx(rs.getInt("idx"));
+				System.out.println(rs.getInt("idx"));
 				scamp.setCpname(rs.getString("cpname"));
 				scamp.setCpIntro(rs.getString("cpLineIntro"));
 				scamp.setCpLctCl(rs.getString("cpLctCl"));
@@ -223,42 +231,6 @@ public class ChongchungmainController {
 
 	}
 	
-	// 충청도 캠핑장 테이블 생성 준비 
-	public List<campzone> TestChongchungDB(String cpname) {
-		List<campzone> _campzone = new ArrayList<campzone>();
-		String result = "a";
-		Connection conn = null; //import java.sql.Connection;
-		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
-		ResultSet rs = null; //import java.sql.ResultSet;
-		// 
-		try {			
-			conn = DBConnectionManager.getConnection();			
-			//쿼리문
-			//String sql = "SELECT * FROM EMP e";
-			String sql = "";
-			sql = "SELECT cpname, cpinduty, lat, lng, addr FROM TM_CAMPINGZONE_EXAL WHERE addr LIKE '%충청%'";
-			if(cpname != null) {
-				sql += " where cpname =" + cpname;
-			}			
-			psmt = conn.prepareStatement(sql);						
-			rs = psmt.executeQuery();
-			
-			while (rs.next()) {
-	            campzone scampzone = new campzone();
-	            scampzone.setCpname(rs.getString("cpname"));
-	            scampzone.setcptel(rs.getString("cpinduty"));
-	            scampzone.setLat(rs.getDouble("lat"));
-	            scampzone.setLng(rs.getDouble("lng"));
-	            scampzone.setAddr(rs.getString("addr"));
-	            _campzone.add(scampzone);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBConnectionManager.close(rs, psmt, conn);
-		}		
-		// System.out.println(result);
-		return  _campzone;	
-	}
+	//가장 최근 idx 가져오기
 
 }

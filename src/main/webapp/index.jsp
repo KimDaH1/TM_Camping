@@ -21,9 +21,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
+	<%@ include file = "header.jsp" %>
+<body>	
 	<h1> 7조 Three Men Camping (공공api 테이블) </h1>
 
-	
 	<table class = "table table-striped" id = "testTable1" border="1" >
 	<thead>
 		<tr>
@@ -93,6 +94,10 @@
 	%>
 	</tbody>	
 	</table>
+
+</body>
+<%@ include file = "footer.jsp" %>
+
 
 	<script>
 	function clickTest(){//emp테이블 상세페이지 이동

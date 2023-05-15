@@ -13,6 +13,7 @@
 	String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘
 	
 	myUtil myutil = new myUtil();
+	
 	mainController maincontroller = new mainController();	
 	//넘어온 페이지 번호를 get방식으로 넘기는것 같음
 	String pageNum = request.getParameter("pageNum");
@@ -27,7 +28,8 @@
 	
 	//검색키와 값	
 	String searchValue = request.getParameter("searchValue");
-	
+	String locationValue = request.getParameter("locations");
+
 	//검색어가 있을 경우
 	if(searchValue != null){
 		if(request.getMethod().equalsIgnoreCase("GET")){
@@ -37,9 +39,16 @@
 		searchValue = "";
 	}
 	
+	if(locationValue != null){
+		if(request.getMethod().equalsIgnoreCase("GET")){
+			locationValue = URLDecoder.decode(searchValue,"UTF-8");
+		}
+	} else {//검색어가 없을 경우		
+		locationValue = "";
+	}
 	
 	// 전체데이터 갯수 구하기
-	int dataCount = maincontroller.getDataTotalCountGyeonggi(searchValue);
+	int dataCount = maincontroller.getDataTotalCountGangwon(searchValue);
 	
 	// 한페이지에 표시할 데이터의 갯수
 	int numPerPage = 10;
@@ -47,6 +56,10 @@
 	// 전체 페이지수 구하기
 	int totalPage = myutil.getPageCount(numPerPage, dataCount);
 	
+	if(totalPage == 0){
+		System.out.println("데이터가 없습니다.");
+		return;
+	}
 	// 전체 페이지수가 표시할 페이지수보다 큰 경우(삭제로 인해)
 	if(currentPage > totalPage){
 		currentPage = totalPage;
@@ -57,8 +70,8 @@
 	int end = currentPage*numPerPage;
 	
 	List<campzone> campzonelist = new ArrayList<campzone>();
-
-	campzonelist = maincontroller.CampDBListsGyeonggi(start, end, searchValue);
+	System.out.println("locationValue : " + locationValue);
+	campzonelist = maincontroller.CampDBListsGangwon(start, end, searchValue);
 	//데이터베이스에서 해당 페이지를 가져온다
 	//List<BoardDTO> lists = dao.getLists(start end, searchKey, searchValue);
 	
@@ -70,7 +83,7 @@
 	
 	
 	//페이징 처리
-	String listUrl = "CampListGyeonggi.jsp"+param;
+	String listUrl = "CampListChongchung2.jsp"+param;
 	String pageIndexList = myutil.pageIndexList(currentPage, totalPage, listUrl);
 	
 	//글 내용 보기 주소 정리(html에서 onclick의 주소가 너무 길기 때문에 한번에 정리)
@@ -85,11 +98,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+	
+
+	
+</style>
 <title>게 시 판</title>
 <script type="text/javascript">
 	function sendIt(){
 		var f = document.searchForm;
-		f.action = "<%=cp %>/CampListGyeonggi.jsp"; 
+		f.action = "<%=cp %>/CampListChongchung2.jsp"; 
 		f.submit();
 	}
 	function clickTest(){
@@ -108,7 +126,10 @@
 		          var number =this.cells[0].innerHTML; //사번		          
 		          
 		         str = number.trim(); //사번을 공백없이 변수에 담기
-		         var link = 'http://localhost:8080/ThreeMenCamping/campDetailGyeonggi.jsp?data=' + str;
+		         var link = 'http://localhost:8080/ThreeMenCamping/ChongchungDetail2.jsp?data=' + str;
+		         var link = 'http://localhost:8080/ThreeMenCamping/ChongchungDetail2.jsp?data=' + encodeURIComponent(str);
+
+
 		         location.href=link; //페이지 이동		         
 		       };
 		    }(row);
@@ -123,11 +144,11 @@
 <body>
 <%@ include file = "header.jsp" %>
 
-	<h1> Three Men Camping (TM_CAMPINGZONE_EXAL 캠핑장 테이블 test) </h1>
-
+<br><br><br>
 <div id="bbsList" style = "text-align: center;">
 	<div id="bbsList_title">
-	<h2>경기도 데이터 게 시 판(JSP)</h2>
+	<h1> Three Men Camping (캠핑장 테이블 공공api 비교, 삽입,출력 test) </h1>
+	<h2>공공데이터 게 시 판(JSP)</h2>
 	</div>
 	<div id="bbsList_header">
 		<div id="leftHeader">
@@ -139,6 +160,7 @@
 			</select>
 			<input type="text" name="searchValue" value="<%=searchValue %>" class="textField"/>
 			<input type="button" value="검  색" class="btn2" onclick="sendIt()"/>
+
 		</form>
 		</div>
 		<%-- <div id="rightHeader">
@@ -159,11 +181,13 @@
 		</tr>
 	</thead>		
 	<tbody>	
-		<% for (int i = 0; i < campzonelist.size(); i++)
+		<% out.println("리스트 사이즈 : " + campzonelist.size());
+		for (int i = 0; i < campzonelist.size(); i++)
 		{ %>
 			<tr>
 				<td class="empno" onClick="clickTest();" style="cursor:pointer;">
-					<% out.print(campzonelist.get(i).getCpname()); %>
+					<%System.out.println("campzonelist.get(i).getCpname() : " + campzonelist.get(i).getCpname());
+						out.print(campzonelist.get(i).getCpname()); %>
 				</td>
 				<td class="ename">
 					<%out.print(campzonelist.get(i).getCpInduty()); %>
@@ -203,7 +227,6 @@
 
 	<!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
 <%@ include file = "footer.jsp" %>
 </body>
 </html>
