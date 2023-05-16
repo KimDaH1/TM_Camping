@@ -1,10 +1,12 @@
 --예약 테이블 생성 쿼리
+select * from tm_reservation;
+drop table tm_reservation CASCADE CONSTRAINTS;
 CREATE TABLE tm_reservation(
     r_number NUMBER(10) PRIMARY KEY NOT NULL,
     s_date DATE,
     e_date DATE,
-    usernumber NUMBER(5) CONSTRAINT USER_RESERVATION_FK REFERENCES tm_users(usernumber) ON DELETE SET NULL,
-    c_id NUMBER(5) CONSTRAINT USER_CAMP_FK REFERENCES tm_campingzone(idx) ON DELETE SET NULL,
+    userid VARCHAR2(40) CONSTRAINT USER_RESERVATION_FK REFERENCES tm_users(userid) ON DELETE SET NULL,
+    c_id NUMBER(5) CONSTRAINT USER_CAMP_FK REFERENCES tm_campingzone_chongchung(idx) ON DELETE SET NULL,
     r_state VARCHAR2(10) DEFAULT '예약됨' --예약 상태(예약됨, 취소됨, 결제됨)
 );
 --날짜 중복체크 & INSERT하는 PL/SQL문

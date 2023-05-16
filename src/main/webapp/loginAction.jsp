@@ -7,30 +7,29 @@
 <jsp:useBean id="user" class="user.UserDto" scope="page"/>
 <jsp:setProperty name="user" property="userID"/>
 <jsp:setProperty name="user" property="userPassword"/>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
-	<%
-		UserDao userDao = new UserDao();
-		int result = userDao.login(user.getUserID(), user.getUserPassword());
-
-		if(result == 1) {
-			out.println("<script>");
-			out.println("alert('로그인에 성공하였습니다.');");
-			session.setAttribute("userId", user.getUserID());
-			String userId = (String)session.getAttribute("userID");
-			out.println("location.href='main.jsp';");
-			out.println("</script>");
-		} else {
-			out.println("<script>");
-			out.println("alert('잘못된 입력입니다.');");
-			out.println("history.back();");
-			out.println("</script>");
-		}
-	%>
+    <%
+        UserDao userDao = new UserDao();
+        int result = userDao.login(user.getUserID(), user.getUserPassword());
+        String alertScript = "";
+        if(result == 1) {
+            session.setAttribute("userId", user.getUserID());
+            String userId = (String)session.getAttribute("userID");
+            alertScript = "swal({title: 'Good job!', text: '로그인에 성공하였습니다.', icon: 'success'}).then(function() { window.location = 'main.jsp'; });";
+        } else {
+            alertScript = "swal({title: 'Oops!', text: '잘못된 입력입니다.', icon: 'error'}).then(function() { history.back(); });";
+        }
+    %>
+    <script>
+        <%=alertScript%>
+    </script>
 </body>
 </html>
