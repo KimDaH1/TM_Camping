@@ -1,10 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>동영상 재생 및 이동</title>
+   <style>
+       @font-face {
+    font-family: 'HS-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    
+       }
+       @font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+      body,
+      html {
+
+         margin-top: 0px;
+         padding: 0;
+         height: 30%;
+         width: 100%;
+         overflow: hidden;
+      }
+
+      .video-container {
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         z-index: -100;
+      }
+
+      .full-screen-video {
+         min-width: 100%;
+         min-height: 100%;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         object-fit: cover;
+      }
+
+      .content-overlay {
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         z-index: 10;
+      }
+      @import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+body {
+      
+      font-family: 'omyu_pretty';
+}
+
+.line {
+      position: relative;
+      top: 30%;
+      width: 14em;
+      margin: 0 auto;
+      border-right: 2px solid rgba(255, 255, 255, 0.75);
+      font-size: 350%;
+      color: white;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      transform: translateY(-50%);
+}
+
+/*Animation*/
+
+.anim-typewriter {
+      animation: typewriter 4s steps(40) 1s 1 normal both,
+      blinkTextCursor 500ms steps(40) infinite normal;
+}
+
+@keyframes typewriter {
+      from {
+            width: 0;
+      }
+      to {
+            width: 16em;
+      }
+}
+
+@keyframes blinkTextCursor {
+      from {
+            border-right-color: rgba(255, 255, 255, 0.75);
+      }
+      to {
+            border-right-color: transparent;
+      }
+}
+
+   </style>
 </head>
+
 <body>
-	<h1>인덱스 페이지</h1>
+   <div class="video-container" onclick="playVideo()">
+      <video id="video-element" class="full-screen-video" muted playsinline>
+         <source src="우주로 빨려들어간다 (2).mp4" type="video/mp4">
+      </video>
+   </div>
+   <p class="line anim-typewriter">TM_Camping 화면을 클릭하세요</p>
+   <script>
+      const videoElement = document.getElementById('video-element');
+
+      function playVideo() {
+         videoElement.play();
+
+         setTimeout(() => {
+            window.location.href = "http://localhost:8080/ThreeMenCamping/main.jsp";
+         }, 5000);
+      }
+   </script>
 </body>
+
 </html>

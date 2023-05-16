@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <%@ page import="java.util.*" %>
 
 <!DOCTYPE html>
@@ -146,7 +146,7 @@ header {
         <ul class="submenu">	
           <li><a class="submenu1" href="CampListGyeonggi.jsp">서울/경기</a></li>
           <li><a class="submenu1" href="CampListGangwon.jsp">강원도</a></li>
-          <li><a class="submenu1" href="CampListChongchung">충청도</a></li>
+          <li><a class="submenu1" href="CampListChongchung2">충청도</a></li>
           <li><a class="submenu1" href="CampListGyeongsang">경상도</a></li>
           <li><a class="submenu1" href="CampListjeolla.jsp">전라도</a></li>
           <li><a class="submenu1" href="CampListjeju.jps">제주도</a></li>

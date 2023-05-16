@@ -66,7 +66,6 @@ public class UserDao {
 				byte[] decodedPassword = Base64.getDecoder().decode(encrypedPassword);
 				byte[] decryptedPassword = cipher.doFinal(decodedPassword);
 				String decryptedPasswordString = new String(decryptedPassword, "UTF-8");
-
 				if(decryptedPasswordString.equals(userPassword)) 
 					return 1; //로그인성공
 				else
