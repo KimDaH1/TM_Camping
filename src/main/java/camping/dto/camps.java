@@ -1,7 +1,15 @@
 package camping.dto;
 
 public class camps {
-	public String contentId;
+	public int contentId;
+	public int getContentId() {
+		return contentId;
+	}
+
+	public void setContentId(int contentId) {
+		this.contentId = contentId;
+	}
+
 	public String facltNm;
 	public String lineIntro;
 	public String intro;

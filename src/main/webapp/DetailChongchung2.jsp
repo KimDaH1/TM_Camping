@@ -36,8 +36,8 @@
 	</div>
 	<table class = "table table-striped" border="1">
 			<tr>
-<!-- 				<td>
-					고유번호 cpname
+<!-- < 				<td>
+					컨텐츠Id cpContentId
 				</td> -->
 				<td>
 					야영장명 <!-- cpname -->
@@ -81,8 +81,8 @@
 				
 	%>
 			<tr>
-<%-- 				<td>
-					<%out.print(campzonelist.getIdx()); %>
+<%--  				<td>
+					<%out.print(campzonelist.getCpContentId()); %>
 				</td> --%>
 				<td>
 					<%out.print(campzonelist.getCpname()); %>

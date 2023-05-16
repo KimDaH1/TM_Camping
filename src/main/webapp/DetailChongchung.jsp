@@ -91,7 +91,6 @@
 				</td>
 			</tr>	
 	</table>
-	<h1> 7Á¶ </h1>
 	<javaScript>
 	
 	
