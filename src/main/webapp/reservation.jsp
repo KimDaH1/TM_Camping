@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="camping.dao.ReservationDao" %>	
+<%@ page import="camping.dao.OrderDao" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,8 +68,9 @@ body {
 	int userNumber = reservationDao.getUserNumber(userId);
 
 	//캠핑장 기본키 값이 넘어 올 예정
-	//int camp_id = Integer.parseInt(request.getParameter("id"));
-	int camp_id = 1;
+	int camp_id = Integer.parseInt(request.getParameter("id"));
+	//int camp_id = 1;
+	String cpname = reservationDao.getCampName(camp_id);
 %>
 	<div class="container">
 		<div class="row">
@@ -91,8 +93,9 @@ body {
 						<div class="mb2">
 							<label class="form-label">캠핑장명 <span
 								class="gray">(camp_id) </span></label> <input id="orderId"
-								class="form-control form-control-lg" type="text" value="금성캠핑장"
+								class="form-control form-control-lg" type="text" name="cpname" value="<%=cpname %>"
 								readonly="readonly">
+							<input type="hidden" name="c_id" value=<%=camp_id %>>
 						</div>
 						<div class="mb2">
 							<label class="form-label" for="sdate">시작일 <span
@@ -118,7 +121,7 @@ body {
 							<label class="form-label">금액 <span
 								class="gray">(amount) </span></label> <input id="amount"
 								class="form-control form-control-lg" type="text"
-								value="하루 이용요금 : 1억">
+								name="amount" value="0">
 						</div>
 
 						<div class="mb2">
@@ -210,7 +213,7 @@ body {
 		    //document.getElementById('years').value = parseInt(dif/cYear)
 		    //document.getElementById('months').value = parseInt(dif/cMonth)
 		    if( edd >= sdd) {
-			    document.getElementById('amount').value = ( parseInt(dif/cDay) + 1 ) * 100000000;
+			    document.getElementById('amount').value = ( parseInt(dif/cDay) + 1 ) * 100000;
 		    } else {
 		    	document.getElementById('amount').value = 0;
 		    }

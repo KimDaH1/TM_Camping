@@ -10,17 +10,21 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
+<%@ include file = "header.jsp" %>
+<%
+	String userId = (String)session.getAttribute("userId");
+%>
 <script>
 	function showAlert() {
 	  Swal.fire({
 	    title: '예약이 완료되었습니다.',
-	    text: '결제 페이지에서 결제 부탁드립니다. ',
+	    text: '예약 내역 페이지에서 결제 부탁드립니다. ',
 	    icon: 'success',
 	    confirmButtonText: '확인',
 	    
 	  }).then(result => {
 		  if(result.isConfirmed) {
-			  location.href = './index.html';
+			  location.href = './reservationInfo.jsp';
 		  }
 		});
 	}
@@ -40,12 +44,14 @@
 	</script>
 	<%
 		request.setCharacterEncoding("UTF-8"); //한글 정상 인식을 위해 써준다.
-		String sDate = request.getParameter("sdate");
-		String eDate = request.getParameter("edate");
-	
+		String s_date = request.getParameter("sdate");
+		String e_date = request.getParameter("edate");
+		String amount = request.getParameter("amount");
+		int c_id = Integer.parseInt(request.getParameter("c_id"));
+		
 		ReservationDao reservationDao = new ReservationDao();
 		//int result = reservationDao.insertReservationInfo(sDate, eDate, 1, 1, "예약됨");
-		int result = reservationDao.insertReservation(sDate, eDate, 1, 1, "예약됨");
+		int result = reservationDao.insertReservation(s_date, e_date, amount, userId, c_id, "예약됨");
 	
 		// id, 이름, 주소, 번호, 취미 설정
 		/* PersonDto personDto = new PersonDto();

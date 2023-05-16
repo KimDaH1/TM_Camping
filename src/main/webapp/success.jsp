@@ -1,3 +1,4 @@
+<%@page import="camping.dto.ReservationDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Base64"%>
@@ -14,9 +15,21 @@
 <%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="camping.dao.OrderDao"%>
+<%@ page import="camping.dao.ReservationDao"%>
+<%@ page import="camping.Utils.MyDateUtil" %>
 
 <%
- // 결제 승인 API 호출하기 
+ // 결제 승인 API 호출하기
+ 
+  int r_number = Integer.parseInt(request.getParameter("id"));
+
+	ReservationDao reservationDao = new ReservationDao();
+	ReservationDto reservationDto = reservationDao.getDates(r_number);
+	String s_date = reservationDto.getS_date();
+	String e_date = reservationDto.getE_date();
+	
+	
+
   String userId = (String)session.getAttribute("userId");
   String orderId = request.getParameter("orderId");
   String paymentKey = request.getParameter("paymentKey");
@@ -128,13 +141,13 @@ body {
 							<label class="form-label" for="amount">시작일 <span
 								class="gray">(s_date) </span></label> <input id="sdate"
 								class="form-control form-control-lg" type="text"
-								name="sdate" readonly="readonly">
+								name="sdate" readonly="readonly" value="<%= MyDateUtil.convertStringToUtilDate(s_date)%>">
 						</div>
 						<div class="mb2">
 							<label class="form-label" for="amount">종료일 <span
 								class="gray">(e_date) </span></label> <input id="edate"
 								class="form-control form-control-lg" type="text"
-								name="edate" readonly="readonly">
+								name="edate" readonly="readonly" value="<%= MyDateUtil.convertStringToUtilDate(e_date)%>">
 						</div>
 						<div class="mb2">
 							<label class="form-label" for="amount">결제 금액 <span
@@ -204,12 +217,12 @@ body {
 				OrderDao orderDao = new OrderDao();
 				String orderName = jsonObject.get("orderName").toString();
 				String method = jsonObject.get("method").toString();
-				int r_number = Integer.parseInt(request.getParameter("id"));
+				//int r_number = Integer.parseInt(request.getParameter("id"));
 				String o_state = "결제됨";
 				
-				orderDao.insertOrderInfo(orderId, amount, method, 1, r_number, o_state);
+				orderDao.insertOrderInfo(orderId, amount, method, userId, r_number, o_state);
 			%>
-			location.href='./index.html';
+			location.href='./main.jsp';
 		});
 	</script>
 </body>

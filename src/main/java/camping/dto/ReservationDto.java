@@ -2,36 +2,43 @@ package camping.dto;
 
 public class ReservationDto {
 
-	int r_id;
-	String sDate;
-	String eDate;
-	int userNumber;
+	int r_number;
+	String s_date;
+	String e_date;
+	String amount;
+	String userid;
 	int c_id;
 	String r_state;
 	
-	public int getR_id() {
-		return r_id;
+	public int getR_number() {
+		return r_number;
 	}
-	public void setR_id(int r_id) {
-		this.r_id = r_id;
+	public void setR_number(int r_number) {
+		this.r_number = r_number;
 	}
-	public String getsDate() {
-		return sDate;
+	public String getS_date() {
+		return s_date;
 	}
-	public void setsDate(String sDate) {
-		this.sDate = sDate;
+	public void setS_date(String s_date) {
+		this.s_date = s_date;
 	}
-	public String geteDate() {
-		return eDate;
+	public String getE_date() {
+		return e_date;
 	}
-	public void seteDate(String eDate) {
-		this.eDate = eDate;
+	public void setE_date(String e_date) {
+		this.e_date = e_date;
 	}
-	public int getUserNumber() {
-		return userNumber;
+	public String getAmount() {
+		return amount;
 	}
-	public void setUserNumber(int userNumber) {
-		this.userNumber = userNumber;
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public int getC_id() {
 		return c_id;
@@ -45,10 +52,5 @@ public class ReservationDto {
 	public void setR_state(String r_state) {
 		this.r_state = r_state;
 	}
-	
-	@Override
-	public String toString() {
-		return "ReservationDto [r_id=" + r_id + ", sDate=" + sDate + ", eDate=" + eDate + "]";
-	}
-	
+		
 }

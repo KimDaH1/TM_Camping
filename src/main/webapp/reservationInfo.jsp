@@ -16,7 +16,7 @@ String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘
 ReservationDao reservationDao = new ReservationDao();
 
 
-int userNumber = 1;
+String userId = (String)session.getAttribute("userId");
 /*
 // 전체데이터 갯수 구하기
 int dataCount = reservationDao.getReservationCount(userNumber);
@@ -38,7 +38,7 @@ int end = currentPage * numPerPage;
 */
 List<ReservationDto> reservationList;
 reservationList = new ArrayList<ReservationDto>();
-reservationList = reservationDao.getReservationList(userNumber);
+reservationList = reservationDao.getReservationList(userId);
 %>
 <!DOCTYPE html>
 <html>
@@ -59,7 +59,7 @@ reservationList = reservationDao.getReservationList(userNumber);
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
-	<img alt="" src="/ThreeMenCamping/src/main/resources/img/fish1.png">
+<%-- <%@ include file = "header.jsp" %> --%>	
 	<h1 style="text-align: center;">예약 리스트 페이지</h1>
 
 	<div id="bbsList">
@@ -79,42 +79,44 @@ reservationList = reservationDao.getReservationList(userNumber);
 			<tbody>
 				<%
 				for (int i = 0; i < reservationList.size(); i++) {
+					String cpname = reservationDao.getCampName(reservationList.get(i).getC_id());
 				%>
 				<tr>
 					<td id="r_id<%=i%>" style="cursor: pointer;">
 						<%
-						out.print(reservationList.get(i).getR_id());
+						out.print(reservationList.get(i).getR_number());
 						%>
 					</td>
 					<td class="empno">
 						<%
 						out.print(reservationList.get(i).getC_id());
+						out.print(cpname);
 						%>
 					</td>
 					<td class="ename">
 						<%
 						//out.print(reservationList.get(i).geteDate());
-						out.print( MyDateUtil.convertStringToUtilDate(reservationList.get(i).getsDate()) );
+						out.print( MyDateUtil.convertStringToUtilDate(reservationList.get(i).getS_date()) );
 						%>
 					</td>
 					<td class="job">
 						<%
-						out.print( MyDateUtil.convertStringToUtilDate(reservationList.get(i).geteDate()) );
+						out.print( MyDateUtil.convertStringToUtilDate(reservationList.get(i).getE_date()) );
 						//out.print(reservationList.get(i).geteDate());
 						%>
 					</td>
 					<td class="mgr">
 						<%
-						out.print(reservationList.get(i).getUserNumber());
+						out.print(reservationList.get(i).getAmount());
 						%>
 					</td>
 					<td class="order">
 						<%-- <button id="<%=i %>" class="btn btn-primary orderBtn">결제</button> --%>
-						<button id="<%=reservationList.get(i).getR_id() %>" class="btn btn-primary orderBtn">결제</button>
+						<button id="<%=reservationList.get(i).getR_number() %>" class="btn btn-primary orderBtn">결제</button>
 					</td>
 					<td class="cancel">
 						<%-- <button id="cancel<%=i %>" class="btn btn-danger cancelBtn">취소</button> --%>
-						<button id="<%=reservationList.get(i).getR_id() %>" class="btn btn-danger cancelBtn">취소</button>
+						<button id="<%=reservationList.get(i).getR_number() %>" class="btn btn-danger cancelBtn">취소</button>
 					</td>
 
 				</tr>				

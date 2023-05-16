@@ -15,7 +15,7 @@ import camping.oracle.DBConnectionManager;
 public class ReservationDao {
 
 	// insert
-	public int insertReservationInfo(String sDate, String eDate, int usernumber, int c_id, String r_state) {
+	public int insertReservationInfo(String s_date, String e_date, String amount, int userid, int c_id, String r_state) {
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -25,15 +25,16 @@ public class ReservationDao {
 			conn = DBConnectionManager.getConnection();
 
 			// 쿼리문!
-			String sql = "insert into tm_reservation(r_number, s_date, e_date, usernumber, c_id, r_state)"
-					+ " values( (select NVL(MAX(r_number),0)+1 from tm_reservation), ?, ?, ?, ?, ?)";
+			String sql = "insert into tm_reservation(r_number, s_date, e_date, amount, userid, c_id, r_state)"
+					+ " values( (select NVL(MAX(r_number),0)+1 from tm_reservation), ?, ?, ?, ?, ?, ?)";
 
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, sDate);
-			psmt.setString(2, eDate);
-			psmt.setInt(3, usernumber);
-			psmt.setInt(4, c_id);
-			psmt.setString(5, r_state);
+			psmt.setString(1, s_date);
+			psmt.setString(2, e_date);
+			psmt.setString(3, amount);
+			psmt.setInt(4, userid);
+			psmt.setInt(5, c_id);
+			psmt.setString(6, r_state);
 
 			result = psmt.executeUpdate();
 
@@ -49,7 +50,7 @@ public class ReservationDao {
 	}
 	
 	//insert 날짜 중복체크 적용
-	public int insertReservation(String sDate, String eDate, int usernumber, int c_id, String r_state) {
+	public int insertReservation(String s_date, String e_date, String amount, String userid, int c_id, String r_state) {
 
 		Connection conn = null;
 		//PreparedStatement psmt = null;
@@ -60,20 +61,21 @@ public class ReservationDao {
 			conn = DBConnectionManager.getConnection();
 
 			// 쿼리문!
-			String sql = "{ call date_duplicate_check_test(?, ?, ?, ?, ?, ?) }";
+			String sql = "{ call date_duplicate_check_test(?, ?, ?, ?, ?, ?, ?) }";
 
 			cstmt = conn.prepareCall(sql);
 			//cstmt.setDate(1, java.sql.Date.valueOf(sDate));
-			cstmt.setString(1, sDate);
+			cstmt.setString(1, s_date);
 			//cstmt.setDate(2, java.sql.Date.valueOf(eDate));
-			cstmt.setString(2, eDate);
-			cstmt.setInt(3, usernumber);
-			cstmt.setInt(4, c_id);
-			cstmt.setString(5, r_state);
-			cstmt.registerOutParameter(6, Types.INTEGER);
+			cstmt.setString(2, e_date);
+			cstmt.setString(3, amount);
+			cstmt.setString(4, userid);
+			cstmt.setInt(5, c_id);
+			cstmt.setString(6, r_state);
+			cstmt.registerOutParameter(7, Types.INTEGER);
 			
 			cstmt.execute();
-			result = cstmt.getInt(6);
+			result = cstmt.getInt(7);
 			
 
 			System.out.println("처리결과:" + result);
@@ -118,7 +120,7 @@ public class ReservationDao {
 		return result;
 	}
 	
-	public List<ReservationDto> getReservationList(int userNumber) {
+	public List<ReservationDto> getReservationList(String userid) {
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -130,11 +132,11 @@ public class ReservationDao {
 
 			// 예약 정보 리스트
 			// 예약이 취소 되었거나, 결제가 된 상태이면 리스트에 제외
-			String sql = "select r.r_number, s_date, e_date, r.usernumber, c_id, nvl(o_state, '미결제')"
+			String sql = "select r.r_number, s_date, e_date, r.amount, r.userid, c_id, nvl(o_state, '미결제')"
 					+ " from tm_reservation r"
 					+ " left outer join tm_order o"
 					+ " on r.r_number = o.r_number"
-					+ " where r.usernumber = 1"
+					+ " where r.userid = ?"
 					+ " and o.o_state is null"
 					+ " and r_state = '예약됨'"
 					+ " order by r.r_number";
@@ -147,7 +149,7 @@ public class ReservationDao {
 					+ " order by r_number";
 			*/
 			psmt = conn.prepareStatement(sql);
-
+			psmt.setString(1, userid);
 			rs = psmt.executeQuery(); // 쿼리를 실행!!
 
 			reservationList = new ArrayList<ReservationDto>();
@@ -157,10 +159,11 @@ public class ReservationDao {
 				ReservationDto reservationDto = new ReservationDto();
 				reservationDto = new ReservationDto();
 				
-				reservationDto.setR_id(rs.getInt("r_number"));
-				reservationDto.setsDate(rs.getString("s_date"));
-				reservationDto.seteDate(rs.getString("e_date"));
-				reservationDto.setUserNumber(rs.getInt("usernumber"));
+				reservationDto.setR_number(rs.getInt("r_number"));
+				reservationDto.setS_date(rs.getString("s_date"));
+				reservationDto.setE_date(rs.getString("e_date"));
+				reservationDto.setAmount(rs.getString("amount"));
+				reservationDto.setUserid(rs.getString("userid"));
 				reservationDto.setC_id(rs.getInt("c_id"));
 				
 				reservationList.add(reservationDto);
@@ -234,5 +237,97 @@ public class ReservationDao {
 		}		
 
 		return totalCount;
+	}
+	
+	public String getCampName(int c_id) {
+		
+		String campName = null;
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "select cpname "
+					   + "from tm_campingzone_chongchung "
+					   + "where idx = ?";
+			psmt = conn.prepareStatement(sql);	
+			psmt.setInt(1, c_id);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				campName = rs.getString("cpname");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return campName;
+	}
+	
+	public ReservationDto getDates(int r_number) {
+		
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		
+		ReservationDto reservationDto = null;
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "select s_date, e_date from tm_reservation where r_number = ?";						
+			psmt = conn.prepareStatement(sql);	
+			psmt.setInt(1, r_number);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				reservationDto = new ReservationDto();
+				reservationDto.setS_date(rs.getString("s_date"));
+				reservationDto.setE_date(rs.getString("e_date"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return reservationDto;
+	}
+	
+	public String getUserName(int r_number) {
+		
+		String userName = null;
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "select username "
+					   + "from tm_reservation r, tm_users u "
+					   + "where r.userid = u.userid "
+					   + "and r_number = ?";
+			psmt = conn.prepareStatement(sql);	
+			psmt.setInt(1, r_number);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				userName = rs.getString("username");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return userName;
 	}
 }

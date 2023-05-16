@@ -7,7 +7,7 @@ public class OrderDto {
 	String order_date; //결제시간
 	//String order_item; //삭제 
 	String paytype; //결제타입
-	int userNumber; //유저번호, 외래키
+	String userid; //유저번호, 외래키
 	int r_number; //예약번호, 외래키
 	String o_state; //결제 상태
 	
@@ -41,17 +41,17 @@ public class OrderDto {
 //	public void setOrder_item(String order_item) {
 //		this.order_item = order_item;
 //	}
-	public int getUserNumber() {
-		return userNumber;
-	}
 	public String getPaytype() {
 		return paytype;
 	}
 	public void setPaytype(String paytype) {
 		this.paytype = paytype;
 	}
-	public void setUserNumber(int userNumber) {
-		this.userNumber = userNumber;
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public int getR_number() {
 		return r_number;

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="camping.dao.OrderDao"%>
+<%@ page import="camping.dao.ReservationDao"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,10 +45,16 @@ body {
 </head>
 
 <body class="bg-light">
-	<% 
-		request.setCharacterEncoding("UTF-8"); //한글 정상 인식을 위해 써준다.
-		int id = Integer.parseInt(request.getParameter("id"));
-	 %>
+<% 
+	request.setCharacterEncoding("UTF-8"); //한글 정상 인식을 위해 써준다.
+	int id = Integer.parseInt(request.getParameter("id"));
+	
+	OrderDao orderDao = new OrderDao();
+	String cpname = orderDao.getCampName(id);
+	ReservationDao reservationDao = new ReservationDao();
+	String username =  reservationDao.getUserName(id);
+	int amount = orderDao.getAmount(id);
+ %>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3"></div>
@@ -95,20 +102,20 @@ body {
 						<label class="form-label" for="amount">물품명 <span
 							class="gray">(orderName) </span><span class="red">필수</span></label> <input
 							id="orderName" class="form-control form-control-lg" type="text"
-							value="휴먼캠핑장" readonly="readonly">
+							value="<%=cpname %>" readonly="readonly">
 					</div>
 
 					<div class="mb2">
 						<label class="form-label" for="amount">금액 <span
 							class="gray">(amount) </span> <span class="red">필수</span></label> <input
 							id="amount" class="form-control form-control-lg" type="text"
-							value="100" readonly="readonly">
+							value="<%=amount %>" readonly="readonly">
 					</div>
 
 					<div class="mb2">
 						<label class="form-label" for="amount">구매자명 <span
 							class="gray">(customerName)</span></label> <input id="customerName"
-							class="form-control form-control-lg" type="text" value="김용원" name="customerName" readonly="readonly">
+							class="form-control form-control-lg" type="text" value="<%=username %>" name="customerName" readonly="readonly">
 					</div>
 
 					<div class="d-grid gap-2">

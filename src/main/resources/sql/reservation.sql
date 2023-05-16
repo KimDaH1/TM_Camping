@@ -3,6 +3,7 @@ CREATE TABLE tm_reservation(
     r_number NUMBER(10) PRIMARY KEY NOT NULL,
     s_date DATE,
     e_date DATE,
+    amount NUMBER(10),
     usernumber NUMBER(5) CONSTRAINT USER_RESERVATION_FK REFERENCES tm_users(usernumber) ON DELETE SET NULL,
     c_id NUMBER(5) CONSTRAINT USER_CAMP_FK REFERENCES tm_campingzone(idx) ON DELETE SET NULL,
     r_state VARCHAR2(10) DEFAULT '예약됨' --예약 상태(예약됨, 취소됨, 결제됨)
@@ -54,7 +55,7 @@ END;
 /
 
 --데이터 조회
-SELECT * 
+SELECT *
 FROM tm_reservation
 ORDER BY r_number;
 
