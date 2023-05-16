@@ -20,7 +20,7 @@
 	    
 	  }).then(result => {
 		  if(result.isConfirmed) {
-			  location.href = './index.html';
+			  location.href = './reservationInfo.jsp';
 		  }
 		});
 	}
