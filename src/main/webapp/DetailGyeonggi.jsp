@@ -124,7 +124,7 @@
          $('.orderBtn').click(function(){
         	 
              let tempId = $(this).attr('id');
-             var link = 'http://localhost:8080/ThreeMenCamping/order.jsp?id=' +tempId;
+             var link = 'http://localhost:8080/ThreeMenCamping/reservation.jsp?id=' +tempId;
              location.href=link; //페이지 이동
          });
   

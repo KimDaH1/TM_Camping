@@ -68,7 +68,7 @@ body {
 
 	//캠핑장 기본키 값이 넘어 올 예정
 	//int camp_id = Integer.parseInt(request.getParameter("id"));
-	int camp_id = 1;
+	int camp_id = 356;
 %>
 	<div class="container">
 		<div class="row">

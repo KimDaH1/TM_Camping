@@ -45,7 +45,7 @@
 	
 		ReservationDao reservationDao = new ReservationDao();
 		//int result = reservationDao.insertReservationInfo(sDate, eDate, 1, 1, "예약됨");
-		int result = reservationDao.insertReservation(sDate, eDate, 1, 1, "예약됨");
+		int result = reservationDao.insertReservation(sDate, eDate, 14, 356, "예약됨");
 	
 		// id, 이름, 주소, 번호, 취미 설정
 		/* PersonDto personDto = new PersonDto();
