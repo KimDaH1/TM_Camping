@@ -45,6 +45,25 @@
      i{
     color: black;
    }
+      .video-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:10px;
+    height: 500px;
+    z-index: -1;
+    opacity: 1.0;
+}
+
+video {
+    position: absolute;
+    top: 280px;
+    left: 560px;
+    z-index: -10;
+    transform: translateX(-50%) translateY(-45%);
+    background: no-repeat;
+    background-size: cover;
+}
   </style>
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -52,7 +71,12 @@
 </head>
 <img src="캠핑메인.png" alt="" width="150">
 <h1>TM_Camping</h1>
-<body id="pull" style="background-image:url(배경화면.avif)">
+<body>
+  <div class="video-box">
+            <video muted autoplay loop>
+                <source src="회원가입.mp4" type="video/mp4">
+            </video>
+        </div>
 
  <form id="joinForm" method="post" action="joinAction.jsp" onsubmit="event.preventDefault(); submitForm();">
     <span>아이디</span><br>

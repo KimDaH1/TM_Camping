@@ -9,6 +9,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="camping.Utils.myUtil" %>
 <%
+
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();//
 	
@@ -99,8 +100,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style>
-	
-
+  @font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+      font-family: 'omyu_pretty' ;
+    }
 	
 </style>
 <title>게 시 판</title>
@@ -141,14 +149,16 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 </head>
-<body>
-<%@ include file = "header.jsp" %>
+
+<body style="background-image: url(충청도배경.avif);">
+
+
 
 <br><br><br>
 <div id="bbsList" style = "text-align: center;">
 	<div id="bbsList_title">
-	<h1> Three Men Camping (캠핑장 테이블 공공api 비교, 삽입,출력 test) </h1>
-	<h2>공공데이터 게 시 판(JSP)</h2>
+	<h1> TM_Camping </h1>
+	<h2>충청도 캠핑장 목록</h2>
 	</div>
 	<div id="bbsList_header">
 		<div id="leftHeader">
@@ -181,7 +191,7 @@
 		</tr>
 	</thead>		
 	<tbody>	
-		<% out.println("리스트 사이즈 : " + campzonelist.size());
+		<% 
 		for (int i = 0; i < campzonelist.size(); i++)
 		{ %>
 			<tr>
@@ -224,9 +234,40 @@
 		</div>
 	</div>
 </div>
-
+<style>
+body{
+background-size:cover;
+}
+   footer{
+  position: relative;
+  top: 80px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  height: 310px;
+  background-color: #383a3f;
+    }
+</style>
+<footer>
+          <div>
+				<img src="sns.PNG" alt="" style="border-radius: 15px; position: relative; ">
+                <p>&nbsp; &nbsp; &nbsp;업체명 : TM_Camping</p>
+                <p>&nbsp; &nbsp; &nbsp;대표자 : 7조 &nbsp;</p>
+                <p>&nbsp; &nbsp; &nbsp;사업자등록번호 : 111-11-11111 &nbsp;</p>
+                <p>&nbsp; &nbsp; &nbsp;주소 : 충청남도 천안시 동남구 대흥동 134 휴먼교육센터 8층 &nbsp;</p>
+                <p>&nbsp; &nbsp; &nbsp;전화번호 : &nbsp;041-561-1122<br><span style="color: rgb(246, 179, 82);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(문의 시간 AM 9:00 ~ PM 8:00 / 점심시간 12:00~13:00)<br>
+                </span>&nbsp; &nbsp; &nbsp;캠핑장 시설 안내 및 이용안내 문의만 부탁드립니다.</p>
+          </div>
+          <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=천안시+동남구+휴먼+교육센터" style="width: 400px; height: 250px;"></iframe>
+					<div>
+						<span style="padding: 20px;">이용약관</span><span style="padding: 20px;">개인정보처리방침</span><span style="padding: 20px;">새로운 메뉴</span>
+          </div>
+        </footer>
 	<!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<%@ include file = "footer.jsp" %>
+
 </body>
 </html>

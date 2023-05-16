@@ -48,6 +48,29 @@
         background-image: url(배경화면.avif);
         background-position: 0% 12%;
     }
+.video-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    opacity: 0.9;
+}
+
+video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background: no-repeat;
+    background-size: cover;
+}
 
     .click {
         margin: 5px;
@@ -81,8 +104,10 @@
         border-right: 0px;
     }
    i{
-    color: black;
+    color: white;
    }
+   input{
+   color:white;}
 </style>
 <header>
 <div class="logoimage" style="width: 200px;">
@@ -94,7 +119,11 @@
 </header>
 <div>
 <body>
-    
+    <div class="video-box">
+            <video muted autoplay loop>
+                <source src="로그인.mp4" type="video/mp4">
+            </video>
+        </div>
     <form method="post" action="loginAction.jsp">
         <h3 style="text-align: conter; color: white;">로그인화면</h3>
         <div>
@@ -116,7 +145,7 @@
         </div>
     </div>
     <div class="snslogin" ><br>
-        <h4 style=" color: white;">간편 로그인</h4>
+        <h4 style=" color: black;">간편 로그인</h4>
         <ul style="display: flex; justify-content: center;">
             <li onclick="kakaoLogin();" style="margin-right: 10px;">
                 <a href="javascript:void(0)">
