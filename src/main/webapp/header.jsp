@@ -28,17 +28,19 @@
 	background-color: black;
 	} */
 header {
+	
   z-index: 6;
   color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 97.2%;
+  width: 100%;
   padding: 20px;
   height: 60px;
   background-color: #383a3f;
-  position: fixed; /* Add this line */
+  position: absolute; /* Add this line */
   top: 0; /* Add this line */
+	right: -0px;
 }
     footer{
   position: relative;
@@ -65,7 +67,7 @@ header {
   margin: 0;
   padding: 0;
   position: relative;
-  left : 40%;
+  left : 50%;
 
     }
 
@@ -86,7 +88,7 @@ header {
 
 .sidebar{
   position: relative;
-  left: 55%;
+  left: 65%;
 }
 
 .login-area a {
@@ -129,9 +131,9 @@ header {
 </head>
 <body>
 <header>
-  <h1 style="position: absolute; left: 100px;">TM_Camping</h1>
+  <h1 style="position: absolute; left: 180px;">TM_Camping</h1>
   <nav>
-    <a href="main.jsp"><img src="캠핑메인.png" alt="" style="width: 70px; position: relative; left: 5px; bottom: 5px;"></a>
+    <a href="main.jsp"><img src="캠핑메인.png" alt="" style="width: 70px; position: relative; left: 90px; bottom: 5px;"></a>
     <ul>
       <li><a class="submenu1"href="#">이용안내</a></li>
       <li class="has-submenu"><a class="submenu1" href="#">예약확인</a>
@@ -154,21 +156,24 @@ header {
       </li>
       <li><a class="submenu1" href="#">커뮤니티</a></li>
     </ul>
-  <div class="sidebar">
+<div class="sidebar">
    <span class="login-area">
    <%  if (session.getAttribute("userId") != null) { %>
   <% String userId = (String)session.getAttribute("userId"); %>
   <span class="login-area">어서오세요 : <%= userId %> 님&nbsp; &nbsp; &nbsp;</span>
+  <button id="logout">로그아웃</button>
+  <script>
+    document.getElementById('logout').addEventListener('click', ()=>{location.href='logout.jsp'});
+  </script>
+  <a class="submenu1 " href="mypage.jsp">마이페이지</a>
 <% } else { %>
   <a class="submenu1 login-area" href="login.jsp">로그인</a>
-  <a class="submenu1 login-area" href="join.jsp">회원가입</a>
-<% } %>   <button id="logout">로그아웃</button>
+  <a class="submenu1 login-area" href="usercheck.jsp">회원가입</a>
+<% } %>  
   <a class="submenu1 " href="https://www.weather.go.kr/w/weather/forecast/short-term.do">기상청날씨</a>
-	<script>
-		document.getElementById('logout').addEventListener('click', ()=>{location.href='logout.jsp'});
-	</script>
 </span>
 </div>
+
   </nav>
 </header>
 </body>
