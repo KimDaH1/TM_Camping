@@ -105,14 +105,14 @@
         </div>
         </div>
         <div class="">
-            <input type="submit" value="LOGIN" style="margin-top : 12px; text-align: center; background-color: rgb(97, 97, 100); border-radius: 8px; width: 200px; height: 27px; font-size: 20px;" >
+            <input type="submit" value="LOGIN" style="margin-top : 12px; text-align: center; background-color: rgb(97, 97, 100); border-radius: 8px; width: 200px; height: 27px; font-size: 20px;color: white" >
         </div>
     </form>
     <div>
-        <span class="click"></span><a href="join.jsp">
-            <input type="submit" value="회원가입" style="margin-top : 12px; text-align: center; background-color: rgb(97, 97, 100); border-radius: 8px; width: 200px; height: 27px; font-size: 20px; position: relative; right: 5px;"></a>
+        <span class="click"></span><a href="usercheck.jsp">
+            <input type="submit" value="회원가입" style="margin-top : 12px; text-align: center; background-color: rgb(97, 97, 100); border-radius: 8px; width: 200px; height: 27px; font-size: 20px; position: relative; right: 5px; color:white"></a>
    
-            <div style="width: 80%;height: 2px; background-color: rgb(97, 97, 100); position: absolute; left: 10%; border-radius: 12px;"></div>
+            <div style="width: 80%;height: 2px; background-color: rgb(97, 97, 100); position: absolute; left: 10%; border-radius: 12px; color:white"></div>
         </div>
     </div>
     <div class="snslogin" ><br>
