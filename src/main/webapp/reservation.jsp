@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="camping.dao.ReservationDao" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,6 +60,16 @@ body {
   </script>
 </head>
 <body class="bg-light">
+<%
+	String userId = (String)session.getAttribute("userId");
+	
+	ReservationDao reservationDao = new ReservationDao();
+	int userNumber = reservationDao.getUserNumber(userId);
+
+	//캠핑장 기본키 값이 넘어 올 예정
+	//int camp_id = Integer.parseInt(request.getParameter("id"));
+	int camp_id = 1;
+%>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3"></div>
@@ -78,22 +89,22 @@ body {
 						style="padding: 40px 30px 50px 30px; margin-top: 30px; margin-bottom: 50px">
 
 						<div class="mb2">
-							<label class="form-label" for="amount">캠핑장명 <span
+							<label class="form-label">캠핑장명 <span
 								class="gray">(camp_id) </span></label> <input id="orderId"
 								class="form-control form-control-lg" type="text" value="금성캠핑장"
 								readonly="readonly">
 						</div>
 						<div class="mb2">
-							<label class="form-label" for="amount">시작일 <span
+							<label class="form-label" for="sdate">시작일 <span
 								class="gray">(s_date) </span></label> <input id="sdate"
 								class="form-control form-control-lg datepicker" type="text"
-								name="sdate" placeholder="여기를 클릭해서 날짜를 선택하세요!">
+								name="sdate" placeholder="여기를 클릭해서 날짜를 선택하세요!" onchange="calDiffDays()">
 						</div>
 						<div class="mb2">
-							<label class="form-label" for="amount">종료일 <span
+							<label class="form-label" for="edate">종료일 <span
 								class="gray">(e_date) </span></label> <input id="edate"
 								class="form-control form-control-lg datepicker" type="text"
-								name="edate" placeholder="여기를 클릭해서 날짜를 선택하세요!">
+								name="edate" placeholder="여기를 클릭해서 날짜를 선택하세요!" onchange="calDiffDays()">
 						</div>
 
 						<!-- <div class="mb2">
@@ -104,16 +115,16 @@ body {
 						</div> -->
 
 						<div class="mb2">
-							<label class="form-label" for="amount">금액 <span
+							<label class="form-label">금액 <span
 								class="gray">(amount) </span></label> <input id="amount"
 								class="form-control form-control-lg" type="text"
-								value="3,000,000,000">
+								value="하루 이용요금 : 1억">
 						</div>
 
 						<div class="mb2">
-							<label class="form-label" for="amount">예약자명 <span
-								class="gray">(customerName)</span></label> <input id="customerName"
-								class="form-control form-control-lg" type="text" value="김용원">
+							<label class="form-label">회원번호 <span
+								class="gray">(userNumber)</span></label> <input id="userNumber"
+								class="form-control form-control-lg" type="text" value="<%=userNumber%>">
 						</div>
 
 						<div class="d-grid gap-2">
@@ -183,6 +194,44 @@ body {
 			    
 			  });
 			}
+		function calDiffDays()
+		{
+		    var sdd = document.getElementById("sdate").value;
+		    var edd = document.getElementById("edate").value;
+		    var ar1 = sdd.split('-');
+		    var ar2 = edd.split('-');
+		    var da1 = new Date(ar1[0], ar1[1], ar1[2]);
+		    var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+		    var dif = da2 - da1;
+		    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+		    var cMonth = cDay * 30;// 월 만듬
+		    var cYear = cMonth * 12; // 년 만듬
+		 if(sdd && edd){
+		    //document.getElementById('years').value = parseInt(dif/cYear)
+		    //document.getElementById('months').value = parseInt(dif/cMonth)
+		    if( edd >= sdd) {
+			    document.getElementById('amount').value = ( parseInt(dif/cDay) + 1 ) * 100000000;
+		    } else {
+		    	document.getElementById('amount').value = 0;
+		    }
+		 }
+		}
+		/*
+		$("#edate").on("change keyup paste", function(){
+			//alert(sdate);
+			if(sdate != "") {
+				let sdate = $('#sdate').val();
+				//const startDate = new date(sdate);
+				alert(sdate);
+			}
+			//const dateA = new Date('2022/06/01');
+			//alert(dateA);
+			//$('#amount').val('100000000');
+		})
+		*/
+		/* $("#amount").on("input", function(){
+		    $(this).val($(this).val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+		}); */
 	</script>
 </body>
 </html>

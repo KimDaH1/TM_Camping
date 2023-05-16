@@ -178,6 +178,36 @@ public class ReservationDao {
 		return reservationList;
 	}
 	
+	//userId -> 회원번호
+	public int getUserNumber(String userId) {
+		
+		int userNumber = 0;
+		
+		Connection conn = null; //import java.sql.Connection;
+		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+		ResultSet rs = null; //import java.sql.ResultSet;// 
+		try {			
+			conn = DBConnectionManager.getConnection();			
+			//쿼리문
+			//String sql = "SELECT * FROM EMP e";
+			String sql = "select usernumber from tm_users where userid = ?";						
+			psmt = conn.prepareStatement(sql);	
+			psmt.setString(1, userId);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				userNumber = rs.getInt("usernumber");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}		
+
+		return userNumber;
+	}
+	
 	public int getReservationCount(int userNumber) {
 		int totalCount = 0;
 

@@ -19,7 +19,7 @@
 	    
 	  }).then(result => {
 		  if(result.isConfirmed) {
-			  location.href = './index.html';
+			  location.href = './reservationInfo.jsp';
 		  }
 		});
 	}
@@ -32,7 +32,7 @@
 		int result = reservationDao.cancelReservationInfo(r_number);
 	
 		if (result == 1) {
-			//추가성공
+			//취소성공
 	%>
 	<script>
 		showAlert();

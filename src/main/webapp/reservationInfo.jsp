@@ -59,6 +59,7 @@ reservationList = reservationDao.getReservationList(userNumber);
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
+	<img alt="" src="/ThreeMenCamping/src/main/resources/img/fish1.png">
 	<h1 style="text-align: center;">예약 리스트 페이지</h1>
 
 	<div id="bbsList">
