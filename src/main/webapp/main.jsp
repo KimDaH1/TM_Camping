@@ -137,7 +137,72 @@ header {
 
     .submenu a:hover {
       background-color: #ffc107;
+}
+		 div,
+        ul,
+        li {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0
+        }
 
+        a {
+            text-decoration: none;
+        }
+
+        .quickmenu {
+        	z-index: 6;
+            position: absolute;
+            width: 90px;
+            top: 90%;
+            margin-top: -50px;
+            right: 10px;
+            background: #fff;
+        }
+
+        .quickmenu ul {
+            position: relative;
+            float: left;
+            width: 100%;
+            display: inline-block;
+            *display: inline;
+            border: 1px solid #ddd;
+        }
+
+        .quickmenu ul li {
+            float: left;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+            display: inline-block;
+            *display: inline;
+        }
+
+        .quickmenu ul li a {
+            position: relative;
+            float: left;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #999;
+            font-size: 9.5pt;
+        }
+
+        .quickmenu ul li a:hover {
+            color: #000;
+        }
+
+        .quickmenu ul li:last-child {
+            border-bottom: 0;
+        }
+
+        .content {
+            position: relative;
+            min-height: 1000px;
+        }
   </style>
   
 </head>
@@ -145,9 +210,16 @@ header {
 
  
 <body>
+    <div class="quickmenu">
+        <ul>
+          <li><a href="#">예약확인</a></li>
+          <li><a href="#">결제확인</a></li>
+          <li><a href="#">My Page</a></li>
+        </ul>
+      </div>
 <%@ include file = "header.jsp" %>
 
-<div class="box diagonal-image1" onclick="location.href='CampListChongchung2.jsp';"><br><br><br>
+<div class="box diagonal-image1" onclick="location.href='CampListChongchung.jsp';"><br><br><br>
 <h1 >충청도</h1></div>
 <div class="box diagonal-image2"  onclick="location.href='CampListGyeonggi.jsp';"><br><br><br>
 <h1 >&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;경기도</h1></div>
@@ -161,7 +233,20 @@ header {
 <h1>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;제주도</h1></div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+      integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+        
+$(document).ready(function(){
+  var currentPosition = parseInt($(".quickmenu").css("top"));
+  $(window).scroll(function() {
+    var position = $(window).scrollTop(); 
+    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+  });
+});
+    </script>
 <style>
 
     
