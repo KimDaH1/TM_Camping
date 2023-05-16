@@ -10,7 +10,7 @@
 <%@ page import="camping.Utils.myUtil" %>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘
+	String cp = request.getContextPath();//
 	
 	myUtil myutil = new myUtil();
 	
