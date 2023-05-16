@@ -48,7 +48,7 @@
 	}
 	
 	// 전체데이터 갯수 구하기
-	int dataCount = maincontroller.getDataTotalCountGangwon(searchValue);
+	int dataCount = maincontroller.getDataTotalCountChongchung(searchValue);
 	
 	// 한페이지에 표시할 데이터의 갯수
 	int numPerPage = 10;
@@ -71,7 +71,7 @@
 	
 	List<campzone> campzonelist = new ArrayList<campzone>();
 	System.out.println("locationValue : " + locationValue);
-	campzonelist = maincontroller.CampDBListsGangwon(start, end, searchValue);
+	campzonelist = maincontroller.CampDBListsChongchung2(start, end, searchValue);
 	//데이터베이스에서 해당 페이지를 가져온다
 	//List<BoardDTO> lists = dao.getLists(start end, searchKey, searchValue);
 	
@@ -126,8 +126,8 @@
 		          var number =this.cells[0].innerHTML; //사번		          
 		          
 		         str = number.trim(); //사번을 공백없이 변수에 담기
-		         var link = 'http://localhost:8080/ThreeMenCamping/ChongchungDetail2.jsp?data=' + str;
-		         var link = 'http://localhost:8080/ThreeMenCamping/ChongchungDetail2.jsp?data=' + encodeURIComponent(str);
+		         var link = 'http://localhost:8080/ThreeMenCamping/DetailChongchung2.jsp?data=' + str;
+		         var link = 'http://localhost:8080/ThreeMenCamping/DetailChongchung2.jsp?data=' + encodeURIComponent(str);
 
 
 		         location.href=link; //페이지 이동		         

@@ -1493,8 +1493,57 @@ public class mainController {
 			return _campzone;	
 
 		}
+		
+		// 충청 게시판
+		public List<campzone> CampDBListsChongchung2(int start, int end, String strValue) {
+			List<campzone> _campzone = new ArrayList<campzone>();
+			String result = "a";
+			Connection conn = null; //import java.sql.Connection;
+			PreparedStatement psmt = null; //import java.sql.PreparedStatement;
+			ResultSet rs = null; //import java.sql.ResultSet;
+
+			// 게시판용 리스트
+			try {			
+				conn = DBConnectionManager.getConnection();			
+				//쿼리문
+				//String sql = "SELECT * FROM EMP e";
+				String sql = "";
+				strValue = "%" + strValue + "%";
+	 
+				sql = "select rnum, cpname, cpinduty, lat, lng, addr from "
+						+ " (SELECT rownum as rnum, cpname, cpInduty, lat, lng, addr "
+						+ "	 FROM TM_CAMPINGZONE_EXAL "
+						+ "	 WHERE addr like '%충청%' "
+						+ "	 and CPNAME LIKE ? ) subTB "
+						+ "	 where rnum >= ? and rnum <= ?"; //and 절이 누락되어 오류가 발생되었음
+
+				psmt = conn.prepareStatement(sql);	
+				psmt.setString(1, strValue);
+				psmt.setInt(2, start);
+				psmt.setInt(3, end);
+				rs = psmt.executeQuery();
+				while (rs.next()) {
+					campzone scampzone = new campzone();
+		            scampzone.setIdx(rs.getInt("rnum"));
+		            System.out.println(rs.getInt("rnum"));
+		            scampzone.setCpname(rs.getString("cpname"));
+		            scampzone.setCpInduty(rs.getString("cpInduty"));
+		            scampzone.setLat(rs.getDouble("lat"));
+		            scampzone.setLng(rs.getDouble("lng"));
+		            scampzone.setAddr(rs.getString("addr"));
+		            _campzone.add(scampzone);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBConnectionManager.close(rs, psmt, conn);
+			}		
+			return _campzone;	
+
+		}
 	
-// 충청도 게시판
+// 충청도 게시판, select test
 	public List<campzone> CampDBListChongchung(int start, int end, String strValue, String lction) {
 
 		List<campzone> _campzone = new ArrayList<campzone>();
@@ -1798,6 +1847,7 @@ public class mainController {
 	}
 	
 	//CampListChongchung.jsp의 전체데이터의 갯수 구하기(캠핑)
+	//select 기능 추가로 test중
 	public int getDataTotalCountChongchung(String strValue) {
 		int totalCount = 0;
 
@@ -1999,7 +2049,7 @@ public class mainController {
 		return searchInfoList;
 	}
 	
-	//충청도(Database 자료에서 선택한 값을 공공api에서 호출하기)
+	//충청도(Database 자료에서 선택한 값을 공공api에서 호출하기), 디테일로 진입되는 부분
 	public String TestingApiChongchung(HttpServletRequest request) throws IOException{
 		
 	    String str = request.getParameter("data");
@@ -2086,7 +2136,7 @@ public class mainController {
 			campzoneJsonModel roots = new Gson().fromJson(jsonObject1.toString(), campzoneJsonModel.class);
 
 			for(int i = 0; i<roots.response.body.items.item.size(); i++) {
-				System.out.println(roots.response.body.items.item.get(i).addr1.toString());
+				System.out.println(roots.response.body.items.item.get(i).facltNm.toString());
 
 				cpname = roots.response.body.items.item.get(i).facltNm.toString();
 				cptel = roots.response.body.items.item.get(i).tel.toString();

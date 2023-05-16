@@ -31,8 +31,8 @@
 <br><br><br>
 <div id="bbsList" style = "text-align: center;">
 	<div id="bbsList_title">
-	<h1> CampList (TM_CAMPINGZONE_TM_CAMPINGZONE_Chongchung campDetail test) </h1>
-	<h2>공공데이터 게 시 판(JSP)</h2>
+	<h1> 경상 campDetail (TM_CAMPINGZONE_TM_CAMPINGZONE_Chongchung 경상campDetail test) </h1>
+	<h2>경상Detail(JSP)</h2>
 	</div>
 	<table class = "table table-striped" border="1">
 			<tr>
@@ -73,7 +73,7 @@
 	 	request.setCharacterEncoding("UTF-8");
     	String data = request.getParameter("data");
 		String aa = "";
-		ChongchungmainController mains = new ChongchungmainController();
+		mainController mains = new mainController();
 		 aa = mains.TestingApiChongchung(request);
 		campzone campzonelist = new campzone();
 		//하이퍼 링크를 통하여 넘어온 값을 저장하여 활용.

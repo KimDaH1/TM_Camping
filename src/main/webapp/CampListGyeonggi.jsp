@@ -108,7 +108,7 @@
 		          var number =this.cells[0].innerHTML; //사번		          
 		          
 		         str = number.trim(); //사번을 공백없이 변수에 담기
-		         var link = 'http://localhost:8080/ThreeMenCamping/campDetailGyeonggi.jsp?data=' + str;
+		         var link = 'http://localhost:8080/ThreeMenCamping/DetailGyeonggi.jsp?data=' + str;
 		         location.href=link; //페이지 이동		         
 		       };
 		    }(row);

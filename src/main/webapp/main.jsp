@@ -147,7 +147,7 @@ header {
 <body>
 <%@ include file = "header.jsp" %>
 
-<div class="box diagonal-image1" onclick="location.href='CampListChongchung.jsp';"><br><br><br>
+<div class="box diagonal-image1" onclick="location.href='CampListChongchung2.jsp';"><br><br><br>
 <h1 >충청도</h1></div>
 <div class="box diagonal-image2"  onclick="location.href='CampListGyeonggi.jsp';"><br><br><br>
 <h1 >&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;경기도</h1></div>
