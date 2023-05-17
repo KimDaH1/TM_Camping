@@ -4,8 +4,8 @@ CREATE TABLE tm_reservation(
     s_date DATE,
     e_date DATE,
     amount NUMBER(10),
-    usernumber NUMBER(5) CONSTRAINT USER_RESERVATION_FK REFERENCES tm_users(usernumber) ON DELETE SET NULL,
-    c_id NUMBER(5) CONSTRAINT USER_CAMP_FK REFERENCES tm_campingzone(idx) ON DELETE SET NULL,
+    userid VARCHAR2(40) CONSTRAINT USER_RESERVATION_FK REFERENCES tm_users(userid) ON DELETE SET NULL,
+    c_id NUMBER(5) CONSTRAINT USER_CAMP_FK REFERENCES tm_campingzone_chongchung(idx) ON DELETE SET NULL,
     r_state VARCHAR2(10) DEFAULT '예약됨' --예약 상태(예약됨, 취소됨, 결제됨)
 );
 --날짜 중복체크 & INSERT하는 PL/SQL문
@@ -14,7 +14,8 @@ CREATE OR REPLACE PROCEDURE date_duplicate_check_test
 --    v_r_number tm.reservation.r_number%type,    
     v_s_date IN tm_reservation.s_date%type,
     v_e_date IN tm_reservation.e_date%type,
-    v_usernumber IN tm_reservation.usernumber%type,
+    v_amount IN tm_reservation.amount%type,
+    v_userid IN tm_reservation.userid%type,
     v_c_id IN tm_reservation.c_id%type,
     v_r_state IN tm_reservation.r_state%type,
     v_result OUT NUMBER
@@ -41,11 +42,12 @@ BEGIN
     ELSE
     -- 겹치는 예약이 존재하지 않음
         v_result :=0;
-        INSERT INTO tm_reservation(r_number, s_date, e_date, usernumber, c_id, r_state)
+        INSERT INTO tm_reservation(r_number, s_date, e_date, amount, userid, c_id, r_state)
         VALUES( (select NVL(MAX(r_number),0)+1 from tm_reservation)                
             ,v_s_date
             ,v_e_date
-            ,v_usernumber
+            ,v_amount
+            ,v_userid
             ,v_c_id
             ,v_r_state);
     
