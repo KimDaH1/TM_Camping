@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 
 //게시판 기능구현을 위한 emp dto 추가
 import camping.dto.emp;
+import camping.dto.camps;
 import camping.dto.campzone;
 import camping.dto.campzoneJsonModel;
 import camping.oracle.DBConnectionManager;
@@ -2067,6 +2068,7 @@ public class mainController {
 		String cpHomepage = "";
 		String cpAnimalCmgCl = "";;
 		String cpInduty = "";
+//		int cpContentId;
 		
 		int iresult = 0;
 
@@ -2150,7 +2152,8 @@ public class mainController {
 				cpHomepage = roots.response.body.items.item.get(i).homepage.toString();
 				cpAnimalCmgCl = roots.response.body.items.item.get(i).animalCmgCl.toString();
 				cpInduty = roots.response.body.items.item.get(i).induty.toString();
-
+//				cpContentId = roots.response.body.items.item.get(i).contentId;
+//				System.out.println("cpContentId : " + cpContentId);
 				//insert methods 만들어 놓고 호출
 
 				//한줄씩 넣기 때문에 결과값 피드백은 1을 받게 되어 있음 //executeUpdate() 참고
@@ -2197,7 +2200,7 @@ public class mainController {
 			psmt.setString(9, cpHomepage);
 			psmt.setString(10, cpAnimalCmgCl);
 			psmt.setString(11, cpInduty);			
-
+//			psmt.setInt(12, cpContentId);
 			result = psmt.executeUpdate();//추가시킨 low값 만큼 int return
 
 		} catch (SQLException e) {
@@ -2213,6 +2216,8 @@ public class mainController {
 	//충청db세부정보
 	public campzone ChongchungDBDetail(String cpname) throws IOException{
 		campzone scamp = new campzone();
+//		camps scamp1 = new camps();
+
 		String result = "a";
 		Connection conn = null; //import java.sql.Connection;
 		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
@@ -2242,7 +2247,8 @@ public class mainController {
 				scamp.setcptel(rs.getString("cptel"));
 				scamp.setCpAnimalCmgCl(rs.getString("cpAnimalCmgCl"));
 				scamp.setCpInduty(rs.getString("cpInduty"));
-								
+//				System.out.println("rs.getString(\"cpContentId\") : " + rs.getString("cpContentId"));
+//				scamp1.setContentId(rs.getInt("cpContentId"));				
 			}
 
 		} catch (SQLException e) {

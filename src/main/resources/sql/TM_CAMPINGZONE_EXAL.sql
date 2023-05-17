@@ -1,3 +1,106 @@
+--회원관리 테이블
+CREATE table TM_USERS
+(
+ usernumber number(5),
+ userid varchar2(40) PRIMARY KEY ,
+ userpassword varchar2(40),
+ username varchar2(40),
+ usergender CHAR(1),
+ useremail varchar2(40),
+ userphone varchar2(40)
+ );
+
+-- 공공API 상세
+CREATE TABLE TM_CAMPINGZONE_CHONGCHUNG
+(
+IDX NUMBER(5) PRIMARY KEY,
+CPNAME VARCHAR2(100),
+CPTEL VARCHAR2(20),
+LAT NUMBER(20),
+LNG NUMBER(20),
+ADDR VARCHAR2(100),
+cpLineIntro VARCHAR2(100), 
+cpLctCl VARCHAR2(100), 
+cpPosblFcltyCl VARCHAR2(100), 
+cpHomepage VARCHAR2(100), 
+cpAnimalCmgCl VARCHAR2(100), 
+cpInduty VARCHAR2(100)
+);
+
+--예약 테이블 생성 쿼리
+CREATE TABLE tm_reservation(
+    r_number NUMBER(10) PRIMARY KEY NOT NULL,
+    s_date DATE,
+    e_date DATE,
+    amount NUMBER(10),
+    userid VARCHAR2(40) CONSTRAINT USER_RESERVATION_FK REFERENCES tm_users(userid) ON DELETE SET NULL,
+    c_id NUMBER(5) CONSTRAINT USER_CAMP_FK REFERENCES tm_campingzone_chongchung(idx) ON DELETE SET NULL,
+    r_state VARCHAR2(10) DEFAULT '예약됨' --예약 상태(예약됨, 취소됨, 결제됨)
+);
+
+
+--날짜 중복체크 & INSERT하는 PL/SQL문
+CREATE OR REPLACE PROCEDURE date_duplicate_check_test
+(   
+--    v_r_number tm.reservation.r_number%type,    
+    v_s_date IN tm_reservation.s_date%type,
+    v_e_date IN tm_reservation.e_date%type,
+    v_amount IN tm_reservation.amount%type,
+    v_userid IN tm_reservation.userid%type,
+    v_c_id IN tm_reservation.c_id%type,
+    v_r_state IN tm_reservation.r_state%type,
+    v_result OUT NUMBER
+    --v_count OUT NUMBER
+)
+IS
+  v_overlap_count NUMBER;
+BEGIN
+  SELECT COUNT(*)
+  INTO v_overlap_count
+  FROM tm_reservation
+  WHERE c_id = v_c_id
+    AND (
+            (v_s_date >= s_date AND v_s_date <= e_date) -- 입력 시작 날짜가 기존 예약 기간에 포함되는 경우
+            OR (v_e_date >= s_date AND v_e_date <= e_date) -- 입력 종료 날짜가 기존 예약 기간에 포함되는 경우
+            OR (v_s_date <= s_date AND v_e_date >= e_date) -- 입력 기간이 기존 예약 기간을 포함하는 경우
+    )   
+    AND r_state <> '취소됨';
+  
+  IF v_overlap_count > 0 THEN
+    -- 겹치는 예약이 존재함    
+    v_result :=1;
+    
+    ELSE
+    -- 겹치는 예약이 존재하지 않음
+        v_result :=0;
+        INSERT INTO tm_reservation(r_number, s_date, e_date, amount, userid, c_id, r_state)
+        VALUES( (select NVL(MAX(r_number),0)+1 from tm_reservation)                
+            ,v_s_date
+            ,v_e_date
+            ,v_amount
+            ,v_userid
+            ,v_c_id
+            ,v_r_state);
+    
+        COMMIT;
+    END IF;
+END;
+/
+
+-- 결제 테이블
+CREATE TABLE tm_order(
+    pay_no NUMBER(10) PRIMARY KEY NOT NULL, --결제번호, 시퀀스
+    order_no VARCHAR2(25), --주문번호(랜덤생성번호)
+    amount NUMBER(8), --결제금액    
+    order_date VARCHAR2(20) DEFAULT SYSDATE, --결제시간
+    --order_item VARCHAR2(30), --결제품목 (삭제 : 예약번호에서 캠핑장명을 불러온다.)
+    paytype VARCHAR2(30), --결제타입
+    --회원번호(FK)
+    userid VARCHAR2(40), --CONSTRAINT USER_ORDER_FK REFERENCES tm_users(usernumber) ON DELETE SET NULL,
+    r_number NUMBER(10) CONSTRAINT RESERV_ORDER_FK REFERENCES tm_reservation(r_number) ON DELETE SET NULL,
+    o_state VARCHAR2(10)
+    --CONSTRAINT ORDER_NUMBER_PK PRIMARY KEY(orderno, o_number)
+);
 --------------------------------------------------------
 --  파일이 생성됨 - 수요일-5월-10-2023   
 --------------------------------------------------------
