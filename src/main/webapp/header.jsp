@@ -154,21 +154,33 @@ header {
       </li>
       <li><a class="submenu1" href="#">커뮤니티</a></li>
     </ul>
-  <div class="sidebar">
-   <span class="login-area">
-   <%  if (session.getAttribute("userId") != null) { %>
+ <div class="sidebar">
+  <span class="login-area">
+<%  if (session.getAttribute("userId") != null) { %>
   <% String userId = (String)session.getAttribute("userId"); %>
   <span class="login-area">어서오세요 : <%= userId %> 님&nbsp; &nbsp; &nbsp;</span>
+  <button id="logout">로그아웃</button>
+  <script>
+    document.getElementById('logout').addEventListener('click', ()=>{location.href='logout.jsp'});
+  </script>
+  <a class="submenu1 " href="mypage.jsp">마이페이지</a>
+<% } else if (session.getAttribute("naverId") != null) { %>
+  <% String naverId = (String)session.getAttribute("naverId"); %>
+  <span class="login-area">네이버 어서오세요 : 사용자 <%= naverId %> 님&nbsp; &nbsp; &nbsp;</span>
+  <button id="logout">로그아웃</button>
+  <script>
+    document.getElementById('logout').addEventListener('click', ()=>{location.href='logout.jsp'});
+  </script>
+  <a class="submenu1 " href="mypage.jsp">마이페이지</a>
 <% } else { %>
   <a class="submenu1 login-area" href="login.jsp">로그인</a>
-  <a class="submenu1 login-area" href="join.jsp">회원가입</a>
-<% } %>   <button id="logout">로그아웃</button>
+  <a class="submenu1 login-area" href="usercheck.jsp">회원가입</a>
+<% } %>  
   <a class="submenu1 " href="https://www.weather.go.kr/w/weather/forecast/short-term.do">기상청날씨</a>
-	<script>
-		document.getElementById('logout').addEventListener('click', ()=>{location.href='logout.jsp'});
-	</script>
 </span>
+
 </div>
+
   </nav>
 </header>
 </body>

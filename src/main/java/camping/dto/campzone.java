@@ -84,7 +84,7 @@ public class campzone {
 	String cpCreatedtime; //등록일
 	String cpModifiedtime; //수정일
 	
- 	public int getIdx() {
+	public int getIdx() {
 		return idx;
 	}
 	public void setIdx(int idx) {

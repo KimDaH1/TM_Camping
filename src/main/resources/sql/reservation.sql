@@ -1,4 +1,6 @@
 --예약 테이블 생성 쿼리
+select * from tm_reservation;
+drop table tm_reservation CASCADE CONSTRAINTS;
 CREATE TABLE tm_reservation(
     r_number NUMBER(10) PRIMARY KEY NOT NULL,
     s_date DATE,
