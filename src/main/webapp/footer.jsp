@@ -255,7 +255,7 @@ header {
 <body>
  <footer>
           <div>
-				<img src="sns.PNG" alt="" style="border-radius: 15px; position: relative; ">
+				<img src="./image/sns.PNG" alt="" style="border-radius: 15px; position: relative; ">
                 <p>&nbsp; &nbsp; &nbsp;업체명 : TM_Camping</p>
                 <p>&nbsp; &nbsp; &nbsp;대표자 : 7조 &nbsp;</p>
                 <p>&nbsp; &nbsp; &nbsp;사업자등록번호 : 111-11-11111 &nbsp;</p>
@@ -265,7 +265,7 @@ header {
           </div>
           <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=천안시+동남구+휴먼+교육센터" style="width: 400px; height: 250px;"></iframe>
 					<div>
-						<span style="padding: 20px;">이용약관</span><span style="padding: 20px;">개인정보처리방침</span><span style="padding: 20px;">새로운 메뉴</span>
+						<span style="padding: 20px;">이용약관</span><span style="padding: 20px;">개인정보처리방침</span>
           </div>
         </footer>
 </body>

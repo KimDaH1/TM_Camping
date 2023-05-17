@@ -1,4 +1,4 @@
--- È¸¿øÁ¤º¸ Å×ÀÌºí Á¤º¸ »ı¼º1
+-- íšŒì›ì •ë³´ í…Œì´ë¸” ì •ë³´ ìƒì„±1
 CREATE table TM_USERS
 (
  usernumber number(5),
@@ -10,16 +10,21 @@ CREATE table TM_USERS
  userphone varchar2(40)
  );
 
---Å×ÀÌºí ÀÚÃ¼ »èÁ¦
+CREATE table KAKAO_USERS
+(
+NICKNAME varchar2(30)
+);
+SELECT * FROM KAKAO_USERS;
+--í…Œì´ë¸” ìì²´ ì‚­ì œ
 drop table tm_users;
 
---Å×ÀÌºí »èÁ¦
+--í…Œì´ë¸” ì‚­ì œ
 DELETE tm_users;
 
---È¸¿øÁ¤º¸ È®ÀÎ
+--íšŒì›ì •ë³´ í™•ì¸
 select * from tm_users;
 
--- Å×ÀÌºí »ı¼ºÇÏ°í µé¾î°¡´ÂÁö È®ÀÎÇÏ´Â ¸ñÀûÀ¸·Î ÀÎ¼­Æ® ±¸¹®
+-- í…Œì´ë¸” ìƒì„±í•˜ê³  ë“¤ì–´ê°€ëŠ”ì§€ í™•ì¸í•˜ëŠ” ëª©ì ìœ¼ë¡œ ì¸ì„œíŠ¸ êµ¬ë¬¸
 INSERT INTO TM_USERS (usernumber, userID, userPassword, userName, userGender, userEmail, userPhone)
 values((SELECT NVL(MAX(usernumber),0)+1 from TM_USERS), 'chlgmle','chlgmle','chlgmle','chlgmle','chlgmle','chlgmle');
 

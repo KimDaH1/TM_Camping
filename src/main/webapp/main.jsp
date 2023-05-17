@@ -268,7 +268,7 @@ $(document).ready(function(){
     .diagonal-image1 {
         width: 355px;
         left: 10px;
-        background-image: url('천안.jpg');
+        background-image: url('./image/천안.jpg');
         clip-path: polygon(0 0, 92% 0, 36% 100%, 0 100%);
        
     }
@@ -276,7 +276,7 @@ $(document).ready(function(){
     .diagonal-image2 {
         width: 470px;
         left: 135px;
-        background-image: url('서울.jpg');
+        background-image: url('./image/서울.jpg');
         clip-path: polygon(42% 0, 87% 0, 42% 100%, 0 100%);
       
     }
@@ -284,7 +284,7 @@ $(document).ready(function(){
     .diagonal-image3 {
         width: 450px;
         left: 331px;
-        background-image: url('전라도.jpg');
+        background-image: url('./image/전라도.jpg');
         clip-path: polygon(47% 0, 90% 0, 45% 100%, 0 100%);
      
     }
@@ -292,7 +292,7 @@ $(document).ready(function(){
     .diagonal-image4 {
         width: 450px;
         left: 523px;
-        background-image: url('부산.jpg');
+        background-image: url('./image/부산.jpg');
         clip-path: polygon(47% 0, 92% 0, 49% 100%, 2% 100%);
      
     }
@@ -300,20 +300,52 @@ $(document).ready(function(){
     .diagonal-image5 {
         width: 450px;
         left: 740px;
-        background-image: url('홍천.jpg');
+        background-image: url('./image/홍천.jpg');
         clip-path: polygon(43% 0, 88% 0, 46% 100%, 0 100%);
       
     }
     .diagonal-image6 {
         width: 350px;
         left: 910px;
-        background-image: url('제주도.jpg');
+        background-image: url('./image/제주도.jpg');
         clip-path: polygon(64% 0, 100% 0, 100% 100%, 10% 100%);
       
     }
 
 </style>
 <%@ include file = "footer.jsp" %>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<img id="movingImage" src="./image/움직임.png" style="position: fixed; height: 50px; width: 50px; z-index: 9999; border-radius: 35px;display: none;" />
+<script>
+$(document).ready(function() {
+    var $movingImage = $('#movingImage');
+    var speed = 5000; // 5000ms = 5 seconds per movement
+
+    setTimeout(function() {
+        $movingImage.show();
+        moveImage();
+    }, 5000); // start moving after 10 seconds
+
+    $movingImage.on('click', function() {
+        window.open('http://localhost:8080/ThreeMenCamping/game.jsp', '_blank');
+        $movingImage.hide();
+    });
+
+    function moveImage() {
+        var h = $(window).height() - $movingImage.height();
+        var w = $(window).width() - $movingImage.width();
+
+        var nh = Math.floor(Math.random() * h);
+        var nw = Math.floor(Math.random() * w);
+
+        $movingImage.animate({ top: nh, left: nw }, speed, function() {
+            // When the animation finishes, start again
+            moveImage();
+        });
+    }
+});
+</script>
+
 
 </body>
 

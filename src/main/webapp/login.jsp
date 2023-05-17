@@ -45,7 +45,7 @@
         border: 2px solid rgb(97, 97, 100);
         border-radius: 15px;
         background-size: cover;
-        background-image: url(배경화면.avif);
+  
         background-position: 0% 12%;
     }
 .video-box {
@@ -112,7 +112,7 @@ video {
 <header>
 <div class="logoimage" style="width: 200px;">
     <h1 style="position: absolute; bottom: 30px; left: 200px;">TM_Camping</h1>
-    <img src="캠핑메인.png" alt="" width="150px;" style="position: absolute; top: -200px; left: 50px;">
+    <img src="./image/캠핑메인.png" alt="" width="150px;" style="position: absolute; top: -200px; left: 50px;">
     
 </div>
 
@@ -121,7 +121,7 @@ video {
 <body>
     <div class="video-box">
             <video muted autoplay loop>
-                <source src="로그인.mp4" type="video/mp4">
+                <source src="./image/로그인.mp4" type="video/mp4">
             </video>
         </div>
     <form method="post" action="loginAction.jsp">
@@ -149,7 +149,7 @@ video {
         <ul style="display: flex; justify-content: center;">
             <li onclick="kakaoLogin();" style="margin-right: 10px;">
                 <a href="javascript:void(0)">
-                    <img src="kakao_login_medium_wide.png" width="180" height="44" style="position: relative; bottom: 42px; right: 15px;">
+                    <img src="./image/kakao_login_medium_wide.png" width="180" height="44" style="position: relative; bottom: 42px; right: 15px;">
                 </a>
         </ul>
 <!-- 카카오 스크립트 -->
@@ -221,7 +221,7 @@ function kakaoLogout() {
          + "&state=" + state;
     session.setAttribute("state", state);
  %>
-  <a class="snslogin" href="<%=apiURL%>"><img height="44" width="180" style="position: relative; bottom: 80px; right: 2px;" src="네이버로그인.png"/></a>
+  <a class="snslogin" href="<%=apiURL%>"><img height="44" width="180" style="position: relative; bottom: 80px; right: 2px;" src="./image/네이버로그인.png"/></a>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <div class="snslogin">
