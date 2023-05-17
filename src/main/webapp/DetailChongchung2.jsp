@@ -1,3 +1,5 @@
+<%@page import="org.apache.catalina.storeconfig.WebResourceRootSF"%>
+<%@page import="camping.dto.campzoneJsonModel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -109,7 +111,7 @@
 					<%out.print(campzonelist.getCpAnimalCmgCl()); %>
 				</td>
 				<td>
-					<%out.print(campzonelist.getCpInduty()); %>
+					<%out.print(campzonelist.getCpInduty()); %>					
 				</td>
 				<td>
 					<button id="<%=campzonelist.getIdx() %>" class="btn btn-primary orderBtn">예약하기</button>
@@ -118,6 +120,25 @@
 	</table>
 </div>
 
+
+<!-- 지도를 담을 영역 만들기 500*400-->
+<div style="display: flex; justify-content: center; align-items: center;">
+<div id="map" style="width:500px;height:400px;">지도</div>
+<img id="map" style="width:500px;height:400px;" src="<%=campzonelist.getCpFirstImageUrl() %>" alt="대표이미지">
+</div>
+
+
+<!-- 실제 지도를 그리는 javascript API를 불러오기-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=246e66fed598ccee26be58e6e7e2bf5c"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(<%= campzonelist.getLng()%>, <%= campzonelist.getLat() %>),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+	</script>
 <script>
 	 $(document).ready(function () {
 		 
