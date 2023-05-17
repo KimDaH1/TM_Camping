@@ -34,7 +34,7 @@
 
     input {
         text-align: left;
-        color: black;
+        color: white;
         border: 1px solid rgb(97, 97, 100);
         background-color: transparent;
         border-top: 0px;
@@ -69,12 +69,12 @@ video {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
-<img src="캠핑메인.png" alt="" width="150">
+<img src="./image/캠핑메인.png" alt="" width="150">
 <h1>TM_Camping</h1>
 <body>
   <div class="video-box">
             <video muted autoplay loop>
-                <source src="회원가입.mp4" type="video/mp4">
+                <source src="./image/회원가입.mp4" type="video/mp4">
             </video>
         </div>
 
@@ -95,13 +95,13 @@ video {
     <input type="radio" name="userGender" value="w" style="margin-bottom: 25px; margin-left: 70px;" >여자<br>
   <span>이메일</span><br>
     <label for="userEmail1"></label>
-    <input type="text" id="userEmail1" style="margin-bottom: 25px;">@
-    <input type="text" id="userEmail2" style="margin-bottom: 25px;"><br>
+    <input type="text" id="userEmail1" style="margin-bottom: 25px; color:white;">@
+    <input type="text" id="userEmail2" style="margin-bottom: 25px;color:white;"><br>
      <span>전화번호</span><br>
     <label for="userPhone1"></label>
-    <input type="text" id="userPhone1" style="margin-bottom: 25px; width: 100px; text-align: center;">
-    <input type="text" id="userPhone2" style="margin-bottom: 25px; width: 100px; text-align: center;">
-    <input type="text" id="userPhone3" style="margin-bottom: 25px; width: 100px; text-align: center;">
+    <input type="text" id="userPhone1" style="margin-bottom: 25px; width: 100px; text-align: center; color:white;">
+    <input type="text" id="userPhone2" style="margin-bottom: 25px; width: 100px; text-align: center; color:white;">
+    <input type="text" id="userPhone3" style="margin-bottom: 25px; width: 100px; text-align: center; color:white;">
     <br>
      <input type="submit" value="확인" style="margin-top : 12px; text-align: center; background-color: rgb(97, 97, 100);
              border-radius: 8px; width: 200px; height: 37px; font-size: 20px; position: relative; right: 5px;

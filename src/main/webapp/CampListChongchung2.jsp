@@ -98,6 +98,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style>
   @font-face {
@@ -150,14 +151,32 @@
 
 </head>
 
-<body style="background-image: url(충청도배경.avif);">
-
+<body style="background-image: url(./image/충청도배경.avif);">
+<style>
+body{
+background-size:cover;
+}
+   footer{
+  position: relative;
+  top: 80px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  height: 310px;
+  background-color: #383a3f;
+    }
+    a{
+    text-decoration-line:none;color:black;}
+</style>
 
 
 <br><br><br>
 <div id="bbsList" style = "text-align: center;">
 	<div id="bbsList_title">
-	<h1> TM_Camping </h1>
+	<h1><a href="http://localhost:8080/ThreeMenCamping/main.jsp"> TM_Camping </a></h1>
 	<h2>충청도 캠핑장 목록</h2>
 	</div>
 	<div id="bbsList_header">
@@ -233,24 +252,40 @@
 			</p>
 		</div>
 	</div>
+
+<div class="container mt-5">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col"><img src="./image/충청1.jpg" class="d-block w-100" alt="image1" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청2.jpg" class="d-block w-100" alt="image2" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청3.jpg" class="d-block w-100" alt="image3" style="width:250px;height:200px;"></div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col"><img src="./image/충청4.jpg" class="d-block w-100" alt="image4" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청5.jpg" class="d-block w-100" alt="image5" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청6.jpg" class="d-block w-100" alt="image6" style="width:250px;height:200px;"></div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col"><img src="./image/충청7.jpg" class="d-block w-100" alt="image7" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청8.jpg" class="d-block w-100" alt="image8" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청9.jpg" class="d-block w-100" alt="image9" style="width:250px;height:200px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<style>
-body{
-background-size:cover;
-}
-   footer{
-  position: relative;
-  top: 80px;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  width: 100%;
-  height: 310px;
-  background-color: #383a3f;
-    }
-</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $('.carousel').carousel({
+      interval: 1000
+    });
+</script>
 <footer>
           <div>
 				<img src="sns.PNG" alt="" style="border-radius: 15px; position: relative; ">
@@ -268,6 +303,7 @@ background-size:cover;
         </footer>
 	<!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
 
 </body>
 </html>

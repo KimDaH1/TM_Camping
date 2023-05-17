@@ -131,15 +131,14 @@ header {
 <header>
   <h1 style="position: absolute; left: 100px;">TM_Camping</h1>
   <nav>
-    <a href="main.jsp"><img src="캠핑메인.png" alt="" style="width: 70px; position: relative; left: 5px; bottom: 5px;"></a>
+    <a href="main.jsp"><img src="./image/캠핑메인.png" alt="" style="width: 70px; position: relative; left: 5px; bottom: 5px;"></a>
     <ul>
       <li><a class="submenu1"href="#">이용안내</a></li>
-      <li class="has-submenu"><a class="submenu1" href="#">예약확인</a>
+      <li class="has-submenu"><a class="submenu1" href="#">각종예약</a>
         <ul class="submenu">
-          <li><a class="submenu1" href="#">캠핑장 예약</a></li>
-          <li><a class="submenu1" href="#">코레일 예약</a></li>
-          <li><a class="submenu1" href="#">렌터카 예약</a></li>
-          <li><a class="submenu1" href="#">렌탈장비 예약</a></li>
+          <li><a class="submenu1" href="reservationInfo.jsp" target="_blank">캠핑장 예약</a></li>
+          <li><a class="submenu1" href="https://www.letskorail.com/" target="_blank">코레일 예약</a></li>
+          <li><a class="submenu1" href="https://starcamp.co.kr/" target="_blank">렌탈장비 예약</a></li>
         </ul>
       </li>
       <li class="has-submenu"><a class="submenu1" href="#">도별여행지</a>
