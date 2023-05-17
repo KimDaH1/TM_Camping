@@ -107,7 +107,7 @@ CREATE TABLE tm_order(
 --------------------------------------------------------
 --  DDL for Table TM_CAMPINGZONE_EXAL
 --------------------------------------------------------
-
+select * from TM_CAMPINGZONE_EXAL;lat
   CREATE TABLE "SCOTT"."TM_CAMPINGZONE_EXAL" 
    (	"CPNAME" VARCHAR2(100 BYTE), 
 	"CPINDUTY" VARCHAR2(100 BYTE), 

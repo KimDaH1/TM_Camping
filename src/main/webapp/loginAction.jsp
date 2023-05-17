@@ -25,7 +25,7 @@
             String userId = (String)session.getAttribute("userID");
             alertScript = "swal({title: 'Good job!', text: '로그인에 성공하였습니다.', icon: 'success'}).then(function() { window.location = 'main.jsp'; });";
         } else {
-            alertScript = "swal({title: 'Oops!', text: '잘못된 입력입니다.', icon: 'error'}).then(function() { history.back(); });";
+            alertScript = "swal({title: 'Oops!', text: '아이디 또는 비밀번호가 틀립니다.', icon: 'error'}).then(function() { history.back(); });";
         }
     %>
     <script>
