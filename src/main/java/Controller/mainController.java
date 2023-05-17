@@ -1,6 +1,6 @@
 package Controller;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -2068,6 +2068,7 @@ public class mainController {
 		String cpHomepage = "";
 		String cpAnimalCmgCl = "";;
 		String cpInduty = "";
+		String cpfirstImageUrl = "";
 //		int cpContentId;
 		
 		int iresult = 0;
@@ -2084,7 +2085,7 @@ public class mainController {
 		// 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.
 		urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + "nHYvwaA5iMdJN%2BZfRIwpkLrcYSbqND87jXVtes2Z6I7kb5%2F8Ycv1UCLzedNfTfWQ%2FVoOtadIC9WpwTLtTnukPA%3D%3D"); /*Service Key*/
 		urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8")+ "=" + URLEncoder.encode("1","UTF-8"));
-		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8")+ "=" + URLEncoder.encode("10","UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8")+ "=" + URLEncoder.encode("1","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8")+ "=" + URLEncoder.encode("ETC","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8")+ "=" + URLEncoder.encode("AppTest","UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8")+ "=" + URLEncoder.encode("json","UTF-8"));
@@ -2152,12 +2153,13 @@ public class mainController {
 				cpHomepage = roots.response.body.items.item.get(i).homepage.toString();
 				cpAnimalCmgCl = roots.response.body.items.item.get(i).animalCmgCl.toString();
 				cpInduty = roots.response.body.items.item.get(i).induty.toString();
+				cpfirstImageUrl = roots.response.body.items.item.get(i).firstImageUrl.toString();
 //				cpContentId = roots.response.body.items.item.get(i).contentId;
 //				System.out.println("cpContentId : " + cpContentId);
 				//insert methods 만들어 놓고 호출
 
 				//한줄씩 넣기 때문에 결과값 피드백은 1을 받게 되어 있음 //executeUpdate() 참고
-				iresult = InsertCampDtCC(cpname, cptel, lat, lng, addr, cpLineIntro, cpLctCl, cpPosblFcltyCl, cpHomepage, cpAnimalCmgCl, cpInduty);
+				iresult = InsertCampDtCC(cpname, cptel, lat, lng, addr, cpLineIntro, cpLctCl, cpPosblFcltyCl, cpHomepage, cpAnimalCmgCl, cpInduty, cpfirstImageUrl);
 				if(iresult != 1) {
 					break;
 				}
@@ -2173,7 +2175,7 @@ public class mainController {
 		return strResult;
 	} 
 
-	private int InsertCampDtCC(String cpname, String cptel, double lat, double lng, String addr, String cpLineIntro, String cpLctCl, String cpPosblFcltyCl, String cpHomepage, String cpAnimalCmgCl, String cpInduty) {
+	private int InsertCampDtCC(String cpname, String cptel, double lat, double lng, String addr, String cpLineIntro, String cpLctCl, String cpPosblFcltyCl, String cpHomepage, String cpAnimalCmgCl, String cpInduty, String cpfirstImageUrl) {
 		Connection conn = null; //import java.sql.Connection;
 		PreparedStatement psmt = null; //import java.sql.PreparedStatement;
 		ResultSet rs = null; //import java.sql.ResultSet;
@@ -2186,8 +2188,8 @@ public class mainController {
 			//쿼리문
 			String sql = "INSERT INTO TM_CAMPINGZONE_Chongchung "
 					+ " (IDX, CPNAME, CPTEL, LAT, LNG, ADDR, cpLineIntro, cpLctCl, cpPosblFcltyCl, cpHomepage,"
-					+ " cpAnimalCmgCl, cpInduty) VALUES ((SELECT NVL(MAX(idx)+1,1) "
-					+ " FROM TM_CAMPINGZONE_Chongchung), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ " cpAnimalCmgCl, cpInduty, cpfirstImageUrl) VALUES ((SELECT NVL(MAX(idx)+1,1) "
+					+ " FROM TM_CAMPINGZONE_Chongchung), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, cpname);
 			psmt.setString(2, cptel);
@@ -2199,8 +2201,9 @@ public class mainController {
 			psmt.setString(8, cpPosblFcltyCl);
 			psmt.setString(9, cpHomepage);
 			psmt.setString(10, cpAnimalCmgCl);
-			psmt.setString(11, cpInduty);			
-//			psmt.setInt(12, cpContentId);
+			psmt.setString(11, cpInduty);		
+			psmt.setString(12, cpfirstImageUrl);
+
 			result = psmt.executeUpdate();//추가시킨 low값 만큼 int return
 
 		} catch (SQLException e) {
@@ -2228,14 +2231,9 @@ public class mainController {
 			//쿼리문
 			//String sql = "SELECT * FROM EMP e";
 			String sql = "";
-
-			sql = "SELECT idx, cpname, cpLineIntro, cpLctCl, addr, cpPosblFcltyCl, cptel, cpAnimalCmgCl, cpInduty FROM TM_CAMPINGZONE_Chongchung where cpname ='"+cpname+"' order by idx";
-
+			sql = "SELECT idx, cpname, cpLineIntro, cpLctCl, addr, cpPosblFcltyCl, cptel, cpAnimalCmgCl, cpInduty, lat, lng, cpfirstImageUrl FROM TM_CAMPINGZONE_Chongchung where cpname ='"+cpname+"' order by idx";
 			psmt = conn.prepareStatement(sql);			
-
 			rs = psmt.executeQuery();
-
-
 			while (rs.next()) {		
 				scamp.setIdx(rs.getInt("idx"));
 				System.out.println(rs.getInt("idx"));
@@ -2247,10 +2245,10 @@ public class mainController {
 				scamp.setcptel(rs.getString("cptel"));
 				scamp.setCpAnimalCmgCl(rs.getString("cpAnimalCmgCl"));
 				scamp.setCpInduty(rs.getString("cpInduty"));
-//				System.out.println("rs.getString(\"cpContentId\") : " + rs.getString("cpContentId"));
-//				scamp1.setContentId(rs.getInt("cpContentId"));				
+				scamp.setLat(rs.getDouble("lat"));
+				scamp.setLng(rs.getDouble("lng"));
+				scamp.setCpFirstImageUrl(rs.getString("cpfirstImageUrl"));
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
