@@ -17,7 +17,7 @@
 <%@ page import="camping.dao.OrderDao"%>
 <%@ page import="camping.dao.ReservationDao"%>
 <%@ page import="camping.Utils.MyDateUtil" %>
-
+<%@ include file = "header.jsp" %>
 <%
  // 결제 승인 API 호출하기
  
@@ -27,6 +27,8 @@
 	ReservationDto reservationDto = reservationDao.getDates(r_number);
 	String s_date = reservationDto.getS_date();
 	String e_date = reservationDto.getE_date();
+	
+	String userName = reservationDao.getUserName(r_number);
 	
 	
 
@@ -110,6 +112,9 @@ body {
 	border-radius: 10px;
 	box-shadow: 0 10px 20px rgb(0 0 0/ 1%), 0 6px 6px rgb(0 0 0/ 6%);
 }
+.container {
+	margin-top: 80px;
+}
 </style>
 </head>
 <body class="bg-light">
@@ -126,14 +131,16 @@ body {
 						width="45px"
 						src="https://static.toss.im/3d-emojis/u1F60E-apng.png"> <img
 						width="45px"
-						src="https://static.toss.im/3d-emojis/u1F60E-apng.png">결제 확인 페이지
+						src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+						<br>
+						삼남자 캠핑결제 확인 페이지
 				</h2>				
 					<div id="requestPayment_form" class="box_section"
 						style="padding: 40px 30px 50px 30px; margin-top: 30px; margin-bottom: 50px">
 
 						<div class="mb2">
 							<label class="form-label" for="amount">캠핑장명 <span
-								class="gray">(camp_id) </span></label> <input id="orderId"
+								class="gray">(campName) </span></label> <input id="orderId"
 								class="form-control form-control-lg" type="text" value="<%= jsonObject.get("orderName") %>"
 								readonly="readonly">
 						</div>
@@ -157,18 +164,18 @@ body {
 						</div>
 
 						<div class="mb2">
-							<label class="form-label" for="amount">예약자명 <span
+							<label class="form-label" for="amount">결제자명 <span
 								class="gray">(customerName)</span></label> <input id="customerName"
-								class="form-control form-control-lg" type="text" value="<%=userId %>" readonly="readonly">
+								class="form-control form-control-lg" type="text" value="<%=userName %>" readonly="readonly">
 						</div>
 						<div class="mb2">
-							<label class="form-label" for="amount">주문 번호 <span
-								class="gray">(customerName)</span></label> <input id="customerName"
+							<label class="form-label" for="amount">주문번호 <span
+								class="gray">(order_no)</span></label> <input id="customerName"
 								class="form-control form-control-lg" type="text" value="<%= jsonObject.get("orderId") %>" readonly="readonly">
 						</div>
 						<div class="mb2">
 							<label class="form-label" for="amount">결제 방식 <span
-								class="gray">(customerName)</span></label> <input id="customerName"
+								class="gray">(payType)</span></label> <input id="customerName"
 								class="form-control form-control-lg" type="text" value="<%= jsonObject.get("method") %>" readonly="readonly">
 						</div>
 
@@ -222,8 +229,9 @@ body {
 				
 				orderDao.insertOrderInfo(orderId, amount, method, userId, r_number, o_state);
 			%>
-			location.href='./main.jsp';
+			location.href='./orderInfo.jsp';
 		});
 	</script>
+<%@ include file = "footer.jsp" %>
 </body>
 </html>

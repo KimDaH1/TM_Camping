@@ -1,8 +1,8 @@
 package camping.dto;
 
 public class OrderDto {
-	int o_id;//결제번호 기본키(시퀀스, 자동생성)
-	String o_number; //주문번호(랜덤생성)
+	int pay_no;//결제번호 기본키(시퀀스, 자동생성)
+	String order_no; //주문번호(랜덤생성)
 	int amount; //결제금액
 	String order_date; //결제시간
 	//String order_item; //삭제 
@@ -10,18 +10,17 @@ public class OrderDto {
 	String userid; //유저번호, 외래키
 	int r_number; //예약번호, 외래키
 	String o_state; //결제 상태
-	
-	public int getO_id() {
-		return o_id;
+	public int getPay_no() {
+		return pay_no;
 	}
-	public void setO_id(int o_id) {
-		this.o_id = o_id;
+	public void setPay_no(int pay_no) {
+		this.pay_no = pay_no;
 	}
-	public String getO_number() {
-		return o_number;
+	public String getOrder_no() {
+		return order_no;
 	}
-	public void setO_number(String o_number) {
-		this.o_number = o_number;
+	public void setOrder_no(String order_no) {
+		this.order_no = order_no;
 	}
 	public int getAmount() {
 		return amount;
@@ -35,12 +34,6 @@ public class OrderDto {
 	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
 	}
-//	public String getOrder_item() {
-//		return order_item;
-//	}
-//	public void setOrder_item(String order_item) {
-//		this.order_item = order_item;
-//	}
 	public String getPaytype() {
 		return paytype;
 	}
@@ -65,5 +58,7 @@ public class OrderDto {
 	public void setO_state(String o_state) {
 		this.o_state = o_state;
 	}
+	
+	
 	
 }

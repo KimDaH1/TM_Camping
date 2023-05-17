@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="camping.dao.OrderDao"%>
 <%@ page import="camping.dao.ReservationDao"%>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +42,9 @@ body {
 	border-radius: 10px;
 	box-shadow: 0 10px 20px rgb(0 0 0/ 1%), 0 6px 6px rgb(0 0 0/ 6%);
 }
+.container {
+	margin-top:80px;
+}
 </style>
 </head>
 
@@ -71,9 +75,9 @@ body {
 				<div id="requestPayment_form" class="box_section"
 					style="padding: 40px 30px 50px 30px; margin-top: 30px; margin-bottom: 50px">
 
-					<label class="form-label" for="paymentType">결제수단 <span
-						class="red">필수</span></label> <select id="paymentType"
-						class="form-select form-control-lg mb2">
+					<label class="form-label" for="paymentType">결제수단
+					<span class="gray">(payType)</span></label>
+					<select id="paymentType" class="form-select form-control-lg mb2">
 						<option value="토스페이" selected="selected">토스페이</option>
 						<option value="카드">카드</option>
 						<option value="계좌이체">계좌이체</option>
@@ -85,35 +89,35 @@ body {
 					</select>
 
 					<div class="mb2">
-						<label class="form-label" for="amount">주문번호 <span
-							class="gray">(orderId) </span> <span class="red">필수</span></label> <input
-							id="orderId" class="form-control form-control-lg" type="text" readonly="readonly">
+						<label class="form-label" for="orderId">주문번호
+						<span class="gray">(order_no)</span></label>
+						<input id="orderId" class="form-control form-control-lg" type="text" readonly="readonly">
 					</div>
 					<form name="userInfoForm" action="success.jsp">
 						<div class="mb2">
 							<label class="form-label" for="amount">예약번호 <span
-								class="gray">(userNumber) </span> <span class="red">필수</span></label> <input
+								class="gray">(reservation_no) </span></label> <input
 								id="r_number" class="form-control form-control-lg" type="text"
 								name="r_number" value="<%=id%>" readonly="readonly">
 						</div>
 					</form>
 
 					<div class="mb2">
-						<label class="form-label" for="amount">물품명 <span
-							class="gray">(orderName) </span><span class="red">필수</span></label> <input
+						<label class="form-label" for="orderName">캠핑장명 <span
+							class="gray">(CampName) </span></label> <input
 							id="orderName" class="form-control form-control-lg" type="text"
 							value="<%=cpname %>" readonly="readonly">
 					</div>
 
 					<div class="mb2">
 						<label class="form-label" for="amount">금액 <span
-							class="gray">(amount) </span> <span class="red">필수</span></label> <input
+							class="gray">(amount) </span></label> <input
 							id="amount" class="form-control form-control-lg" type="text"
 							value="<%=amount %>" readonly="readonly">
 					</div>
 
 					<div class="mb2">
-						<label class="form-label" for="amount">구매자명 <span
+						<label class="form-label" for="customerName">구매자명 <span
 							class="gray">(customerName)</span></label> <input id="customerName"
 							class="form-control form-control-lg" type="text" value="<%=username %>" name="customerName" readonly="readonly">
 					</div>
@@ -128,6 +132,7 @@ body {
 			</div>
 		</div>
 	</div>
+<%@ include file="footer.jsp"%>	
 </body>
 <script>
   /* =================================  API KEY 세팅 ================================== */

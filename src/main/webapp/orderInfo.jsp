@@ -5,14 +5,16 @@
 <%@ page import="camping.Utils.MyDateUtil" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ include file="header.jsp"%>
 <%
 request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘
 
-OrderDao reservationDao = new OrderDao();
+OrderDao orderDao = new OrderDao();
 
+String userId = (String)session.getAttribute("userId");
+String campName = null;
 
-int userNumber = 1;
 /*
 // 전체데이터 갯수 구하기
 int dataCount = reservationDao.getReservationCount(userNumber);
@@ -35,7 +37,7 @@ int end = currentPage * numPerPage;
 
 List<OrderDto> orderList;
 orderList = new ArrayList<OrderDto>();
-orderList = reservationDao.getOrderList(userNumber);
+orderList = orderDao.getOrderList(userId);
 %>
 <!DOCTYPE html>
 <html>
@@ -56,7 +58,12 @@ orderList = reservationDao.getOrderList(userNumber);
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
-<h1 style="text-align: center;">결제 리스트 페이지</h1>
+<h1 style="text-align: center; margin-top: 80px">
+	<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+	<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+	<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+	<br>
+삼남자 캠핑 결제 리스트 페이지</h1>
 
 	<div id="bbsList">
 		
@@ -67,7 +74,7 @@ orderList = reservationDao.getOrderList(userNumber);
 					<th>주문번호</th>
 					<th>캠핑장명</th>
 					<th>결제시간</th>
-					<th>금액</th>
+					<th>결제금액</th>
 					<!-- <th>결제하기</th> -->
 					<th>결제취소</th>
 				</tr>
@@ -79,16 +86,19 @@ orderList = reservationDao.getOrderList(userNumber);
 				<tr>
 					<td id="o_id<%=i%>" style="cursor: pointer;">
 						<%
-						out.print(orderList.get(i).getO_id());
+						out.print(orderList.get(i).getPay_no());
 						%>
 					</td>
 					<td class="o_number">
 						<%
-						out.print(orderList.get(i).getO_number());
+						out.print(orderList.get(i).getOrder_no());
 						%>
 					</td>
 					<td class="empno">
-						화성캠핑장
+						<%
+							campName = orderDao.getCampName(orderList.get(i).getR_number());
+							out.print(campName);
+						%>
 						<%-- <%
 						out.print(orderList.get(i).getC_id());
 						%> --%>
@@ -104,13 +114,9 @@ orderList = reservationDao.getOrderList(userNumber);
 						out.print(orderList.get(i).getAmount());
 						%>
 					</td>
-					<%-- <td class="order">
-						<button id="<%=i %>" class="btn btn-primary orderBtn">결제</button>
-						<button id="<%=orderList.get(i).getO_id() %>" class="btn btn-primary orderBtn">결제</button>
-					</td> --%>
 					<td class="cancel">
 						<%-- <button id="cancel<%=i %>" class="btn btn-danger cancelBtn">취소</button> --%>
-						<button id="<%=orderList.get(i).getO_id() %>" class="btn btn-danger cancelBtn">취소</button>
+						<button id="<%=orderList.get(i).getPay_no() %>" class="btn btn-danger cancelBtn">취소</button>
 					</td>
 
 				</tr>				
@@ -122,16 +128,7 @@ orderList = reservationDao.getOrderList(userNumber);
 		
 	</div>
 	<script>
-	 $(document).ready(function () {
-		 
-         $('.orderBtn').click(function(){
-        	 
-             let tempId = $(this).attr('id');
-             //let r_id = document.getElementById('r_id'+tempId).innerText;
-             //alert('예약번호:'+r_id);
-             //alert(tempId+'번째 데이터');
-             location.href='./order.jsp?id='+tempId;
-         });
+	 $(document).ready(function () {		       
          
          $('.cancelBtn').click(function(){
          	let tempId = $(this).attr('id');
@@ -155,7 +152,7 @@ orderList = reservationDao.getOrderList(userNumber);
 			    
 			  }).then(result => {
 				  if(result.isConfirmed) {
-					  location.href='./cancelReservation.jsp?id='+tempId;
+					  location.href='./cancelOrder_proc.jsp?id='+tempId;
 				  }
 			  });
 			}

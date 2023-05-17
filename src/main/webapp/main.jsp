@@ -212,8 +212,8 @@ header {
 <body>
     <div class="quickmenu">
         <ul>
-          <li><a href="#">예약확인</a></li>
-          <li><a href="#">결제확인</a></li>
+          <li><a href="./reservationInfo.jsp">예약확인</a></li>
+          <li><a href="./orderInfo.jsp">결제확인</a></li>
           <li><a href="#">My Page</a></li>
         </ul>
       </div>

@@ -44,6 +44,9 @@ body {
 	border-radius: 10px;
 	box-shadow: 0 10px 20px rgb(0 0 0/ 1%), 0 6px 6px rgb(0 0 0/ 6%);
 }
+.container {
+	margin-top: 80px;
+}
 </style>
 <script>
   $( function() {
@@ -61,6 +64,7 @@ body {
   </script>
 </head>
 <body class="bg-light">
+<%@ include file="header.jsp"%>
 <%
 	String userId = (String)session.getAttribute("userId");
 	
@@ -78,8 +82,7 @@ body {
 
 			<div class="col-md-6">
 
-				<h2
-					style="margin-top: 10px; padding: 20px 0px 10px 0px; text-align: center;">
+				<h2 style="margin-top: 10px; padding: 20px 0px 10px 0px; text-align: center;">
 					<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
 					<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png"> 
 					<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png"><br>
@@ -109,14 +112,7 @@ body {
 								class="form-control form-control-lg datepicker" type="text"
 								name="edate" placeholder="여기를 클릭해서 날짜를 선택하세요!" onchange="calDiffDays()">
 						</div>
-
-						<!-- <div class="mb2">
-							<label class="form-label" for="amount">물품명 <span
-								class="gray">(orderName) </span><span class="red">필수</span></label> <input
-								id="orderName" class="form-control form-control-lg" type="text"
-								value="휴먼캠핑장">
-						</div> -->
-
+						
 						<div class="mb2">
 							<label class="form-label">금액 <span
 								class="gray">(amount) </span></label> <input id="amount"
@@ -153,6 +149,9 @@ body {
 					/* if(confirm('예약하시겠습까?')) {
 						form.submit();
 					} */
+					<%
+						System.out.print("예약이 완료되었습니다");
+					%>
 					showAlert();
 	//				form.submit();
 				} else {
@@ -236,5 +235,6 @@ body {
 		    $(this).val($(this).val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
 		}); */
 	</script>
+<%@ include file="footer.jsp"%>	
 </body>
 </html>

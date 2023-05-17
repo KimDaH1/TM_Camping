@@ -50,7 +50,8 @@ public class OrderDao {
 		return result;
 	}
 	
-	public List<OrderDto>  getOrderList(int userNumber) {
+	//결제 내역 페이지에서 보여줄 리스트
+	public List<OrderDto>  getOrderList(String userId) {
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -61,17 +62,23 @@ public class OrderDao {
 			conn = DBConnectionManager.getConnection();
 			
 			//결제 내역 리스트
-			String sql = "select * from tm_order";
+			String sql = "select * from tm_order "
+						+"where userid = ? "
+						+"and o_state = '결제됨' "
+						+"order by pay_no ";
 			
 			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, userId);
 			
 			rs = psmt.executeQuery();
+			
 			
 			orderList = new ArrayList<OrderDto>();
 			
 			while (rs.next()) {
 				OrderDto orderDto = new OrderDto();
-				orderDto.setO_number(rs.getString("o_number"));
+				orderDto.setPay_no(rs.getInt("pay_no"));
+				orderDto.setOrder_no(rs.getString("order_no"));
 				orderDto.setAmount(rs.getInt("amount"));
 				orderDto.setOrder_date(rs.getString("order_date"));
 				orderDto.setPaytype(rs.getString("paytype"));
@@ -87,6 +94,11 @@ public class OrderDao {
 		} finally {
 			DBConnectionManager.close(rs, psmt, conn);
 		}
+		
+		for (OrderDto orderDto : orderList) {
+			System.out.println(orderDto.getPay_no());
+		}
+		
 		return orderList;
 	}
 	
@@ -153,5 +165,36 @@ public class OrderDao {
 		}		
 		
 		return amount;
+	}
+	
+	public int cancelOrderInfo(int pay_no) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		int result = 0;
+		
+		try {
+			conn = DBConnectionManager.getConnection();
+
+			// 쿼리문!
+			String sql = "update tm_order"
+						+" SET o_state = '취소됨'"
+						+" WHERE pay_no = ?";
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, pay_no);
+			
+			result = psmt.executeUpdate();
+			
+			System.out.println("처리결과:" + result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.close(rs, psmt, conn);
+		}
+		
+		return result;
 	}
 }

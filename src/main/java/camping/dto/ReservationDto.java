@@ -10,6 +10,20 @@ public class ReservationDto {
 	int c_id;
 	String r_state;
 	
+	public ReservationDto() {
+	}
+	
+	public ReservationDto(int r_number, String s_date, String e_date, String amount, String userid, int c_id, String r_state) {
+	
+		this.r_number = r_number;
+		this.s_date = s_date;
+		this.e_date = e_date;
+		this.amount = amount;
+		this.userid = userid;
+		this.c_id = c_id;
+		this.r_state = r_state;
+	}
+	
 	public int getR_number() {
 		return r_number;
 	}

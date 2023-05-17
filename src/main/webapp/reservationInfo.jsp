@@ -8,7 +8,7 @@
 <%@ page import="camping.Utils.MyDateUtil" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-
+<%@ include file="header.jsp"%>
 <%
 request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘
@@ -59,8 +59,12 @@ reservationList = reservationDao.getReservationList(userId);
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
-<%-- <%@ include file = "header.jsp" %> --%>	
-	<h1 style="text-align: center;">예약 리스트 페이지</h1>
+	<h1 style="text-align: center; margin-top: 80px">
+		<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+		<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+		<img width="45px" src="https://static.toss.im/3d-emojis/u1F60E-apng.png">
+		<br>
+		삼남자 캠핑예약 리스트 페이지</h1>
 
 	<div id="bbsList">
 		
@@ -89,7 +93,7 @@ reservationList = reservationDao.getReservationList(userId);
 					</td>
 					<td class="empno">
 						<%
-						out.print(reservationList.get(i).getC_id());
+						//out.print(reservationList.get(i).getC_id());
 						out.print(cpname);
 						%>
 					</td>
