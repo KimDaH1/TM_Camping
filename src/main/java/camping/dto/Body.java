@@ -5,5 +5,4 @@ public class Body {
 	public int numOfRows;
 	public int pageNo;
 	public int totalCount;
-
 }

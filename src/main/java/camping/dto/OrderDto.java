@@ -1,7 +1,7 @@
 package camping.dto;
 
 public class OrderDto {
-	int pay_no;//결제번호 기본키(시퀀스, 자동생성)
+	int pay_no; //결제번호 기본키(시퀀스, 자동생성)
 	String order_no; //주문번호(랜덤생성)
 	int amount; //결제금액
 	String order_date; //결제시간
@@ -10,6 +10,7 @@ public class OrderDto {
 	String userid; //유저번호, 외래키
 	int r_number; //예약번호, 외래키
 	String o_state; //결제 상태
+	
 	public int getPay_no() {
 		return pay_no;
 	}
@@ -58,7 +59,4 @@ public class OrderDto {
 	public void setO_state(String o_state) {
 		this.o_state = o_state;
 	}
-	
-	
-	
 }

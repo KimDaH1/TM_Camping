@@ -7,7 +7,7 @@ public class myUtil{
 		int pageCount = 0;
 		pageCount = dataCount/numPerPage;
 		
-		if(dataCount % numPerPage != 0) {//나머지가 0이 아니면 페이지 하나 더 만듬
+		if(dataCount % numPerPage != 0) { //나머지가 0이 아니면 페이지 하나 더 만듬
 			pageCount++;
 		}
 		return pageCount;
@@ -20,16 +20,16 @@ public class myUtil{
 	public String pageIndexList(int currentPage, int totalPage, String listUrl) {
 		
 		int numPerBlock = 10;  //리스트 밑에 나오는 페이지번호 출력 갯수
-		int currentPageSetup; //표시할 첫 페이지의 -1해준 값
-		int page;  			  // 하이퍼링크가 될 page index 숫자
+		int currentPageSetup;  //표시할 첫 페이지의 -1해준 값
+		int page;  			     // 하이퍼링크가 될 page index 숫자
 		
 		StringBuffer sb = new StringBuffer();
-		if(currentPage == 0 || totalPage == 0) {//데이터 없을 경우
+		if(currentPage == 0 || totalPage == 0) { //데이터 없을 경우
 			return "";
 		}
 		//ListTest.jsp
 		//ListTest.jsp?serchKey = name&serchValue=suzi 검색한 내용의 인수와 변수값이 붙음
-		if(listUrl.indexOf("?") != -1) {//물음표가 있으면
+		if(listUrl.indexOf("?") != -1) { //물음표가 있으면
 			listUrl = listUrl + "&";
 			//ListTest.jsp?searchKey=name&searchValue=suzi&
 		} else {

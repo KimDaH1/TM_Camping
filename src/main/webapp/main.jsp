@@ -4,7 +4,6 @@
 <%@ page import="camping.dto.campzone" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
-<%@ page import="camping.dto.emp" %>
 
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>

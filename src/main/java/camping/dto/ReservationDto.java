@@ -65,6 +65,5 @@ public class ReservationDto {
 	}
 	public void setR_state(String r_state) {
 		this.r_state = r_state;
-	}
-		
+	}		
 }
