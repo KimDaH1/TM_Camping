@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="camping.dao.OrderDao"%>
 <%@ page import="camping.dao.ReservationDao"%>
-<%@ include file="header.jsp"%>
+<%@ include file="header2.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>

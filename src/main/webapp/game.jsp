@@ -6,17 +6,36 @@
   <meta charset="UTF-8">
   <title>벽돌깨기 게임</title>
   <style>
+  div{
+  }
     canvas {
         border-radius: 12px;
       border: 1px solid #000;
       float: bottom;
     }
-    
+     .wh{
+      position: absolute;
+      left: 70%;
+      bottom: 33%;
+    }
   </style>
 </head>
 <body>
   <canvas id="gameCanvas" width="800" height="600"></canvas>
   <script src="game.js"></script>
+  <div  class="wh" style="border: solid 1px black; width: 300px; height:600px; text-align: center; border-radius: 12px;">
+  <h1>7조의 도장깨기</h1>
+    <p>조원 : 김다현 , 김용원 , 최희두</p>
+    <p>다음 라운드 같은거 없습니다.</p>
+    <p>전부 다 부수겠다면 말리진 않을게요</p>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <p style="font-size: 0.3px;">벽돌깨기에대한 질문은 받지안겠습니다.(제발)</p>
+
+    <p class="ho" style="font-size: 1px; zoom: 0.5;">사실 집에서 다 부셔버렸지롱 ㅎㅎㅎㅎㅎㅎㅎㅎ(근데 눈물흘림)</p>
+     
+</div>
+    
+
 </body>
 </html>
 
@@ -39,34 +58,34 @@ let rightPressed = false;
 let leftPressed = false;
 
 // 벽돌 객체 설정
-const brickRowCount = 4;
+const brickRowCount = 3;
 const brickColumnCount = 9;
-const brickWidth = 65;
+const brickWidth = 70;
 const brickHeight = 30;
 const brickPadding = 10;
-const brickOffsetTop = 30;
-const brickOffsetLeft = 30;
+const brickOffsetTop = 50;
+const brickOffsetLeft = 40;
 let bricks = [];
 
 // 벽돌 개수 계산 및 새로운 벽돌 생성
 const newBrickRowCount = Math.floor(canvas.height / (brickHeight + brickPadding));
 const newBrickColumnCount = Math.floor(canvas.width / (brickWidth + brickPadding));
-
+const brickNames = ["정용진","정용진","정용진","김민지","김성훈","김세실","김수호","김우성","김지훈","문경훈","박주영","박진완","서지희","심다정","유승아","이의성","이하린","이호진","이홍재","정용진","조승연","최덕희","최석현","최성대","정용진","정용진","정용진"]
 for (let c = 0; c < newBrickColumnCount; c++) {
-  bricks[c] = [];
-  for (let r = 0; r < newBrickRowCount; r++) {
-    bricks[c][r] = { x: 0, y: 0, status: 1 };
-  }
-}
+	  bricks[c] = [];
+	  for (let r = 0; r < newBrickRowCount; r++) {
+	    bricks[c][r] = { x: 0, y: 0, status: 1 };
+	  }
+	}
 
 
 for (let c = 0; c < brickColumnCount; c++) {
-  bricks[c] = [];
-  for (let r = 0; r < brickRowCount; r++) {
-    bricks[c][r] = { x: 0, y: 0, status: 1 };
-  }
-}
-
+	  bricks[c] = [];
+	  for (let r = 0; r < brickRowCount; r++) {
+	    const nameIndex = c * brickRowCount + r; // Compute the index for the name
+	    bricks[c][r] = { x: 0, y: 0, status: 1, name: brickNames[nameIndex] };
+	  }
+	}
 // 벽돌 그리기 함수
 function drawBricks() {
   for (let c = 0; c < brickColumnCount; c++) {
@@ -78,19 +97,23 @@ function drawBricks() {
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#000000";
         ctx.fill();
         ctx.closePath();
+
+        // 이름을 화면에 표시합니다.
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillText(bricks[c][r].name, brickX, brickY + brickHeight / 2);
       }
     }
   }
 }
-
 // 패들 그리기 함수
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = "#0095DD";
+  ctx.fillStyle = "#26ce10";
   ctx.fill();
   ctx.closePath();
 }
@@ -99,7 +122,7 @@ function drawPaddle() {
 function drawBall() {
   ctx.beginPath();
   ctx.arc(ballX, ballY, ballRadius, 0, Math.PI*2);
-  ctx.fillStyle = "#0095DD";
+  ctx.fillStyle = "#26ce10";
   ctx.fill();
   ctx.closePath();
 }

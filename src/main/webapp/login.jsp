@@ -3,6 +3,7 @@
     <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,6 +111,7 @@ video {
    color:white;}
 </style>
 <header>
+
 <div class="logoimage" style="width: 200px;">
     <h1 style="position: absolute; bottom: 30px; left: 200px;">TM_Camping</h1>
     <img src="./image/캠핑메인.png" alt="" width="150px;" style="position: absolute; top: -200px; left: 50px;">

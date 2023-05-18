@@ -134,7 +134,7 @@
 
 </head>
 <body>
-<%@ include file = "header.jsp" %>
+<%@ include file = "header2.jsp" %>
 
 	<h1> Three Men Camping (충청도 캠핑장 테이블 test) </h1>
 
