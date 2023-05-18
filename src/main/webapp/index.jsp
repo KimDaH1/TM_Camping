@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
        
     <!-- 사용하는 controller java쪽 클래스들 -->
-<%@ page import="camping.dao.PersonDao" %>
-<%@ page import="camping.dto.PersonDto" %>
 <%@ page import="Controller.mainController" %>
 <%@ page import="camping.dto.campzone" %>
 

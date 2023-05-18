@@ -49,7 +49,7 @@ body {
 </head>
 
 <body class="bg-light">
-<% 
+<%
 	request.setCharacterEncoding("UTF-8"); //한글 정상 인식을 위해 써준다.
 	int id = Integer.parseInt(request.getParameter("id"));
 	
@@ -58,6 +58,7 @@ body {
 	ReservationDao reservationDao = new ReservationDao();
 	String username =  reservationDao.getUserName(id);
 	int amount = orderDao.getAmount(id);
+	
  %>
 	<div class="container">
 		<div class="row">
@@ -95,7 +96,7 @@ body {
 					</div>
 					<form name="userInfoForm" action="success.jsp">
 						<div class="mb2">
-							<label class="form-label" for="amount">예약번호 <span
+							<label class="form-label" for="r_number">예약번호 <span
 								class="gray">(reservation_no) </span></label> <input
 								id="r_number" class="form-control form-control-lg" type="text"
 								name="r_number" value="<%=id%>" readonly="readonly">
@@ -198,7 +199,8 @@ body {
 
   /* ================== '결제' Btn Event ================== */
   document.getElementById("requestPayment").addEventListener('click', function () {  
-		
+	
+	let amount = document.getElementById("amount").value;
     let paymentType = document.getElementById("paymentType").value;
     let requestJson = initPaymentsData("공통",paymentType);
     
