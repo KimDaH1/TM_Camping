@@ -9,7 +9,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="camping.Utils.myUtil" %>
 <%
-
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();//
 	
@@ -152,22 +151,12 @@
 </head>
 
 <body style="background-image: url(./image/충청도배경.avif);">
+<%@ include file = "header2.jsp" %>
 <style>
 body{
 background-size:cover;
 }
-   footer{
-  position: relative;
-  top: 80px;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  width: 100%;
-  height: 310px;
-  background-color: #383a3f;
-    }
+
     a{
     text-decoration-line:none;color:black;}
 </style>
@@ -176,7 +165,7 @@ background-size:cover;
 <br><br><br>
 <div id="bbsList" style = "text-align: center;">
 	<div id="bbsList_title">
-	<h1><a href="http://localhost:8080/ThreeMenCamping/main.jsp"> TM_Camping </a></h1>
+	<h1><a href="http://localhost:8080/ThreeMenCamping/main.jsp" > TM_Camping </a></h1>
 	<h2>충청도 캠핑장 목록</h2>
 	</div>
 	<div id="bbsList_header">
@@ -258,23 +247,23 @@ background-size:cover;
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row">
-                    <div class="col"><img src="./image/충청1.jpg" class="d-block w-100" alt="image1" style="width:250px;height:200px;"></div>
-                    <div class="col"><img src="./image/충청2.jpg" class="d-block w-100" alt="image2" style="width:250px;height:200px;"></div>
-                    <div class="col"><img src="./image/충청3.jpg" class="d-block w-100" alt="image3" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청도1.jpg" class="d-block w-100" alt="image1" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청도2.jpg" class="d-block w-100" alt="image2" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청도3.jpg" class="d-block w-100" alt="image3" style="width:250px;height:200px;"></div>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="row">
-                    <div class="col"><img src="./image/충청4.jpg" class="d-block w-100" alt="image4" style="width:250px;height:200px;"></div>
-                    <div class="col"><img src="./image/충청5.jpg" class="d-block w-100" alt="image5" style="width:250px;height:200px;"></div>
-                    <div class="col"><img src="./image/충청6.jpg" class="d-block w-100" alt="image6" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청도4.jpg" class="d-block w-100" alt="image4" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청도5.jpg" class="d-block w-100" alt="image5" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청도6.jpg" class="d-block w-100" alt="image6" style="width:250px;height:200px;"></div>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="row">
-                    <div class="col"><img src="./image/충청7.jpg" class="d-block w-100" alt="image7" style="width:250px;height:200px;"></div>
-                    <div class="col"><img src="./image/충청8.jpg" class="d-block w-100" alt="image8" style="width:250px;height:200px;"></div>
-                    <div class="col"><img src="./image/충청9.jpg" class="d-block w-100" alt="image9" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청도7.jpg" class="d-block w-100" alt="image7" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청도8.jpg" class="d-block w-100" alt="image8" style="width:250px;height:200px;"></div>
+                    <div class="col"><img src="./image/충청도9.jpg" class="d-block w-100" alt="image9" style="width:250px;height:200px;"></div>
                 </div>
             </div>
         </div>
@@ -286,21 +275,7 @@ background-size:cover;
       interval: 1000
     });
 </script>
-<footer>
-          <div>
-				<img src="sns.PNG" alt="" style="border-radius: 15px; position: relative; ">
-                <p>&nbsp; &nbsp; &nbsp;업체명 : TM_Camping</p>
-                <p>&nbsp; &nbsp; &nbsp;대표자 : 7조 &nbsp;</p>
-                <p>&nbsp; &nbsp; &nbsp;사업자등록번호 : 111-11-11111 &nbsp;</p>
-                <p>&nbsp; &nbsp; &nbsp;주소 : 충청남도 천안시 동남구 대흥동 134 휴먼교육센터 8층 &nbsp;</p>
-                <p>&nbsp; &nbsp; &nbsp;전화번호 : &nbsp;041-561-1122<br><span style="color: rgb(246, 179, 82);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(문의 시간 AM 9:00 ~ PM 8:00 / 점심시간 12:00~13:00)<br>
-                </span>&nbsp; &nbsp; &nbsp;캠핑장 시설 안내 및 이용안내 문의만 부탁드립니다.</p>
-          </div>
-          <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=천안시+동남구+휴먼+교육센터" style="width: 400px; height: 250px;"></iframe>
-					<div>
-						<span style="padding: 20px;">이용약관</span><span style="padding: 20px;">개인정보처리방침</span><span style="padding: 20px;">새로운 메뉴</span>
-          </div>
-        </footer>
+<%@ include file = "footer2.jsp" %>
 	<!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 

@@ -33,27 +33,29 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 97.2%;
+  width: 100%;
   padding: 20px;
-  height: 60px;
+  height: 70px;
   background-color: #383a3f;
-  position: fixed; /* Add this line */
-  top: 0; /* Add this line */
+  position: absolute;
+  top: 0;
+  loft: 5%;
 }
-    
-    nav {
  
+    nav {
+      display: flex;
       justify-content: center;
       align-items: center;
     }
 
 
     nav ul {
+  display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
   position: relative;
-  left : 200px;
+  left : 60%;
 
     }
 
@@ -73,8 +75,8 @@ header {
     }
 
 .sidebar{
-  position: absolute;
-  left: 100%;
+  position: relative;
+  left: 80%;
 }
 
 .login-area a {
@@ -93,7 +95,7 @@ header {
       display: none;
       position: absolute;
       top: 100%;
-      left: 0;
+      left: 0px;
       min-width: 120px;
       z-index: 6;
     }
@@ -117,9 +119,9 @@ header {
 </head>
 <body>
 <header>
-  <h1 style="position: absolute; left: 100px; color:white;"><a href="http://localhost:8080/ThreeMenCamping/main.jsp" style="color: white;">TM_Camping</a></h1>
+  <h1 style="position: absolute; left: 150px;">TM_Camping</h1>
   <nav>
-    <a href="main.jsp"><img src="./image/캠핑메인.png" alt="" style="width: 70px; position: relative; left: 5px; bottom: 5px;"></a>
+    <a href="main.jsp"><img src="./image/캠핑메인.png" alt="" style="width: 85px; position: relative; left: 15px; bottom: 5px;"></a>
     <ul>
       <li><a class="submenu1"href="#">이용안내</a></li>
       <li class="has-submenu"><a class="submenu1" href="#">각종예약</a>

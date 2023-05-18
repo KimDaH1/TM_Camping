@@ -10,7 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
-<%@ include file = "header.jsp" %>
+<%@ include file = "header2.jsp" %>
 <%
 	String userId = (String)session.getAttribute("userId");
 %>

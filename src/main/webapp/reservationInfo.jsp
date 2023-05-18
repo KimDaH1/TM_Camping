@@ -8,7 +8,7 @@
 <%@ page import="camping.Utils.MyDateUtil" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ include file="header.jsp"%>
+<%@ include file="header2.jsp"%>
 <%
 request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘

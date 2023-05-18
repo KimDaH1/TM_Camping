@@ -26,13 +26,13 @@
         }
 
         body {
-            background-image: url(배경화면.avif);
+            background-image: url(./image/배경화면.avif);
             background-size: cover;
         }
 
         .checkbox-container {
         	margin-bottom:10px;
-            display: block;
+            display: block; 
             position: relative;
             cursor: pointer;
             user-select: none;
