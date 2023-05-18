@@ -25,11 +25,10 @@
 
         }
 
-       body {
-	font-family: 'Noto Sans KR', sans-serif;
-	background-image: url(./image/배경화면.avif);
-	background-size: cover;
-}
+        body {
+            background-image: url(./image/배경화면.avif);
+            background-size: cover;
+        }
 
         .checkbox-container {
         	margin-bottom:10px;
