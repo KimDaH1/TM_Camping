@@ -11,7 +11,7 @@
    footer{
   position: relative;
   float: bottom;
-  top: 315px;
+  top: 100px;
   color: #fff;
   display: flex;
   justify-content: space-between;

@@ -133,7 +133,7 @@ body {
 			</div>
 		</div>
 	</div>
-<%@ include file="footer.jsp"%>	
+<%@ include file="footer2.jsp"%>	
 </body>
 <script>
   /* =================================  API KEY 세팅 ================================== */
