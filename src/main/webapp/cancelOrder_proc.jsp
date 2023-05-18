@@ -46,8 +46,5 @@
 	<%
 		}
 	%>
-	<!-- <script>
-		//location.href = './index.html';
-	</script> -->
 </body>
 </html>
