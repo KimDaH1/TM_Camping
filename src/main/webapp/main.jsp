@@ -40,104 +40,8 @@
 	body{
 	background-color: black;
 	}
-header {
-  z-index: 6;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 97.2%;
-  padding: 20px;
-  height: 60px;
-  background-color: #383a3f;
-  position: fixed; /* Add this line */
-  top: 0; /* Add this line */
-}
-    footer{
-  position: relative;
-  top: 880px;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  width: 97.2%;
-  height: 260px;
-  background-color: #383a3f;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
 
-
-    nav ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  left : 40%;
-
-    }
-
-    nav li {
-      margin-right: 20px;
-      position: relative;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      transition: background-color 0.5s ease;
-    }
-
-    nav .submenu1:hover {
-      background-color: #ffc107;
-    }
-
-.sidebar{
-  position: relative;
-  left: 55%;
-}
-
-.login-area a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 10px;
-}
-
-.weather {
-  color: #ffc107;
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-    .submenu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      min-width: 120px;
-      z-index: 6;
-    }
-
-    .has-submenu:hover .submenu {
-      display: block;
-    }
-
-    .submenu a {
-      display: block;
-      background-color: #383a3f;
-      color: #fff;
-      padding: 10px;
-      transition: background-color 0.5s ease;
-    }
-
-    .submenu a:hover {
-      background-color: #ffc107;
-}
+ 
 		 div,
         ul,
         li {
@@ -212,9 +116,9 @@ header {
 <body>
     <div class="quickmenu">
         <ul>
-          <li><a href="./reservationInfo.jsp">예약확인</a></li>
-          <li><a href="./orderInfo.jsp">결제확인</a></li>
-          <li><a href="#">My Page</a></li>
+          <li><a href="./reservationInfo.jsp" style="color:black;">예약확인</a></li>
+          <li><a href="./orderInfo.jsp" style="color:black;">결제확인</a></li>
+          <li><a href="https://open.kakao.com/o/ghSgnXkf" style="background-color:yellow; color:black;">실시간 상담</a></li>
         </ul>
       </div>
 <%@ include file = "header.jsp" %>

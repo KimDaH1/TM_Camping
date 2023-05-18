@@ -32,7 +32,7 @@
 
         .checkbox-container {
         	margin-bottom:10px;
-            display: block;
+            display: block; 
             position: relative;
             cursor: pointer;
             user-select: none;

@@ -64,7 +64,7 @@ body {
   </script>
 </head>
 <body class="bg-light">
-<%@ include file="header.jsp"%>
+<%@ include file="header2.jsp"%>
 <%
 	String userId = (String)session.getAttribute("userId");
 	
