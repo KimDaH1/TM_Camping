@@ -39,7 +39,7 @@ header {
   background-color: #383a3f;
   position: absolute;
   top: 0;
-  loft: 5%;
+  left:%;
 }
  
     nav {
@@ -76,7 +76,7 @@ header {
 
 .sidebar{
   position: relative;
-  left: 80%;
+  left: 72%;
 }
 
 .login-area a {

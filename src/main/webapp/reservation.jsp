@@ -235,6 +235,6 @@ body {
 		    $(this).val($(this).val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
 		}); */
 	</script>
-<%@ include file="footer.jsp"%>	
+<%@ include file="footer2.jsp"%>	
 </body>
 </html>
