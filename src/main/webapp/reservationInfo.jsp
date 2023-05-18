@@ -10,7 +10,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.DecimalFormat" %>
 
-<%@ include file="header.jsp"%>
+<%@ include file="header2.jsp"%>
 <%
 request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();// /ThreeMenCamping 여기까지 찍힘

@@ -20,7 +20,7 @@
 <%@ page import="java.text.DecimalFormat" %>
 
 
-<%@ include file = "header.jsp" %>
+<%@ include file = "header2.jsp" %>
 <%
 	DecimalFormat decFormat = new DecimalFormat("###,###");
  // 결제 승인 API 호출하기
