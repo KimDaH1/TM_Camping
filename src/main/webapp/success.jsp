@@ -17,8 +17,12 @@
 <%@ page import="camping.dao.OrderDao"%>
 <%@ page import="camping.dao.ReservationDao"%>
 <%@ page import="camping.Utils.MyDateUtil" %>
+<%@ page import="java.text.DecimalFormat" %>
+
+
 <%@ include file = "header.jsp" %>
 <%
+	DecimalFormat decFormat = new DecimalFormat("###,###");
  // 결제 승인 API 호출하기
  
   int r_number = Integer.parseInt(request.getParameter("id"));
@@ -160,7 +164,7 @@ body {
 							<label class="form-label" for="amount">결제 금액 <span
 								class="gray">(amount) </span></label> <input id="amount"
 								class="form-control form-control-lg" type="text"
-								value="<%= jsonObject.get("totalAmount") %>" readonly="readonly">
+								value="<%= decFormat.format(jsonObject.get("totalAmount")) %>" readonly="readonly">
 						</div>
 
 						<div class="mb2">
@@ -189,35 +193,6 @@ body {
 			</div>
 		</div>
 	</div>
-<%-- <section>	
-    <%
-    if (isSuccess) { %>
-        <h1>결제 정보</h1>
-        <p>결과 데이터 : <%= jsonObject.toJSONString() %></p>
-        <p>캠핑장 : <%= jsonObject.get("orderName") %></p>        
-        <p>customerName : <%= jsonObject.get("customerName") %></p>
-        <p>결제 금액 : <%= jsonObject.get("totalAmount") %></p>        
-        <p>주문 번호 : <%= jsonObject.get("orderId") %></p>        
-             
-        <p>결제 방식 : <%= jsonObject.get("method") %></p>
-        <button id="confirmBtn" type="button" class="btn btn-primary">확인</button>
-        <p>
-            <% if(jsonObject.get("method").equals("카드")) { out.println(((JSONObject)jsonObject.get("card")).get("number"));} %>
-            <% if(jsonObject.get("method").equals("가상계좌")) { out.println(((JSONObject)jsonObject.get("virtualAccount")).get("accountNumber"));} %>
-            <% if(jsonObject.get("method").equals("계좌이체")) { out.println(((JSONObject)jsonObject.get("transfer")).get("bank"));} %>
-            <% if(jsonObject.get("method").equals("휴대폰")) { out.println(((JSONObject)jsonObject.get("mobilePhone")).get("customerMobilePhone"));} %>
-        
-        </p>
-       
-    <%} else { %>
-        <h1>결제 실패</h1>
-        <p><%= jsonObject.get("message") %></p>
-        <span>에러코드: <%= jsonObject.get("code") %></span>
-        <%
-    }
-    %>
-
-</section> --%>
 <script>
 		document.getElementById('confirmBtn').addEventListener('click', ()=>{			
 			<%

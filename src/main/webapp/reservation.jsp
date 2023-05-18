@@ -73,7 +73,7 @@ body {
 
 	//캠핑장 기본키 값이 넘어 올 예정
 	int camp_id = Integer.parseInt(request.getParameter("id"));
-	//int camp_id = 1;
+	
 	String cpname = reservationDao.getCampName(camp_id);
 %>
 	<div class="container">
@@ -144,16 +144,19 @@ body {
 			let sdate = document.getElementById('sdate').value;
 			let edate = document.getElementById('edate').value;
 			
+			//로그인한 상태인지 아닌지 확인하는 부분
+			<%
+				System.out.println(userId);
+				if(userId == null ) {
+					System.out.println("아이디가 null");
+				} else {
+					System.out.println("아이디 : " + userId);
+				}
+			%>
+			
 			if(sdate != "" && edate != "") {
 				if(edate >= sdate) {
-					/* if(confirm('예약하시겠습까?')) {
-						form.submit();
-					} */
-					<%
-						System.out.print("예약이 완료되었습니다");
-					%>
 					showAlert();
-	//				form.submit();
 				} else {
 					showWarning();
 				}
@@ -161,12 +164,26 @@ body {
 				showWarning();
 			}
 			
-			
-			/* if(confirm('예약하시겠습까?')) {
-				form.submit();
-			} */
-			
+			if(<%=userId%> == null) {
+				showDoLogin();
+			} 
 		});
+		
+		function showDoLogin() {			
+			  Swal.fire({
+			    title: '로그인 / 회원가입이 필요합니다.',
+			    text: '로그인 / 회원가입 페이지로 이동합니다.',
+			    icon: 'waring',
+			    showCancelButton: true,
+			    confirmButtonText: '확인',
+		
+			  }).then(result => {
+				  if(result.isConfirmed) {
+					  location.href='http://localhost:8080/ThreeMenCamping/login.jsp';
+				  }
+			  });
+			}
+		
 		function showAlert() {
 			let form = document.reservationForm;
 			let sdate = document.getElementById('sdate').value;
@@ -187,6 +204,7 @@ body {
 				  }
 			  });
 			}
+		
 		function showWarning() {
 			  Swal.fire({
 			    title: '날짜 선택이 잘못되었습니다!',
@@ -196,6 +214,7 @@ body {
 			    
 			  });
 			}
+		
 		function calDiffDays()
 		{
 		    var sdd = document.getElementById("sdate").value;
@@ -212,28 +231,13 @@ body {
 		    //document.getElementById('years').value = parseInt(dif/cYear)
 		    //document.getElementById('months').value = parseInt(dif/cMonth)
 		    if( edd >= sdd) {
-			    document.getElementById('amount').value = ( parseInt(dif/cDay) + 1 ) * 100000;
+			    //document.getElementById('amount').value = ( parseInt(dif/cDay) + 1 ) * 100000;
+		    	document.getElementById('amount').value = ( (parseInt(dif/cDay) + 1 ) * 100000 ).toLocaleString('ko-KR');
 		    } else {
 		    	document.getElementById('amount').value = 0;
 		    }
 		 }
 		}
-		/*
-		$("#edate").on("change keyup paste", function(){
-			//alert(sdate);
-			if(sdate != "") {
-				let sdate = $('#sdate').val();
-				//const startDate = new date(sdate);
-				alert(sdate);
-			}
-			//const dateA = new Date('2022/06/01');
-			//alert(dateA);
-			//$('#amount').val('100000000');
-		})
-		*/
-		/* $("#amount").on("input", function(){
-		    $(this).val($(this).val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
-		}); */
 	</script>
 <%@ include file="footer.jsp"%>	
 </body>

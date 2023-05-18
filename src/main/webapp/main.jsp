@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="camping.dao.PersonDao" %>
-<%@ page import="camping.dto.PersonDto" %>
 <%@ page import="Controller.mainController" %>
 <%@ page import="camping.dto.campzone" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -19,7 +17,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Example</title>
+  <title>ThreeMen Camping</title>
   <style>
   @font-face {
     font-family: 'omyu_pretty';

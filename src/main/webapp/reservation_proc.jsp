@@ -46,7 +46,8 @@
 		request.setCharacterEncoding("UTF-8"); //한글 정상 인식을 위해 써준다.
 		String s_date = request.getParameter("sdate");
 		String e_date = request.getParameter("edate");
-		String amount = request.getParameter("amount");
+		
+		String amount = request.getParameter("amount").replace(",", "");
 		int c_id = Integer.parseInt(request.getParameter("c_id"));
 		
 		ReservationDao reservationDao = new ReservationDao();
@@ -75,8 +76,5 @@
 	<%
 		}
 	%>
-	<!-- <script>
-		//location.href = './index.html';
-	</script> -->	
 </body>
 </html>

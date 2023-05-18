@@ -5,6 +5,9 @@
 <%@ page import="camping.Utils.MyDateUtil" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.DecimalFormat" %>
+
+
 <%@ include file="header.jsp"%>
 <%
 request.setCharacterEncoding("UTF-8");
@@ -15,25 +18,7 @@ OrderDao orderDao = new OrderDao();
 String userId = (String)session.getAttribute("userId");
 String campName = null;
 
-/*
-// 전체데이터 갯수 구하기
-int dataCount = reservationDao.getReservationCount(userNumber);
-
-// 한페이지에 표시할 데이터의 갯수
-int numPerPage = 10;
-
-// 전체 페이지수 구하기
-int totalPage = myutil.getPageCount(numPerPage, dataCount);
-
-// 전체 페이지수가 표시할 페이지수보다 큰 경우(삭제로 인해)
-if (currentPage > totalPage) {
-	currentPage = totalPage;
-}
-
-// 데이터베이스에서 가져올 rownum의 시작과 끝
-int start = (currentPage - 1) * numPerPage + 1;
-int end = currentPage * numPerPage;
-*/
+DecimalFormat decFormat = new DecimalFormat("###,###");
 
 List<OrderDto> orderList;
 orderList = new ArrayList<OrderDto>();
@@ -111,7 +96,7 @@ orderList = orderDao.getOrderList(userId);
 					</td>
 					<td class="mgr">
 						<%
-						out.print(orderList.get(i).getAmount());
+						out.print( decFormat.format(orderList.get(i).getAmount()) );
 						%>
 					</td>
 					<td class="cancel">
