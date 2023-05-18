@@ -26,7 +26,7 @@
         }
 
         body {
-            background-image: url(배경화면.avif);
+            background-image: url(./image/배경화면.avif);
             background-size: cover;
         }
 
@@ -100,7 +100,7 @@
 </head>
 
 <body>
-    <img src="캠핑메인.png" alt="" width="150">
+    <img src="./image/캠핑메인.png" alt="" width="150">
     <h1>TM_Camping</h1>
     <form id="agreementForm" action="http://localhost:8080/ThreeMenCamping/join.jsp">
 

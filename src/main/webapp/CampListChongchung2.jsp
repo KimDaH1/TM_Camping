@@ -136,7 +136,7 @@
 		          
 		         str = number.trim(); //사번을 공백없이 변수에 담기
 		         var link = 'http://localhost:8080/ThreeMenCamping/DetailChongchung2.jsp?data=' + str;
-		         var link = 'http://localhost:8080/ThreeMenCamping/DetailChongchung2.jsp?data=' + encodeURIComponent(str);
+		         //var link = 'http://localhost:8080/ThreeMenCamping/DetailChongchung2.jsp?data=' + encodeURIComponent(str);
 
 
 		         location.href=link; //페이지 이동		         

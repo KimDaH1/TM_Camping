@@ -2131,6 +2131,7 @@ public class mainController {
 
 		JSONParser jsonParser1 = new JSONParser();//import org.json.simple.parser.JSONParser; 추가
 		JSONObject jsonObject1;//import org.json.simple.JSONObject; 추가
+		
 		try {
 			jsonObject1 = (JSONObject) jsonParser1.parse(strResult);
 			System.out.println("jsonObject1 = " + jsonObject1);
