@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>게 시 판</title>
 <style>
  @font-face {
     font-family: 'omyu_pretty';

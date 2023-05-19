@@ -6,7 +6,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>header</title>
+  <title>예약 리스트 페이지</title>
     <style>
   @font-face {
     font-family: 'omyu_pretty';
