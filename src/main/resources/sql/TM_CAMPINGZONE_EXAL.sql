@@ -9,6 +9,11 @@ CREATE table TM_USERS
  useremail varchar2(40),
  userphone varchar2(40)
  );
+ 
+CREATE table KAKAO_USERS
+(
+NICKNAME varchar2(30)
+);
 
 -- 공공API 상세
 CREATE TABLE TM_CAMPINGZONE_CHONGCHUNG
