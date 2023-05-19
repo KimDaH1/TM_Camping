@@ -5,7 +5,6 @@
 <%@ page import="Controller.mainController" %>
 
 <%@ page import="camping.dto.campzone" %>
-<%@ page import="camping.dto.emp" %>
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>

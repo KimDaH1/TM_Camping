@@ -6,7 +6,6 @@
     <!-- 사용하는 controller java쪽 클래스들 -->
 <%@ page import="Controller.mainController" %>
 <%@ page import="camping.dto.campzone" %>
-<%@ page import="camping.dto.emp" %>
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
@@ -144,6 +143,15 @@ background-size:cover;
 <!-- 실제 지도를 그리는 javascript API를 불러오기-->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=246e66fed598ccee26be58e6e7e2bf5c"></script>
 	<script>
+	  var cpName = 'campzonelist.getCpname()';
+
+	  if (cpName = null) {
+	    alert("cpName 값이 null입니다.");
+	    history.back();
+	  } else if (cpName = ""){
+	    alert("cpName 값이 null입니다.");
+	    history.back();
+	  }
 		var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(<%= campzonelist.getLng()%>, <%= campzonelist.getLat() %>),

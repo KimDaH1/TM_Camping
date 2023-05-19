@@ -5,7 +5,6 @@
     <!-- 사용하는 controller java쪽 클래스들 -->
 <%@ page import="Controller.mainController" %>
 <%@ page import="camping.dto.campzone" %>
-<%@ page import="camping.dto.emp" %>
 <%@ page import="java.util.*" %>
 <%@ page import="camping.Utils.myUtil" %>
 <%
@@ -49,6 +48,7 @@
 	
 	// 전체데이터 갯수 구하기
 	int dataCount = maincontroller.getDataTotalCountChongchung(searchValue);
+
 	
 	// 한페이지에 표시할 데이터의 갯수
 	int numPerPage = 10;
@@ -135,7 +135,7 @@
 		          
 		         str = number.trim(); //사번을 공백없이 변수에 담기
 		         var link = 'http://localhost:8080/ThreeMenCamping/DetailChongchung2.jsp?data=' + str;
-		         var link = 'http://localhost:8080/ThreeMenCamping/DetailChongchung2.jsp?data=' + encodeURIComponent(str);
+		         //var link = 'http://localhost:8080/ThreeMenCamping/DetailChongchung2.jsp?data=' + encodeURIComponent(str);
 
 
 		         location.href=link; //페이지 이동		         
