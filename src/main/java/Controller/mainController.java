@@ -594,6 +594,8 @@ public class mainController {
 				lction = "%경상%";
 			} else if(lction.equals("7")) {
 				lction = "%제주%";
+			} else {
+				lction = "%%";
 			}
 			System.out.println("lction : " + lction);
 			
@@ -602,9 +604,9 @@ public class mainController {
 			sql = "select rnum, cpname, cpinduty, lat, lng, addr from "
 					+ " (SELECT rownum as rnum, cpname, cpInduty, lat, lng, addr "
 					+ " FROM TM_CAMPINGZONE_EXAL"
-					+ " WHERE addr like ? "
-					+ " and CPNAME LIKE ? ) subTB"
-					+ " where rnum >= ? and rnum <= ?"; 
+					+ " WHERE addr like ? " // %cndwjd%
+					+ " and CPNAME LIKE ? ) subTB" // %adsf%
+					+ " where rnum >= ? and rnum <= ?";
 
 			psmt = conn.prepareStatement(sql);	
 			psmt.setString(1, lction);
