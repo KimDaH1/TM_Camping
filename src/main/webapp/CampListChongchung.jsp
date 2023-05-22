@@ -107,7 +107,7 @@ String pageIndexList = myutil.pageIndexList(currentPage, totalPage, listUrl);
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>게 시 판</title>
+<title>게 시 판(테스트)</title>
 <script type="text/javascript">
 
 function sendIt(){

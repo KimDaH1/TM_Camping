@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>게 시 판</title>
 <style>
  @font-face {
     font-family: 'omyu_pretty';
@@ -159,6 +159,12 @@ background-size:cover;
 		};
 
 		var map = new kakao.maps.Map(container, options);
+		
+		var markerPosition = new kakao.maps.LatLng(<%= campzonelist.getLng()%>, <%= campzonelist.getLat() %>);
+		var marker = new kakao.maps.Marker({
+			position: markerPosition
+		});
+		marker.setMap(map);
 	</script>
 <script>
 	 $(document).ready(function () {
